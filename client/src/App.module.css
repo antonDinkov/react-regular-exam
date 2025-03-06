@@ -1,0 +1,103 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+main {
+    padding-top: 10%;
+    display: flex;
+    gap: 10em;
+    align-items: center;
+}
+
+.logo {
+    font-size: 250pt;
+}
+
+h2 {
+    font-size: 25pt;
+    margin-bottom: 15px;
+}
+
+.happening {
+    font-size: 50pt;
+    line-height: 1;
+    margin-bottom: 25px;
+}
+
+nav {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+}
+
+button {
+    border-radius: 1.5em;
+    padding: 0.7em;
+    height: 40px;
+}
+
+.awesome {
+    display: flex;
+    gap: 0.3em;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: none;
+}
+
+button > i {
+    font-size: 20px;
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    gap: 0.3em;
+}
+
+.separator > * {
+    margin: 0;
+    padding: 0;
+}
+
+hr {
+    flex-grow: 1;
+}
+
+.terms{
+    font-size: 8pt;
+    margin-bottom: 25px;
+}
+
+.terms > a{
+    text-decoration: none;
+}
+
+ul {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+ul > * {
+    display: block;
+    line-height: 1;
+    text-align: center;
+}
+
+li > a {
+    text-decoration: none;
+    color: black;
+}
+a > i {
+    font-size: 8pt;
+}
+
+.flexli {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}

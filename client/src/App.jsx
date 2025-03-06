@@ -1,35 +1,54 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import styles from './App.module.css';
 
 function App() {
-  const [count, setCount] = useState(0)
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    return (
+        <>
+            <main>
+                <h1 className={styles.logo}>At</h1>
+                <div>
+                    <h1 className={styles.happening}>Happening now</h1>
+                    <h2>Join Today.</h2>
+                    <nav>
+                        <button className={styles.awesome}><i className="fa-brands fa-google"></i>Sign up with Google</button>
+                        <button className={styles.awesome}><i className="fa-brands fa-apple"></i>Sign u with Apple</button>
+                        <div className={styles.separator}>
+                            <hr />
+                            <p>or</p>
+                            <hr />
+                        </div>
+                        <button>Create account</button>
+                        <p className={styles.terms}>By signing up, you agree of the <a href="#">Term of Service</a>and <a href="#">Privacy Policy</a>, incliding <a href="#">Cookie Use.</a></p>
+                        <p id="account">Already have an account?</p>
+                        <button>Sign in</button>
+                    </nav>
+                </div>
+            </main>
+            <footer>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Download the At app</a></li>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                    <li><a href="#">Accessibillity</a></li>
+                    <li><a href="#">Ads Info</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Brand Resources</a></li>
+                    <li><a href="#">Advertising</a></li>
+                    <li><a href="#">Marketing</a></li>
+                    <li><a href="#">At for Business</a></li>
+                    <li><a href="#">Developers</a></li>
+                    <li><a href="#">Directory</a></li>
+                    <li><a href="#">Settings</a></li>
+                    <li><a className={styles.flexli} href="#"><i className="fa-regular fa-copyright"></i>2025 X Corp</a></li>
+                </ul>
+            </footer>
+        </>
+    )
 }
 
 export default App
