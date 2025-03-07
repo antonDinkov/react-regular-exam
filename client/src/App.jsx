@@ -22,6 +22,8 @@ function App() {
                         <p className={styles.terms}>By signing up, you agree of the <a href="#">Term of Service</a>and <a href="#">Privacy Policy</a>, incliding <a href="#">Cookie Use.</a></p>
                         <p id="account">Already have an account?</p>
                         <button>Sign in</button>
+                        <p>Take a look:</p>
+                        <button>Guest</button>
                     </nav>
                 </div>
             </main>
