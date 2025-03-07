@@ -3,7 +3,16 @@
     margin: 0;
 }
 
-main {
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+}
+
+.main {
     padding-top: 10%;
     display: flex;
     gap: 10em;
@@ -14,7 +23,7 @@ main {
     font-size: 250pt;
 }
 
-h2 {
+.h2 {
     font-size: 25pt;
     margin-bottom: 15px;
 }
@@ -25,14 +34,14 @@ h2 {
     margin-bottom: 25px;
 }
 
-nav {
+.nav {
     width: 250px;
     display: flex;
     flex-direction: column;
     gap: 0.3em;
 }
 
-button {
+.button {
     border-radius: 1.5em;
     padding: 0.7em;
     height: 40px;
@@ -40,7 +49,7 @@ button {
     background-color: #ffffff;
 }
 
-button:hover {
+.button:hover {
     cursor: pointer;
 }
 
@@ -56,38 +65,38 @@ button:hover {
     background-color: #e6e6e6;
 }
 
-button > i {
+.button > i {
     font-size: 20px;
 }
-button:nth-child(2) > i {
+.button:nth-child(2) > i {
     font-size: 25px;
 }
 
-button:nth-child(4) {
+.button:nth-child(4) {
     background-color: #5a9bed;
     border: none;
     color: #ffffff;
 }
 
-button:nth-child(4):hover {
+.button:nth-child(4):hover {
     background-color: #4A87D1;
 }
 
-button:nth-child(7) {
+.button:nth-child(7) {
     color: #5a9bed;
     border: 1px solid #d2d9de;
 }
 
-button:nth-child(7):hover {
+.button:nth-child(7):hover {
     background-color: #D9E8FA;
 }
 
-button:nth-child(9) {
+.button:nth-child(9) {
     color: #5a9bed;
     border: 1px solid #d2d9de;
 }
 
-button:nth-child(9):hover {
+.button:nth-child(9):hover {
     background-color: #D9E8FA;
 }
 
@@ -102,7 +111,7 @@ button:nth-child(9):hover {
     padding: 0;
 }
 
-hr {
+.hr {
     flex-grow: 1;
 }
 
@@ -115,24 +124,24 @@ hr {
     text-decoration: none;
 }
 
-ul {
+.ul {
     display: flex;
     gap: 15px;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-ul > * {
+.ul > * {
     display: block;
     line-height: 1;
     text-align: center;
 }
 
-li > a {
+.li > a {
     text-decoration: none;
     color: black;
 }
-a > i {
+.flexli > i {
     font-size: 8pt;
 }
 
