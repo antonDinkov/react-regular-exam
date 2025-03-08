@@ -44,9 +44,15 @@
 .button {
     border-radius: 1.5em;
     padding: 0.7em;
-    height: 40px;
+    height: 20px;
     font-weight: bolder;
     background-color: #ffffff;
+    text-decoration: none;
+    text-align: center;
+}
+
+.button > * {
+    text-decoration: none;
 }
 
 .button:hover {
@@ -59,6 +65,7 @@
     justify-content: center;
     align-items: center;
     border: 1px solid #d2d9de;
+    color: black;
 }
 
 .awesome:hover {
@@ -94,6 +101,11 @@
 .button:nth-child(9) {
     color: #5a9bed;
     border: 1px solid #d2d9de;
+}
+
+.button:nth-child(9) > a {
+    color: #5a9bed;
+    /* border: 1px solid #d2d9de; */
 }
 
 .button:nth-child(9):hover {
