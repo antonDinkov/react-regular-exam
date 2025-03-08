@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+    gap: 1em;
+}
+
+/* на малък екран да ги направя видими */
+.i {
+    display: none;
+}
+/* на малък екран невидими да ги направя */
+.spanInvisible {
+    display: block;
+}
