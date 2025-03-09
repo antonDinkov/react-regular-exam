@@ -66,6 +66,7 @@
     flex-direction: column;
     gap: 1em;
     padding-left: 40px;
+    overflow-y: auto;
 }
 
 .search > input {
