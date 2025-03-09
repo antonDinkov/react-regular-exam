@@ -11,16 +11,18 @@ function Guest() {
 
     return (
         <div className={styles.container}>
-            <nav>
+            <nav className={styles.nav}>
                 <h1>At</h1>
                 <ul>
                     <li><Link to='#'><i className={`fa-solid fa-arrow-right-to-bracket ${styles.i}`}></i><span>Sign in</span></Link></li>
                     <li><Link to='#'><i className={`fa-regular fa-id-badge ${styles.i}`}></i><span>Create account</span></Link></li>
                     <li><Link to="/react-regular-exam"><i class={`fa-solid fa-person-through-window ${styles.i}`}></i><span>Leave</span></Link></li>
                 </ul>
+                <img src="https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-png-image_3918418.jpg" alt="Guest" />
+                <p>Guest</p>
             </nav>
-            <main>
-                <section id="search">
+            <main className={styles.main}>
+                <section id="search" className={styles.search}>
                     <h3>What do you need?</h3>
                     <input type="search" ref={searchValue} name="search" id="search" placeholder="search" />
                     <button onClick={handleSearch}>🔍</button>
