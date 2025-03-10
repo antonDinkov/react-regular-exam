@@ -3,17 +3,38 @@ import styles from "./Guest.module.css";
 import { Link } from "react-router";
 import { db } from "../firebase";
 import { collection, getDocs } from "../firebase";
-import { log } from "mathjs";
 
 function Guest() {
     const searchValue = useRef();
     const [posts, setPosts] = useState([]);
-    const isDone = useRef(false)
+    const [filteredPosts, setFilteredPosts] = useState([]);
+    const isDone = useRef(false);
 
     const handleSearch = () => {
-        console.log(searchValue.current.value)
+        const searchText = searchValue.current.value.trim().toLowerCase(); // Малки букви за case-insensitive
         searchValue.current.value = '';
+
+        if (searchText === "") {
+            setFilteredPosts(posts); // Ако полето е празно, показваме всички постове
+        } else {
+            const results = posts.filter((post) =>
+                post.content?.toLowerCase().includes(searchText)
+            );
+            setFilteredPosts(results);
+        }
     };
+
+    /* useEffect(() => {
+        if (searchTerm) {
+            const results = posts.filter((post) =>
+                post.content?.toLowerCase().includes(searchTerm)
+            );
+            setFilteredPosts(results);
+        } else {
+            setFilteredPosts(posts);
+        }
+    }, [searchTerm, posts]);
+ */
 
     useEffect(() => {
         if (isDone.current) return;
@@ -26,7 +47,7 @@ function Guest() {
 
                 console.log(postsArray);
                 setPosts(postsArray)
-
+                setFilteredPosts(postsArray); // При първоначално зареждане, показваме всички постове
             } catch (error) {
                 console.error("Грешка при взимане на постовете:", error);
             }
@@ -67,25 +88,29 @@ function Guest() {
                             <p><i className="fa-solid fa-magnifying-glass"></i><span>57</span></p>
                         </div>
                     </div>
-                    {posts.map((pos, index) => {
-                        const postDate = pos.meta.date.toDate()
-                        return (
-                            <div id="post" className={styles.post} key={index}>
-                                <div id="meta" className={styles.meta}>
-                                    <img src={pos.meta.img} alt="Profile image" />
-                                    <h4>{pos.meta.author}</h4>
-                                    <p>{postDate.toLocaleDateString()}</p>
+                    {filteredPosts.length > 0 ? (
+                        filteredPosts.map((pos, index) => {
+                            const postDate = pos.meta.date.toDate()
+                            return (
+                                <div id="post" className={styles.post} key={index}>
+                                    <div id="meta" className={styles.meta}>
+                                        <img src={pos.meta.img} alt="Profile image" />
+                                        <h4>{pos.meta.author}</h4>
+                                        <p>{postDate.toLocaleDateString()}</p>
+                                    </div>
+                                    <p>{pos.content}</p>
+                                    <img src={pos.img} alt="Img or Video" />
+                                    <div id="feedback" className={styles.feedback}>
+                                        <p><i className="fa-regular fa-comment"></i><span>{pos.feedback.comments}</span></p>
+                                        <p><i className="fa-regular fa-heart"></i><span>{pos.feedback.likes}</span></p>
+                                        <p><i className="fa-solid fa-magnifying-glass"></i><span>{pos.feedback.views}</span></p>
+                                    </div>
                                 </div>
-                                <p>{pos.content}</p>
-                                <img src={pos.img} alt="Img or Video" />
-                                <div id="feedback" className={styles.feedback}>
-                                    <p><i className="fa-regular fa-comment"></i><span>{pos.feedback.comments}</span></p>
-                                    <p><i className="fa-regular fa-heart"></i><span>{pos.feedback.likes}</span></p>
-                                    <p><i className="fa-solid fa-magnifying-glass"></i><span>{pos.feedback.views}</span></p>
-                                </div>
-                            </div>
-                        );
-                    })}
+                            );
+                        })
+                    ):(
+                        <p>No posts found</p>
+                    )}
                 </section>
             </main>
         </div>

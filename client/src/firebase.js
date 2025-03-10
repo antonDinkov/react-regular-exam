@@ -1,4 +1,4 @@
-import { getFirestore, doc, setDoc, updateDoc, getDocs, collection, addDoc } from "firebase/firestore"
+import { getFirestore, doc, setDoc, updateDoc, getDocs, collection, addDoc, query, where } from "firebase/firestore"
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
@@ -22,4 +22,4 @@ const app = initializeApp(firebaseConfig);
 //Initialize Firestore
 const db = getFirestore(app);
 
-export { db, doc, setDoc, updateDoc, getDocs, collection, addDoc };
+export { db, doc, setDoc, updateDoc, getDocs, collection, addDoc, query, where };
