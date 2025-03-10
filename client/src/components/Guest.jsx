@@ -44,8 +44,6 @@ function Guest() {
                 const postsCollection = collection(db, "posts");
                 const querySnapShot = await getDocs(postsCollection);
                 const postsArray = querySnapShot.docs.map((doc) => doc.data());
-
-                console.log(postsArray);
                 setPosts(postsArray)
                 setFilteredPosts(postsArray); // При първоначално зареждане, показваме всички постове
             } catch (error) {
