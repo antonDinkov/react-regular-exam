@@ -20,7 +20,7 @@ function FrontPage() {
                         <Link className={styles.button}>Create account</Link>
                         <p className={styles.terms}>By signing up, you agree of the <a href="#">Term of Service</a>and <a href="#">Privacy Policy</a>, incliding <a href="#">Cookie Use.</a></p>
                         <p id="account">Already have an account?</p>
-                        <Link className={styles.button}>Sign in</Link>
+                        <Link to="/react-regular-exam/login" className={styles.button}>Sign in</Link>
                         <p>Take a look:</p>
                         <Link to="/react-regular-exam/guest" className={styles.button}>Guest</Link>
                     </nav>
