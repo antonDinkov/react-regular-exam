@@ -1,7 +1,7 @@
-import FrontPage from './components/FrontPage';
+import FrontPage from './components/Front Page/FrontPage';
 import { Routes, Route } from 'react-router';
-import Guest from './components/Guest';
-import Login from './components/Login';
+import Guest from './components/Guest Page/Guest';
+import Login from './components/Login Page/Login';
 function App() {
 
     return (

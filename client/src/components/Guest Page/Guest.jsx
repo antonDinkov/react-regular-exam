@@ -1,8 +1,8 @@
 import { useRef, useState, useEffect } from "react";
 import styles from "./Guest.module.css";
 import { Link } from "react-router";
-import { db } from "../firebase";
-import { collection, getDocs } from "../firebase";
+import { db } from "../../firebase";
+import { collection, getDocs } from "../../firebase";
 
 function Guest() {
     const searchValue = useRef();
