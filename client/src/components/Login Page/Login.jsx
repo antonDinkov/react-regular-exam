@@ -4,7 +4,7 @@ function Login() {
     return (
         <div className={styles.wrapperMajor}>
             <header className={styles.header}>
-                <Link to='/react-regular-exam'><i className="fa-solid fa-xmark"></i></Link>
+                <Link className={styles.x} to='/react-regular-exam'><i className="fa-solid fa-xmark"></i></Link>
                 <h1 className={styles.logo}>At</h1>
             </header>
             <main className={styles.main}>
