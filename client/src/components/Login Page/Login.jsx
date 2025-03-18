@@ -24,7 +24,6 @@ function Login() {
                         <p className={styles.lastParagraph}>Don't have an account?<Link to="/react-regular-exam/create">Sign up</Link></p>
                     </nav>
                 </div>
-
             </main>
 
         </div>
