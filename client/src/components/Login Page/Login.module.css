@@ -48,9 +48,13 @@
     text-align: center;
 }
 
-nav .google {
+.nav .google {
     color: #3d4043;
     font-weight: normal;
+}
+
+.nav .google:hover {
+    background-color: rgba(224, 247, 250, 0.3);
 }
 
 .button > * {
