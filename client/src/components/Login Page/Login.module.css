@@ -1,0 +1,121 @@
+.wrapperMajor {
+    padding: 2em;
+    border-radius: 1em;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+.header i {
+    color: black;
+}
+
+.logo {
+    margin: 0 auto;
+    font-size: 40pt;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mainDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+}
+
+.nav {
+    width: 325px;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.button {
+    
+    border-radius: 1.5em;
+    padding: 0.7em;
+    height: 20px;
+    font-weight: bolder;
+    background-color: #ffffff;
+    text-decoration: none;
+    text-align: center;
+}
+
+nav .google {
+    color: #3d4043;
+    font-weight: normal;
+}
+
+.button > * {
+    text-decoration: none;
+}
+
+.button:hover {
+    cursor: pointer;
+}
+
+.awesome {
+    display: flex;
+    gap: 0.3em;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #d2d9de;
+    color: black;
+}
+
+.awesome:hover {
+    background-color: #e6e6e6;
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    gap: 0.3em;
+}
+
+.separator > * {
+    margin: 0;
+    padding: 0;
+}
+
+.hr {
+    flex-grow: 1;
+}
+
+.input {
+    padding: 1.3em 0.5em;
+    border-radius: 0.4em;
+    font-size: 12pt;
+    border: 1px solid #d2d9de;
+}
+
+.next {
+    background-color: black;
+    color: #ffffff;
+}
+
+.next:hover{
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.lastParagraph {
+    margin-top: 3em;
+    color: #586471;
+}
+
+.lastParagraph > a {
+    margin-left: 0.3em;
+    text-decoration: none;
+    color: #5a9bed;
+}
+
+.lastParagraph > a:hover {
+    text-decoration: underline;
+}
