@@ -61,11 +61,10 @@
 .upperDiv {
     display: flex;
     flex-direction: column;
-    gap: 1em;
-    
 }
 
 .emailState {
+    margin: 2em 0;
     background-color: #f7f9f9;
     padding: 1em;
     display: flex;
@@ -84,6 +83,13 @@
     display: flex;
     flex-direction: column;
     border-radius: 0.4em;
+    gap: 0.2em;
+}
+
+.arrow {
+    display: flex;
+    gap: 0.2em;
+    color: #5a9bed;
 }
 
 .inputWrapper {
@@ -95,4 +101,19 @@
 .pass {
     flex-grow: 1;
     padding: 0.3em;
+    border: none;
+}
+
+.forgot{
+    line-height: 0;
+    padding: 1em;
+}
+
+.forgot > a {
+    text-decoration: none;
+    color: #5a9bed;
+}
+
+.forgot > a:hover {
+    text-decoration: underline;
 }

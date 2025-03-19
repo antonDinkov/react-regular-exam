@@ -17,14 +17,18 @@ function LoginNext(params) {
                             <p>client@email.com</p>
                         </div>
                         <div className={styles.password}>
-                            <p>Password</p>
+                            <div className={styles.arrow}>
+                                <p>Password</p>
+                                <i class="fa-solid fa-arrow-down"></i>
+                            </div>
+
                             <div className={styles.inputWrapper}>
-                                <input className={styles.pass} type="password" name="" id="" placeholder='Password' />
+                                <input className={styles.pass} type="password" name="" id="" placeholder='' />
                                 <i className="fa-regular fa-eye"></i>
                             </div>
-                            
+
                         </div>
-                        <p className={styles.forgot}>Forgot password?</p>
+                        <p className={styles.forgot}><Link>Forgot password?</Link></p>
                     </div>
                     <div>
                         <Link to='/react-regular-exam/welcome'>Log in</Link>
