@@ -117,3 +117,18 @@
 .forgot > a:hover {
     text-decoration: underline;
 }
+
+.login {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.login>a {
+    background-color: #88898c;
+    text-align: center;
+    padding: 1em;
+    border-radius: 1.8em;
+    color: #ffffff;
+    text-decoration: none;
+}

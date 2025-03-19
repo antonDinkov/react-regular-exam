@@ -30,7 +30,7 @@ function LoginNext(params) {
                         </div>
                         <p className={styles.forgot}><Link>Forgot password?</Link></p>
                     </div>
-                    <div>
+                    <div className={styles.login}>
                         <Link to='/react-regular-exam/welcome'>Log in</Link>
                         <div className={styles.signup}>
                             <p>Don't have an account?</p>
