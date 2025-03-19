@@ -58,7 +58,7 @@ function Guest() {
             <nav className={styles.nav}>
                 <h1>At</h1>
                 <ul>
-                    <li><Link to='#'><i className={`fa-solid fa-arrow-right-to-bracket ${styles.i}`}></i><span>Sign in</span></Link></li>
+                    <li><Link to='/react-regular-exam/login'><i className={`fa-solid fa-arrow-right-to-bracket ${styles.i}`}></i><span>Sign in</span></Link></li>
                     <li><Link to='#'><i className={`fa-regular fa-id-badge ${styles.i}`}></i><span>Create account</span></Link></li>
                     <li><Link to="/react-regular-exam"><i className={`fa-solid fa-person-through-window ${styles.i}`}></i><span>Leave</span></Link></li>
                 </ul>
