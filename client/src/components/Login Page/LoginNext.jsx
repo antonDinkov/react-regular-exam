@@ -19,7 +19,7 @@ function LoginNext(params) {
                         <div className={styles.password}>
                             <div className={styles.arrow}>
                                 <p>Password</p>
-                                <i class="fa-solid fa-arrow-down"></i>
+                                <i className="fa-solid fa-arrow-down"></i>
                             </div>
 
                             <div className={styles.inputWrapper}>
