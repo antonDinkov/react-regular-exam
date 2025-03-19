@@ -10,16 +10,19 @@ function LoginNext(params) {
             </header>
             <main className={styles.main}>
                 <div className={styles.mainDiv}>
-                    <div>
-                        <h1>Enter toyr password</h1>
-                        <div className='emailState'>
+                    <div className={styles.upperDiv}>
+                        <h1>Enter your password</h1>
+                        <div className={styles.emailState}>
                             <p>Email</p>
                             <p>client@email.com</p>
                         </div>
                         <div className={styles.password}>
                             <p>Password</p>
-                            <input className={styles.pass} type="password" name="" id="" />
-                            <i class="fa-regular fa-eye"></i>
+                            <div className={styles.inputWrapper}>
+                                <input className={styles.pass} type="password" name="" id="" placeholder='Password' />
+                                <i className="fa-regular fa-eye"></i>
+                            </div>
+                            
                         </div>
                         <p className={styles.forgot}>Forgot password?</p>
                     </div>
