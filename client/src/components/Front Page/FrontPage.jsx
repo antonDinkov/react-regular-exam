@@ -17,7 +17,7 @@ function FrontPage() {
                             <p>or</p>
                             <hr className={styles.hr} />
                         </div>
-                        <Link className={styles.button}>Create account</Link>
+                        <Link to='/react-regular-exam/create' className={styles.button}>Create account</Link>
                         <p className={styles.terms}>By signing up, you agree of the <a href="#">Term of Service</a>and <a href="#">Privacy Policy</a>, incliding <a href="#">Cookie Use.</a></p>
                         <p id="account">Already have an account?</p>
                         <Link to="/react-regular-exam/login" className={styles.button}>Sign in</Link>

@@ -1,7 +1,7 @@
 import { Link } from 'react-router'
 import styles from './LoginNext.module.css'
 
-function LoginNext(params) {
+function LoginNext() {
     return (
         <div className={styles.wrapperMajor}>
             <header className={styles.header}>
