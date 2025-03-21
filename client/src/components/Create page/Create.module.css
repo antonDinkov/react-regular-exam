@@ -171,6 +171,6 @@
     border: none;
 }
 
-.month > select:hover, .day > select, .year:hover > select:hover {
+.month > select, .day > select, .year > select {
     cursor: pointer;
 }
