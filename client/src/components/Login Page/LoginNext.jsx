@@ -1,7 +1,10 @@
 import { Link } from 'react-router'
 import styles from './LoginNext.module.css'
+import { useContext } from 'react'
+import { FormContext } from '../../../context/UserContext'
 
 function LoginNext() {
+    const {email} = useContext(FormContext);
     return (
         <div className={styles.wrapperMajor}>
             <header className={styles.header}>
@@ -14,7 +17,7 @@ function LoginNext() {
                         <h1>Enter your password</h1>
                         <div className={styles.emailState}>
                             <p>Email</p>
-                            <p>client@email.com</p>
+                            <p>{email}</p>
                         </div>
                         <div className={styles.password}>
                             <div className={styles.arrow}>

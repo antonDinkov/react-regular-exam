@@ -59,10 +59,9 @@
 }
 
 .button {
-    
     border-radius: 1.5em;
     padding: 0.7em;
-    height: 20px;
+    height: 50px;
     font-weight: bolder;
     background-color: #ffffff;
     text-decoration: none;

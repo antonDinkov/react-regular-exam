@@ -22,7 +22,7 @@ export function FormDataProvider ({children}) {
     });
 
     const updateForm = (newData) => {
-        setFormData((oldData) => ({...oldData, newData,}));
+        setFormData((oldData) => ({...oldData, ...newData,}));
     };
 
     return (
