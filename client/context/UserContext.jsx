@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 
-export const FormContext = createContext({
+export const FormContext = createContext(/* {
     name: '',
     email: '',
     birthday: {
@@ -8,7 +8,7 @@ export const FormContext = createContext({
         day: '',
         year: '',
     },
-});
+} */);
 
 export function FormDataProvider ({children}) {
     const [formData, setFormData] = useState({
