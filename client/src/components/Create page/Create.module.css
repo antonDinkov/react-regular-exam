@@ -168,3 +168,7 @@
     font-size: 16pt;
     border: none;
 }
+
+.month > select:hover, .day > select, .year:hover > select:hover {
+    cursor: pointer;
+}
