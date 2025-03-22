@@ -51,127 +51,87 @@
     flex-grow: 1;
 }
 
-.mainDiv {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    flex-grow: 1;
-}
-
-.upperDiv {
+.wrapper {
     display: flex;
     flex-direction: column;
     gap: 2em;
+    flex: 1;
+    overflow-y: auto;
 }
 
-.password {
-    border: 1px solid #d2d9de;
-    padding: 1em;
+.checkBoxWrapper {
     display: flex;
     flex-direction: column;
-    border-radius: 0.4em;
-    gap: 0.2em;
+    gap: 1.5em;
 }
 
-.arrow {
+.checkBoxWrapper > div {
     display: flex;
-    gap: 0.2em;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.checkBoxWrapper > div >div {
+    display: flex;
+    gap: 0.3em;
+    justify-content: space-between;
+    font-size: 13pt;
+    font-weight: lighter;
+}
+
+.checkBoxWrapper > div > div > h3 {
+    color: #111419;
+}
+
+.checkBoxWrapper > div > div > input {
+    align-self: start;
+    appearance: none;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border: 2px solid #586471;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.checkBoxWrapper > div > div > input:checked {
+    background-color: #007bff;
+    border-color: #007bff;
+    position: relative;
+}
+
+.checkBoxWrapper > div > div > input:checked::after {
+    content: "✔";
+    font-size: 18px;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.wrapper > p {
+    color: #586471;
+    font-size: 13pt;
+}
+
+.wrapper > p > a {
+    text-decoration: none;
     color: #5a9bed;
 }
 
-.inputWrapper {
-    display: flex;
-    gap: 0.4em;
+.wrapper > p > a:hover {
+    text-decoration: underline;
 }
 
-.pass {
-    flex-grow: 1;
-    padding: 0.3em;
+.button > input {
+    width: 100%;
+    padding: 0.7em;
+    border-radius: 2em;
     border: none;
-}
-
-.login {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5em;
-}
-
-.login > button {
-    background-color: #88898c;
-    text-align: center;
-    padding: 1em;
-    border: none;
-    border-radius: 1.8em;
     color: #ffffff;
-    text-decoration: none;
+    background-color: #111419;
+    font-size: 15pt;
     font-weight: bold;
-    font-size: 14pt;
-}
-
-.birth {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6em;
-}
-
-.birth > p:first-child {
-    font-weight: bold;
-    font-size: 13pt;
-}
-
-.birth > p:nth-child(2) {
-    color: #586471;
-    font-size: 13pt;
-}
-
-.birthday {
-    display: flex;
-    gap: 0.5em;
-}
-
-.month {
-    flex: 0 0 50%;
-    padding: 0.5em;
-    border: 1px solid #d2d9de;
-    border-radius: 0.3em;
-}
-
-.month > select {
-    width: 100%;
-    font-size: 16pt;
-    border: none;
-}
-
-.month > p, .day > p, .year > p {
-    color: #586471;
-}
-
-.day {
-    flex: 1 1 auto;
-    padding: 0.5em;
-    border: 1px solid #d2d9de;
-    border-radius: 0.3em;
-}
-
-.day > select {
-    width: 100%;
-    font-size: 16pt;
-    border: none;
-}
-
-.year {
-    flex: 1 1 auto;
-    padding: 0.5em;
-    border: 1px solid #d2d9de;
-    border-radius: 0.3em;
-}
-
-.year > select {
-    width: 100%;
-    font-size: 16pt;
-    border: none;
-}
-
-.month > select, .day > select, .year > select {
-    cursor: pointer;
 }

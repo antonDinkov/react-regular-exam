@@ -11,20 +11,33 @@ function CreateNext() {
                 </header>
                 <main className={styles.main}>
                     <div className={styles.wrapper}>
+                        <h1>Customize your experience</h1>
                         <div className={styles.checkBoxWrapper}>
                             <div>
-
+                                <h3>Get more out of At</h3>
+                                <div>
+                                    <p>Receive email about your At activity and recommendations.</p>
+                                    <input type="checkbox" name="" id="" />
+                                </div>
                             </div>
                             <div>
-
+                                <h3>Connect with people you know</h3>
+                                <div>
+                                    <p>Let others find your At account by your email address.</p>
+                                    <input type="checkbox" name="" id="" />
+                                </div>
                             </div>
                             <div>
-
+                                <h3>Personalized ads</h3>
+                                <div>
+                                    <p>You will always see ads on At based on your At activity. When this setting is enabled, At may further personalize ads from At advertisers, on and off At, by combining your At activity with other online activity and information from our partners.</p>
+                                    <input type="checkbox" name="" id="" />
+                                </div>
                             </div>
                         </div>
 
                         <p>
-
+                            By signing up, you agree to our <Link>Terms</Link>, <Link>Privacy Policy</Link>, and <Link>Cookie Use</Link>. At may use your contact information, including your email address and phone number for purposes outlined in our Privacy Policy. <Link>Learn more</Link>
                         </p>
                     </div>
                     <div className={styles.button}>
