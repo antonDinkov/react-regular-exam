@@ -1,4 +1,4 @@
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import styles from './Create.module.css';
 import { useContext, useState } from 'react';
 import { FormContext } from '../../../context/UserContext';
@@ -6,18 +6,36 @@ import { FormContext } from '../../../context/UserContext';
 
 function Create() {
 const {updateForm} = useContext(FormContext);
-const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    birthday: {
-        month: '',
-        day: '',
-        year: '',
-    },
-});
+const navigate = useNavigate();
+
+const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = {
+        name: e.target.elements.name?.value || '',
+        email: e.target.elements.email?.value || '',
+        birthday: {
+            month: e.target.elements.month?.value || '',
+            day: e.target.elements.day?.value || '',
+            year: e.target.elements.year?.value || '',
+        }
+    };
+    if (!formData.name) {
+        return alert ('You must enter a name');
+    } else if (!formData.email) {
+        return alert ('You must enter a valid email address');
+    } else if (!formData.birthday.month) {
+        return alert ('You must choose a month');
+    } else if (!formData.birthday.day) {
+        return alert ('You must choose a day');
+    } else if (!formData.birthday.year) {
+        return alert ('You must choose an year');
+    }
+    await updateForm(formData);
+    navigate('/react-regular-exam/create/submit');
+};
 
     return (
-        <form action="">
+        <form onSubmit={handleSubmit}>
             <div className={styles.wrapperMajor}>
                 <header className={styles.header}>
                     <Link className={styles.x} to='/react-regular-exam'><i className="fa-solid fa-xmark"></i></Link>
@@ -34,7 +52,7 @@ const [formData, setFormData] = useState({
                                 </div>
 
                                 <div className={styles.inputWrapper}>
-                                    <input className={styles.pass} type="text" name="" id="" placeholder='' />
+                                    <input className={styles.pass} type="text" name="name" id="" placeholder='' />
                                 </div>
                             </div>
                             <div className={styles.password}>
@@ -44,7 +62,7 @@ const [formData, setFormData] = useState({
                                 </div>
 
                                 <div className={styles.inputWrapper}>
-                                    <input className={styles.pass} type="email" name="" id="" placeholder='' />
+                                    <input className={styles.pass} type="email" name="email" id="" placeholder='' />
                                 </div>
                             </div>
                             <div className={styles.birth}>
@@ -95,7 +113,7 @@ const [formData, setFormData] = useState({
                             </div>
                         </div>
                         <div className={styles.login}>
-                            <Link to='/react-regular-exam/welcome'>Next</Link>
+                            <button>Next</button>
                         </div>
                     </div>
                 </main>

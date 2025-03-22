@@ -5,6 +5,7 @@ import Login from './components/Login Page/Login';
 import LoginNext from './components/Login Page/LoginNext';
 import Create from './components/Create page/Create';
 import { FormDataProvider } from '../context/UserContext';
+import CreateNext from './components/Create page/CreateNext';
 function App() {
 
     return (
@@ -15,6 +16,7 @@ function App() {
                 <Route path='/react-regular-exam/login' element={<Login />}></Route>
                 <Route path='/react-regular-exam/login/pass' element={<LoginNext />}></Route>
                 <Route path='/react-regular-exam/create' element={<Create />}></Route>
+                <Route path='/react-regular-exam/create/submit' element={<CreateNext />}></Route>
             </Routes>
         </FormDataProvider>
 
