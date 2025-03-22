@@ -19,6 +19,11 @@ export function FormDataProvider ({children}) {
             day: '',
             year: '',
         },
+        checkbox: {
+            getMore: '',
+            connectWith: '',
+            peronalizedAds: '',
+        },
     });
 
     const updateForm = (newData) => {

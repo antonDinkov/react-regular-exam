@@ -1,10 +1,22 @@
 import { Link, useNavigate } from "react-router";
 import styles from './CreateNext.module.css'
+import { useContext } from "react";
+import { FormContext } from "../../../context/UserContext";
 
 function CreateNext() {
     const navigate = useNavigate();
-    const handleSubmit = (e) => {
+    const { updateForm } = useContext(FormContext);
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const formData = {
+            checkbox: {
+                getMore: e.target.elements.getMore?.checked ? "yes" : "no" || '',
+                connectWith: e.target.elements.connectWith?.checked ? "yes" : "no" || '',
+                peronalizedAds: e.target.elements.peronalizedAds?.checked ? "yes" : "no" || '',
+            },
+        }
+        await updateForm(formData)
         navigate('/react-regular-exam/guest')
     }
     return (
@@ -22,21 +34,21 @@ function CreateNext() {
                                 <h3>Get more out of At</h3>
                                 <div>
                                     <p>Receive email about your At activity and recommendations.</p>
-                                    <input type="checkbox" name="" id="" />
+                                    <input type="checkbox" name="getMore" />
                                 </div>
                             </div>
                             <div>
                                 <h3>Connect with people you know</h3>
                                 <div>
                                     <p>Let others find your At account by your email address.</p>
-                                    <input type="checkbox" name="" id="" />
+                                    <input type="checkbox" name="connectWith" />
                                 </div>
                             </div>
                             <div>
                                 <h3>Personalized ads</h3>
                                 <div>
                                     <p>You will always see ads on At based on your At activity. When this setting is enabled, At may further personalize ads from At advertisers, on and off At, by combining your At activity with other online activity and information from our partners.</p>
-                                    <input type="checkbox" name="" id="" />
+                                    <input type="checkbox" name="peronalizedAds" />
                                 </div>
                             </div>
                         </div>
