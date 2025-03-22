@@ -1,9 +1,14 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import styles from './CreateNext.module.css'
 
 function CreateNext() {
+    const navigate = useNavigate();
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        navigate('/react-regular-exam/guest')
+    }
     return (
-        <form action="">
+        <form onSubmit={handleSubmit}>
             <div className={styles.wrapperMajor}>
                 <header className={styles.header}>
                     <Link className={styles.x} to='/react-regular-exam'><i className="fa-solid fa-xmark"></i></Link>

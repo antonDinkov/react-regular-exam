@@ -1,10 +1,10 @@
 import { useRef, useState, useEffect } from "react";
-import styles from "./Guest.module.css";
+import styles from "./Welcome.module.css";
 import { Link } from "react-router";
 import { db } from "../../firebase";
 import { collection, getDocs } from "../../firebase";
 
-function Guest() {
+function Welcome() {
     const searchValue = useRef();
     const [posts, setPosts] = useState([]);
     const [filteredPosts, setFilteredPosts] = useState([]);
@@ -115,4 +115,4 @@ function Guest() {
     )
 };
 
-export default Guest;
+export default Welcome;
