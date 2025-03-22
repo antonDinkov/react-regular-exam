@@ -1,8 +1,21 @@
 import { Link } from 'react-router';
 import styles from './Create.module.css';
+import { useContext, useState } from 'react';
+import { FormContext } from '../../../context/UserContext';
 
 
 function Create() {
+const {updateForm} = useContext(FormContext);
+const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    birthday: {
+        month: '',
+        day: '',
+        year: '',
+    },
+});
+
     return (
         <form action="">
             <div className={styles.wrapperMajor}>

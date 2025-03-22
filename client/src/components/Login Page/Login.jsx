@@ -5,33 +5,15 @@ import { FormContext } from "../../../context/UserContext";
 function Login() {
     const navigate = useNavigate();
     const {updateForm} = useContext(FormContext);
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        birthday: {
-            month: '',
-            day: '',
-            year: '',
-        },
-    });
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: value,
-        }));
-    };
-
-    const handleSubmit = (e) => {
+    
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!formData.email) {
+        const updatedFormData = {email: e.target.elements.email?.value || ''}
+        if (!updatedFormData.email) {
             return alert ('You must enter a valid email address');
         }
-        // Актуализираме контекста с данните от формата
-        updateForm(formData);
+        await updateForm(updatedFormData);
         navigate('/react-regular-exam/login/pass')
-        // Може да добавиш навигация или други действия тук, след като формата е подадена
     };
     return (
         /* action използвам само когато изпращам данни към бекенда */
@@ -52,7 +34,7 @@ function Login() {
                                 <p>or</p>
                                 <hr className={styles.hr} />
                             </div>
-                            <input onChange={handleChange} name="email" className={styles.input} type="email" placeholder="email" />
+                            <input name="email" className={styles.input} type="email" placeholder="email" />
                             <button className={`${styles.button} ${styles.awesome} ${styles.next}`}>Next</button>
                             <button type="button" className={`${styles.button} ${styles.awesome}`} to="/react-regular-exam/guest">Forgot password?</button>
                             <p className={styles.lastParagraph}>Don't have an account?<Link to="/react-regular-exam/create">Sign up</Link></p>
