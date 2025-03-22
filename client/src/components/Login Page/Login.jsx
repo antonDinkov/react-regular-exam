@@ -25,7 +25,9 @@ function Login() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
+        if (!formData.email) {
+            return alert ('You must enter a valid email address');
+        }
         // Актуализираме контекста с данните от формата
         updateForm(formData);
         navigate('/react-regular-exam/login/pass')
@@ -50,7 +52,7 @@ function Login() {
                                 <p>or</p>
                                 <hr className={styles.hr} />
                             </div>
-                            <input onChange={handleChange} name="email" className={styles.input} type="text" placeholder="email" />
+                            <input onChange={handleChange} name="email" className={styles.input} type="email" placeholder="email" />
                             <button className={`${styles.button} ${styles.awesome} ${styles.next}`}>Next</button>
                             <button type="button" className={`${styles.button} ${styles.awesome}`} to="/react-regular-exam/guest">Forgot password?</button>
                             <p className={styles.lastParagraph}>Don't have an account?<Link to="/react-regular-exam/create">Sign up</Link></p>
