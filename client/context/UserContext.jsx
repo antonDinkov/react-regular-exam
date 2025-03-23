@@ -24,6 +24,7 @@ export function FormDataProvider ({children}) {
             getMore: '',
             connectWith: '',
             peronalizedAds: '',
+            noThanks: '',
         },
     });
 
@@ -32,7 +33,7 @@ export function FormDataProvider ({children}) {
     };
 
     return (
-        <FormContext.Provider value={{...formData, updateForm}}>
+        <FormContext.Provider value={{formData, updateForm}}>
             {children}
         </FormContext.Provider>
     );

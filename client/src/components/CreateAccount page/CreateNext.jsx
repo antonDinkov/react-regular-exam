@@ -1,27 +1,53 @@
 import { Link, useNavigate } from "react-router";
 import styles from './CreateNext.module.css'
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FormContext } from "../../../context/UserContext";
+import registerUser from "./register";
+import LoadingSpinner from "../Loading spinner/Spinner";
 
 function CreateNext() {
     const navigate = useNavigate();
-    const { updateForm } = useContext(FormContext);
+    const { formData, updateForm } = useContext(FormContext);
+    const [shouldRegister, setShouldRegister] = useState(false);
+    const [spinner, setSpinner] = useState(false);
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const formData = {
+        setSpinner(true);
+        const formDataBoxes = {
             checkbox: {
                 getMore: e.target.elements.getMore?.checked ? "yes" : "no" || '',
                 connectWith: e.target.elements.connectWith?.checked ? "yes" : "no" || '',
                 peronalizedAds: e.target.elements.peronalizedAds?.checked ? "yes" : "no" || '',
             },
         }
-        await updateForm(formData)
-        navigate('/react-regular-exam/guest')
+        try {
+            await updateForm(formDataBoxes);
+            setShouldRegister(true);
+        } catch (error) {
+            console.error("Error registering user:", error.message);
+        }
     }
+    useEffect(() => {
+        if (!shouldRegister) {
+            return;
+        }
+        const register = async () => {
+            try {
+                await registerUser(formData);
+                setSpinner(false);
+                navigate('/react-regular-exam/guest');
+                
+            } catch (error) {
+                alert (error.message);
+            }
+        }
+        register();
+    }, [shouldRegister])
     return (
         <form onSubmit={handleSubmit}>
             <div className={styles.wrapperMajor}>
+            {spinner && <LoadingSpinner />}
                 <header className={styles.header}>
                     <Link className={styles.x} to='/react-regular-exam'><i className="fa-solid fa-xmark"></i></Link>
                     <h1 className={styles.logo}>At</h1>
