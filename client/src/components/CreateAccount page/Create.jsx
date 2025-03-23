@@ -14,7 +14,6 @@ const handleSubmit = async (e) => {
         name: e.target.elements.name?.value || '',
         email: e.target.elements.email?.value || '',
         password: e.target.elements.password?.value || '',
-        repeat: e.target.elements.repeat?.value || '',
         birthday: {
             month: e.target.elements.month?.value || '',
             day: e.target.elements.day?.value || '',
@@ -27,7 +26,7 @@ const handleSubmit = async (e) => {
         return alert ('You must enter a valid email address!');
     } else if (!formData.password || formData.password.length < 6) {
         return alert ('You must enter a valid password!');
-    } else if (formData.password !== formData.repeat) {
+    } else if (formData.password !== e.target.elements.repeat?.value) {
         return alert ('Password Missmatch!');
     } else if (!formData.birthday.month) {
         return alert ('You must choose a month!');
