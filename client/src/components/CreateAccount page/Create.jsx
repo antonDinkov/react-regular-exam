@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router';
 import styles from './Create.module.css';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { FormContext } from '../../../context/UserContext';
 
 
@@ -13,6 +13,8 @@ const handleSubmit = async (e) => {
     const formData = {
         name: e.target.elements.name?.value || '',
         email: e.target.elements.email?.value || '',
+        password: e.target.elements.password?.value || '',
+        repeat: e.target.elements.repeat?.value || '',
         birthday: {
             month: e.target.elements.month?.value || '',
             day: e.target.elements.day?.value || '',
@@ -20,15 +22,19 @@ const handleSubmit = async (e) => {
         }
     };
     if (!formData.name) {
-        return alert ('You must enter a name');
+        return alert ('You must enter a name!');
     } else if (!formData.email) {
-        return alert ('You must enter a valid email address');
+        return alert ('You must enter a valid email address!');
+    } else if (!formData.password || formData.password.length < 6) {
+        return alert ('You must enter a valid password!');
+    } else if (formData.password !== formData.repeat) {
+        return alert ('Password Missmatch!');
     } else if (!formData.birthday.month) {
-        return alert ('You must choose a month');
+        return alert ('You must choose a month!');
     } else if (!formData.birthday.day) {
-        return alert ('You must choose a day');
+        return alert ('You must choose a day!');
     } else if (!formData.birthday.year) {
-        return alert ('You must choose an year');
+        return alert ('You must choose an year!');
     }
     await updateForm(formData);
     navigate('/react-regular-exam/create/submit');
@@ -63,6 +69,26 @@ const handleSubmit = async (e) => {
 
                                 <div className={styles.inputWrapper}>
                                     <input className={styles.pass} type="email" name="email" id="" placeholder='' />
+                                </div>
+                            </div>
+                            <div className={styles.password}>
+                                <div className={styles.arrow}>
+                                    <p>Password</p>
+                                    <i className="fa-solid fa-arrow-down"></i>
+                                </div>
+
+                                <div className={styles.inputWrapper}>
+                                    <input className={styles.pass} type="password" name="password" id="" placeholder='At least 6 characters' />
+                                </div>
+                            </div>
+                            <div className={styles.password}>
+                                <div className={styles.arrow}>
+                                    <p>Repeat password</p>
+                                    <i className="fa-solid fa-arrow-down"></i>
+                                </div>
+
+                                <div className={styles.inputWrapper}>
+                                    <input className={styles.pass} type="password" name="repeat" id="" placeholder='' />
                                 </div>
                             </div>
                             <div className={styles.birth}>

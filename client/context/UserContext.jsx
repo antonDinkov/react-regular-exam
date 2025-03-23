@@ -14,6 +14,7 @@ export function FormDataProvider ({children}) {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
+        password: '',
         birthday: {
             month: '',
             day: '',

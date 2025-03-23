@@ -3,9 +3,9 @@ import { Routes, Route } from 'react-router';
 import Guest from './components/Guest Page/Guest';
 import Login from './components/Login Page/Login';
 import LoginNext from './components/Login Page/LoginNext';
-import Create from './components/Create page/Create';
+import Create from './components/CreateAccount page/Create';
 import { FormDataProvider } from '../context/UserContext';
-import CreateNext from './components/Create page/CreateNext';
+import CreateNext from './components/CreateAccount page/CreateNext';
 import Welcome from './components/Welcome page/Welcome';
 function App() {
 
