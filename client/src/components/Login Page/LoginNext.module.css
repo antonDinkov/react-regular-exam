@@ -135,6 +135,7 @@
     color: #ffffff;
     text-decoration: none;
     border: none;
+    cursor: pointer;
 }
 
 .signup {

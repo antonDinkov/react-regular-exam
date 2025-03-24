@@ -1,12 +1,25 @@
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import styles from './LoginNext.module.css'
 import { useContext } from 'react'
 import { FormContext } from '../../../context/UserContext'
+import { loginUser } from '../HTTP/registerAndLogin';
 
 function LoginNext() {
-    const { formData } = useContext(FormContext);
-    const submitHandler = async (params) => {
+    const { formData, updateForm } = useContext(FormContext);
+    const navigate = useNavigate();
+
+    const submitHandler = async (e) => {
+        e.preventDefault();
         console.log('Hello world');
+        const pass = {password: e.target.elements.password?.value}
+        if (!pass) {return alert ('You need to provide a password')};
+        await updateForm(pass);
+        try {
+            await loginUser(formData);
+            navigate('/react-regular-exam/welcome');
+        } catch (error) {
+            alert (error.message)
+        }
     }
 
     return (
@@ -31,7 +44,7 @@ function LoginNext() {
                                 </div>
 
                                 <div className={styles.inputWrapper}>
-                                    <input className={styles.pass} type="password" name="" id="" placeholder='' />
+                                    <input className={styles.pass} type="password" name="password" id="" placeholder='' />
                                     <i className="fa-regular fa-eye"></i>
                                 </div>
 
@@ -39,7 +52,7 @@ function LoginNext() {
                             <p className={styles.forgot}><Link>Forgot password?</Link></p>
                         </div>
                         <div className={styles.login}>
-                            <input type='submit' value='Log in' />
+                            <input name='login' type='submit' value='Log in' />
                             <div className={styles.signup}>
                                 <p>Don't have an account?</p>
                                 <Link to='/create'>Sign up</Link>
