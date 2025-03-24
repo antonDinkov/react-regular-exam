@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router";
 import styles from './CreateNext.module.css'
 import { useContext, useEffect, useState } from "react";
 import { FormContext } from "../../../context/UserContext";
-import registerUser from "./register";
+import {registerUser} from "../HTTP/registerAndLogin";
 import LoadingSpinner from "../Loading spinner/Spinner";
 
 function CreateNext() {
