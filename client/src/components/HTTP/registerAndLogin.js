@@ -15,6 +15,8 @@ export const registerUser = async (contextData) => {
 
 export const loginUser = async (contextData) => {
     const {email, password} = contextData
+    console.log(email, password);
+    
     try {
         const userdata = await signInWithEmailAndPassword(auth, email, password);
         const user = userdata.user;

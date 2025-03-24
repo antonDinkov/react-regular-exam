@@ -1,26 +1,40 @@
 import { Link, useNavigate } from 'react-router'
 import styles from './LoginNext.module.css'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { FormContext } from '../../../context/UserContext'
 import { loginUser } from '../HTTP/registerAndLogin';
 
 function LoginNext() {
     const { formData, updateForm } = useContext(FormContext);
     const navigate = useNavigate();
+    const [shouldLogin, setShouldLogin] = useState(false);
+    const [spinner, setSpinner] = useState(false);
 
     const submitHandler = async (e) => {
         e.preventDefault();
+        setSpinner(true)
         console.log('Hello world');
         const pass = {password: e.target.elements.password?.value}
         if (!pass) {return alert ('You need to provide a password')};
         await updateForm(pass);
-        try {
-            await loginUser(formData);
-            navigate('/react-regular-exam/welcome');
-        } catch (error) {
-            alert (error.message)
-        }
+        setShouldLogin(true)
     }
+
+    useEffect(() => {
+        if (!shouldLogin) {
+                    return;
+                }
+                const login = async () => {
+                    try {
+                        await loginUser(formData);
+                        setSpinner(false);
+                        navigate('/react-regular-exam/guest');
+                    } catch (error) {
+                        alert (error.message);
+                    }
+                }
+                login();
+    }, [shouldLogin])
 
     return (
         <form onSubmit={submitHandler}>
