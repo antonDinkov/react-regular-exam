@@ -127,13 +127,14 @@
     gap: 0.5em;
 }
 
-.login>a {
+.login>input {
     background-color: #88898c;
     text-align: center;
     padding: 1em;
     border-radius: 1.8em;
     color: #ffffff;
     text-decoration: none;
+    border: none;
 }
 
 .signup {

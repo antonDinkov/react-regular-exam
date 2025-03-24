@@ -1,4 +1,5 @@
 import { createUserWithEmailAndPassword, db, doc, setDoc, auth, signInWithEmailAndPassword } from "../../firebase";
+import { setUser } from "./localeStorageApi";
 export const registerUser = async (contextData) => {
     const {email, password} = contextData
     try {
@@ -19,9 +20,9 @@ export const loginUser = async (contextData) => {
         const user = userdata.user;
         console.log(user);
         const token = await user.getIdToken();
-        
-        await setDoc(doc(db, "users", user.uid), {...contextData, createdAt: new Date()});
+        console.log(token);
+        setUser(user, token);
     } catch (err) {
-        console.error("Error registering user:", err.message);
+        console.error("Error login user:", err.message);
     }
 }
