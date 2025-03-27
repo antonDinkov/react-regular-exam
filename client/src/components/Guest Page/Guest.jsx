@@ -59,7 +59,7 @@ function Guest() {
                 <h1>At</h1>
                 <ul>
                     <li><Link to='/react-regular-exam/login'><i className={`fa-solid fa-arrow-right-to-bracket ${styles.i}`}></i><span>Sign in</span></Link></li>
-                    <li><Link to='#'><i className={`fa-regular fa-id-badge ${styles.i}`}></i><span>Create account</span></Link></li>
+                    <li><Link to='/react-regular-exam/create'><i className={`fa-regular fa-id-badge ${styles.i}`}></i><span>Create account</span></Link></li>
                     <li><Link to="/react-regular-exam"><i className={`fa-solid fa-person-through-window ${styles.i}`}></i><span>Leave</span></Link></li>
                 </ul>
                 <img src="https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-png-image_3918418.jpg" alt="Guest" />
