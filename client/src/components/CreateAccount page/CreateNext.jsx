@@ -8,7 +8,6 @@ import LoadingSpinner from "../Loading spinner/Spinner";
 function CreateNext() {
     const navigate = useNavigate();
     const { formData, updateForm } = useContext(FormContext);
-    const [shouldRegister, setShouldRegister] = useState(false);
     const [spinner, setSpinner] = useState(false);
     
     const handleSubmit = async (e) => {
@@ -16,20 +15,19 @@ function CreateNext() {
         setSpinner(true);
         const formDataBoxes = {
             checkbox: {
-                getMore: e.target.elements.getMore?.checked ? "yes" : "no" || '',
-                connectWith: e.target.elements.connectWith?.checked ? "yes" : "no" || '',
-                peronalizedAds: e.target.elements.peronalizedAds?.checked ? "yes" : "no" || '',
+                getMore: e.target.elements.getMore?.checked ? "yes" : "no",
+                connectWith: e.target.elements.connectWith?.checked ? "yes" : "no",
+                peronalizedAds: e.target.elements.peronalizedAds?.checked ? "yes" : "no",
             },
         }
         try {
-            await updateForm(formDataBoxes);
-            setShouldRegister(true);
+            updateForm(formDataBoxes);
         } catch (error) {
             console.error("Error registering user:", error.message);
         }
     }
     useEffect(() => {
-        if (!shouldRegister) {
+        if (!formData.checkbox.getMore) {
             return;
         }
         const register = async () => {
@@ -43,7 +41,7 @@ function CreateNext() {
             }
         }
         register();
-    }, [shouldRegister])
+    }, [formData.checkbox.getMore])
     return (
         <form onSubmit={handleSubmit}>
             <div className={styles.wrapperMajor}>

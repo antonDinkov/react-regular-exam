@@ -15,14 +15,14 @@ export const registerUser = async (contextData) => {
 
 export const loginUser = async (contextData) => {
     const {email, password} = contextData
-    console.log(email, password);
+    
     
     try {
         const userdata = await signInWithEmailAndPassword(auth, email, password);
         const user = userdata.user;
-        console.log(user);
+        
         const token = await user.getIdToken();
-        console.log(token);
+        
         setUser(user, token);
     } catch (err) {
         console.error("Error login user:", err.message);
