@@ -58,12 +58,15 @@ function Welcome() {
             <nav className={styles.nav}>
                 <h1>At</h1>
                 <ul>
-                    <li><Link to='/react-regular-exam/login'><i className={`fa-solid fa-arrow-right-to-bracket ${styles.i}`}></i><span>Sign in</span></Link></li>
-                    <li><Link to='/react-regular-exam/create'><i className={`fa-regular fa-id-badge ${styles.i}`}></i><span>Create account</span></Link></li>
-                    <li><Link to="/react-regular-exam"><i className={`fa-solid fa-person-through-window ${styles.i}`}></i><span>Leave</span></Link></li>
+                    <li><Link to='/react-regular-exam/welcome'><i className={`fa-solid fa-house-flag ${styles.i}`}></i><span>Welcome</span></Link></li>
+                    <li><Link to='/react-regular-exam/create'><i className={`fa-solid fa-bell ${styles.i}`}></i><span>Notification</span></Link></li>
+                    <li><Link to='/react-regular-exam/create'><i className={`fa-solid fa-envelope ${styles.i}`}></i><span>Messages</span></Link></li>
+                    <li><Link to='/react-regular-exam/create'><i className={`fa-solid fa-user ${styles.i}`}></i><span>Profile</span></Link></li>
+                    <li><Link to='/react-regular-exam/create'><i className={`fa-solid fa-suitcase ${styles.i}`}></i><span>Jobs</span></Link></li>
+                    <li><Link to="/react-regular-exam"><i className={`fa-solid fa-circle-xmark ${styles.i}`}></i><span>Logout</span></Link></li>
                 </ul>
                 <img src="https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-png-image_3918418.jpg" alt="Guest" />
-                <p>Guest</p>
+                <p>Current user</p>
             </nav>
             <main className={styles.main}>
                 <section id="search" className={styles.search}>
