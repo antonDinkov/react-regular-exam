@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, db, doc, setDoc, auth, signInWithEmailAndPassword } from "../../firebase";
+import { createUserWithEmailAndPassword, db, doc, setDoc, getDoc, getDocs auth, signInWithEmailAndPassword } from "../../firebase";
 import { setUser } from "./localeStorageApi";
 export const registerUser = async (contextData) => {
     const {email, password} = contextData
@@ -20,11 +20,25 @@ export const loginUser = async (contextData) => {
     try {
         const userdata = await signInWithEmailAndPassword(auth, email, password);
         const user = userdata.user;
-        
         const token = await user.getIdToken();
         
         setUser(user, token);
     } catch (err) {
         console.error("Error login user:", err.message);
+    }
+}
+
+async function getUserName(userId) {
+    try {
+        const docRef = doc(db, 'users', userId);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            return docSnap.data().name;
+        } else {
+            throw new Error ('no such user!');
+        }
+    } catch (error) {
+        console.error("Error fetching user:", error.message);
+        return null;//за да се избегне срив!
     }
 }
