@@ -14,7 +14,7 @@
     display: inline-block;
     width: 30px;
     text-align: center;
-    background-color: #868686;
+    /* background-color: #868686; */
 }
 /* на малък екран невидими да ги направя */
 .spanInvisible {
@@ -26,6 +26,7 @@
     flex-direction: column;
     flex: 0 0 40%;
     border-right: 1px solid #f5f5f5;
+    overflow-y: auto;
 }
 
 .nav li {
@@ -34,6 +35,22 @@
     padding: 1em;
     width: 50%;
     border-radius: 10em;
+}
+
+.nav li:last-child{
+    color: white;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+}
+
+.nav li:last-child:hover{
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.nav li:last-child > a > span{
+    color: white;
+    font-weight: bold;
 }
 
 .nav li:hover {

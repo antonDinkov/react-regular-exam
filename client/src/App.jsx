@@ -19,6 +19,7 @@ function App() {
                 <Route path='/react-regular-exam/create' element={<Create />}></Route>
                 <Route path='/react-regular-exam/create/submit' element={<CreateNext />}></Route>
                 <Route path='/react-regular-exam/welcome' element={<Welcome />}></Route>
+                <Route path='/react-regular-exam/post' element={<Welcome />}></Route>
             </Routes>
         </FormDataProvider>
 

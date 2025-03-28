@@ -64,6 +64,8 @@ function Welcome() {
                     <li><Link to='/react-regular-exam/create'><i className={`fa-solid fa-user ${styles.i}`}></i><span>Profile</span></Link></li>
                     <li><Link to='/react-regular-exam/create'><i className={`fa-solid fa-suitcase ${styles.i}`}></i><span>Jobs</span></Link></li>
                     <li><Link to="/react-regular-exam"><i className={`fa-solid fa-circle-xmark ${styles.i}`}></i><span>Logout</span></Link></li>
+                    <li><Link to="/react-regular-exam/post"><span>Post</span></Link></li>
+                    
                 </ul>
                 <img src="https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-png-image_3918418.jpg" alt="Guest" />
                 <p>Current user</p>

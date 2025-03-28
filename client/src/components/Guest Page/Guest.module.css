@@ -14,7 +14,7 @@
     display: inline-block;
     width: 30px;
     text-align: center;
-    background-color: #868686;
+    /* background-color: #868686; */
 }
 /* на малък екран невидими да ги направя */
 .spanInvisible {
