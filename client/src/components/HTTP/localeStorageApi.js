@@ -1,6 +1,7 @@
 export function setUser(user, token) {
-    localStorage.setItem('userToken', token);
     localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('userToken', token);
+    /* localStorage.setItem('userName', JSON.stringify(userName)); */
 }
 
 export function getUserToken() {

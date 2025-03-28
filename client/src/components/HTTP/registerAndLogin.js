@@ -1,7 +1,7 @@
-import { createUserWithEmailAndPassword, db, doc, setDoc, getDoc, getDocs auth, signInWithEmailAndPassword } from "../../firebase";
+import { createUserWithEmailAndPassword, db, doc, setDoc, getDoc, getDocs, auth, signInWithEmailAndPassword } from "../../firebase";
 import { setUser } from "./localeStorageApi";
 export const registerUser = async (contextData) => {
-    const {email, password} = contextData
+    const {email, password} = contextData;
     try {
         const userdata = await createUserWithEmailAndPassword(auth, email, password);
         const user = userdata.user;
@@ -14,26 +14,29 @@ export const registerUser = async (contextData) => {
 }
 
 export const loginUser = async (contextData) => {
-    const {email, password} = contextData
-    
+    const {email, password} = contextData;
     
     try {
         const userdata = await signInWithEmailAndPassword(auth, email, password);
         const user = userdata.user;
-        const token = await user.getIdToken();
+        /* console.log(user.uid); */
         
-        setUser(user, token);
+        const token = await user.getIdToken();
+        const currentUserInfo = await getUser(user.uid);
+        setUser(currentUserInfo, token);
     } catch (err) {
         console.error("Error login user:", err.message);
     }
 }
 
-async function getUserName(userId) {
+async function getUser(userId) {
     try {
         const docRef = doc(db, 'users', userId);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-            return docSnap.data().name;
+            /* console.log(docSnap.data()); */
+            
+            return docSnap.data();
         } else {
             throw new Error ('no such user!');
         }

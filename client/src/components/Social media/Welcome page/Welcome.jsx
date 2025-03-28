@@ -1,16 +1,24 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useContext } from "react";
 import styles from "./Welcome.module.css";
-import { Link } from "react-router";
-import { db } from "../../firebase";
-import { collection, getDocs } from "../../firebase";
+import { Link, Outlet } from "react-router";
+import { db } from "../../../firebase";
+import { collection, getDocs } from "../../../firebase";
+import { FormContext } from "../../../../context/UserContext";
+import { getUser } from "../../HTTP/localeStorageApi";
+import Navbar from "../Navbar";
+import Main from "./Main";
 
-function Welcome() {
-    const searchValue = useRef();
-    const [posts, setPosts] = useState([]);
-    const [filteredPosts, setFilteredPosts] = useState([]);
-    const isDone = useRef(false);
+function Welcome({children}) {
+    /* const searchValue = useRef(); */
+    /* const [posts, setPosts] = useState([]); */
+    /* const [filteredPosts, setFilteredPosts] = useState([]); */
+    /* const isDone = useRef(false); */
+    /* const {formData, updateForm} = useContext(FormContext);
+    const [currentUser, setCurrentUser] = useState('Loading...'); */
+    
+    
 
-    const handleSearch = () => {
+    /* const handleSearch = () => {
         const searchText = searchValue.current.value.trim().toLowerCase(); // Малки букви за case-insensitive
         searchValue.current.value = '';
 
@@ -22,7 +30,21 @@ function Welcome() {
             );
             setFilteredPosts(results);
         }
-    };
+    }; */
+
+    /* useEffect(() => {
+        const user = JSON.parse(getUser());
+        console.log('Tochno predi loga');
+        console.log(user);
+        
+        console.log(user.name);
+        
+        if (user && user.name) {
+            setCurrentUser(user.name);
+        } else {
+            setCurrentUser('Guest'); // Ако няма потребител, да не е "Error load..."
+        }
+    }, []); */
 
     /* useEffect(() => {
         if (searchTerm) {
@@ -36,7 +58,7 @@ function Welcome() {
     }, [searchTerm, posts]);
  */
 
-    useEffect(() => {
+    /* useEffect(() => {
         if (isDone.current) return;
         isDone.current = true;
         const fetchPost = async () => {
@@ -51,11 +73,11 @@ function Welcome() {
             }
         }
         fetchPost();
-    }, []);
+    }, []); */
 
     return (
         <div className={styles.container}>
-            <nav className={styles.nav}>
+            {/* <nav className={styles.nav}>
                 <h1>At</h1>
                 <ul>
                     <li><Link to='/react-regular-exam/welcome'><i className={`fa-solid fa-house-flag ${styles.i}`}></i><span>Welcome</span></Link></li>
@@ -68,10 +90,11 @@ function Welcome() {
                     
                 </ul>
                 <img src="https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-png-image_3918418.jpg" alt="Guest" />
-                <p>Current user</p>
-            </nav>
+                <p>{currentUser}</p>
+            </nav> */}
+            <Navbar />
             <main className={styles.main}>
-                <section id="search" className={styles.search}>
+                {/* <section id="search" className={styles.search}>
                     <h3>What do you need?</h3>
                     <input type="search" ref={searchValue} name="search" id="search" placeholder="search" />
                     <button onClick={handleSearch}>🔍</button>
@@ -114,7 +137,9 @@ function Welcome() {
                     ):(
                         <p>No posts found</p>
                     )}
-                </section>
+                </section> */}
+                {/* <Main /> */}
+                <Outlet />
             </main>
         </div>
     )
