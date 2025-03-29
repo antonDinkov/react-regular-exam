@@ -19,11 +19,12 @@ export const loginUser = async (contextData) => {
     try {
         const userdata = await signInWithEmailAndPassword(auth, email, password);
         const user = userdata.user;
-        /* console.log(user.uid); */
-        
         const token = await user.getIdToken();
         const currentUserInfo = await getUser(user.uid);
+        console.log(currentUserInfo);
+        
         setUser(currentUserInfo, token);
+        return currentUserInfo;
     } catch (err) {
         console.error("Error login user:", err.message);
     }

@@ -25,7 +25,8 @@ function LoginNext() {
                 }
                 const login = async () => {
                     try {
-                        await loginUser(formData);
+                        const userInfo = await loginUser(formData);
+                        await updateForm(userInfo);
                         navigate('/react-regular-exam/welcome');
                         setSpinner(false);
                     } catch (error) {
