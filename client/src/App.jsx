@@ -19,10 +19,8 @@ function App() {
                 <Route path='/react-regular-exam/login/pass' element={<LoginNext />}></Route>
                 <Route path='/react-regular-exam/create' element={<Create />}></Route>
                 <Route path='/react-regular-exam/create/submit' element={<CreateNext />}></Route>
-                {/* <Route path='/react-regular-exam/welcome' element={<Welcome />}></Route> */}
-                <Route path='/react-regular-exam/post' element={<Welcome />}></Route>
-                <Route path="/react-regular-exam/*" element={<Welcome />}>
-                    <Route path="welcome" element={<Main />} />
+                <Route path="/react-regular-exam/welcome" element={<Welcome />}>
+                    <Route index element={<Main />} />
                 </Route>
             </Routes>
         </FormDataProvider>
