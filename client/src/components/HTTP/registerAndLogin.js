@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, db, doc, setDoc, getDoc, getDocs, auth, signInWithEmailAndPassword } from "../../firebase";
+import { createUserWithEmailAndPassword, db, doc, setDoc, getDoc, getDocs, auth, signInWithEmailAndPassword, addDoc, collection } from "../../firebase";
 import { setUser } from "./localeStorageApi";
 export const registerUser = async (contextData) => {
     const {email, password} = contextData;
@@ -25,6 +25,14 @@ export const loginUser = async (contextData) => {
         return currentUserInfo;
     } catch (err) {
         console.error("Error login user:", err.message);
+    }
+}
+
+export const postCreate = async (data) => {
+    try {
+        await addDoc(collection(db, "posts"), data);
+    } catch (error) {
+        console.error("Error adding document:", error);
     }
 }
 
