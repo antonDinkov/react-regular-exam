@@ -92,3 +92,16 @@
     background-color: #8ecdf7;
     cursor: not-allowed;
 }
+
+.removeButton {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #ff4d4d;
+    margin-left: 10px;
+}
+
+.removeButton:hover {
+    color: #cc0000;
+}

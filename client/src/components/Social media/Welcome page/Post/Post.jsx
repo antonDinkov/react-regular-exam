@@ -6,12 +6,20 @@ import { useRef, useState } from "react";
 function Post() {
     const [media, setMedia] = useState(null);
     const textRef = useRef(null);
+    const fileInputRef = useRef(null); // Референция към input-а
 
     const handleMediaUpload = (e) => {
         const file = e.target.files[0];
         if (file) {
             const imageUrl = URL.createObjectURL(file);
             setMedia(imageUrl);
+        }
+    };
+
+    const handleRemoveMedia = () => {
+        setMedia(null); // Изчистваме state-а
+        if (fileInputRef.current) {
+            fileInputRef.current.value = ""; // Нулираме стойността на input-а
         }
     };
 
@@ -30,7 +38,10 @@ function Post() {
 
         console.log("Post submitted:", post);
         textRef.current.value = "";
-        setMedia(null); // Изчистваме качената медия
+        setMedia(null);
+        if (fileInputRef.current) {
+            fileInputRef.current.value = ""; // Още едно нулиране след публикуване
+        }
     };
 
     return (
@@ -53,8 +64,19 @@ function Post() {
                     <div className={styles.footer}>
                         <label className={styles.mediaButton}>
                             📷 Add Media
-                            <input type="file" accept="image/*" onChange={handleMediaUpload} hidden />
+                            <input 
+                                type="file" 
+                                accept="image/*" 
+                                onChange={handleMediaUpload} 
+                                hidden 
+                                ref={fileInputRef} // Свързваме input-а с useRef
+                            />
                         </label>
+                        {media && (
+                            <button type="button" onClick={handleRemoveMedia} className={styles.removeButton}>
+                                ❌ Remove
+                            </button>
+                        )}
                         <button type="submit" className={styles.button}>Post</button>
                     </div>
                 </form>
