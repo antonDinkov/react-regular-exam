@@ -7,7 +7,6 @@ import Create from './components/CreateAccount page/Create';
 import { FormDataProvider } from '../context/UserContext';
 import CreateNext from './components/CreateAccount page/CreateNext';
 import Welcome from './components/Social media/Welcome page/Welcome';
-import Layout from './components/Social media/Layout';
 import Main from './components/Social media/Welcome page/Main';
 function App() {
 
