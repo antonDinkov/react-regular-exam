@@ -1,5 +1,6 @@
+import { FormContext } from '../../../../../context/UserContext';
 import styles from './Post.module.css';
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 
 
 
@@ -7,6 +8,7 @@ function Post() {
     const [media, setMedia] = useState(null);
     const textRef = useRef(null);
     const fileInputRef = useRef(null);
+    const {formData} = useContext(FormContext);
 
     const handleMediaUpload = (e) => {
         const file = e.target.files[0];

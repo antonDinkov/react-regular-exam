@@ -30,7 +30,9 @@ export const loginUser = async (contextData) => {
 
 export const postCreate = async (data) => {
     try {
-        await addDoc(collection(db, "posts"), data);
+        const post = await addDoc(collection(db, "posts"), data);
+        const postWithId = {...data, id: post.id};
+        await setDoc(doc(db, "posts", post.id), postWithId);
     } catch (error) {
         console.error("Error adding document:", error);
     }
