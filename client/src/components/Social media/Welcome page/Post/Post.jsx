@@ -6,7 +6,7 @@ import { useRef, useState } from "react";
 function Post() {
     const [media, setMedia] = useState(null);
     const textRef = useRef(null);
-    const fileInputRef = useRef(null); // Референция към input-а
+    const fileInputRef = useRef(null);
 
     const handleMediaUpload = (e) => {
         const file = e.target.files[0];
@@ -17,9 +17,9 @@ function Post() {
     };
 
     const handleRemoveMedia = () => {
-        setMedia(null); // Изчистваме state-а
+        setMedia(null);
         if (fileInputRef.current) {
-            fileInputRef.current.value = ""; // Нулираме стойността на input-а
+            fileInputRef.current.value = ""; 
         }
     };
 
@@ -40,7 +40,7 @@ function Post() {
         textRef.current.value = "";
         setMedia(null);
         if (fileInputRef.current) {
-            fileInputRef.current.value = ""; // Още едно нулиране след публикуване
+            fileInputRef.current.value = "";
         }
     };
 

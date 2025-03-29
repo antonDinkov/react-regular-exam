@@ -7,7 +7,7 @@ export const registerUser = async (contextData) => {
         const user = userdata.user;
         /* console.log(user); */
         
-        await setDoc(doc(db, "users", user.uid), {...contextData, createdAt: new Date()});
+        await setDoc(doc(db, "users", user.uid), {...contextData, createdAt: new Date(), userId: user.uid});
     } catch (err) {
         console.error("Error registering user:", err.message);
     }
