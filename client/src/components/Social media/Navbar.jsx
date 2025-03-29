@@ -49,12 +49,12 @@ function Navbar() {
             <h1>At</h1>
             <ul>
                 <li><Link to='/react-regular-exam/welcome'><i className={`fa-solid fa-house-flag ${styles.i}`}></i><span>Welcome</span></Link></li>
-                <li><Link to='/react-regular-exam/notification'><i className={`fa-solid fa-bell ${styles.i}`}></i><span>Notification</span></Link></li>
-                <li><Link to='/react-regular-exam/messages'><i className={`fa-solid fa-envelope ${styles.i}`}></i><span>Messages</span></Link></li>
-                <li><Link to='/react-regular-exam/profile'><i className={`fa-solid fa-user ${styles.i}`}></i><span>Profile</span></Link></li>
-                <li><Link to='/react-regular-exam/jobs'><i className={`fa-solid fa-suitcase ${styles.i}`}></i><span>Jobs</span></Link></li>
+                <li><Link to='/react-regular-exam/welcome/notification'><i className={`fa-solid fa-bell ${styles.i}`}></i><span>Notification</span></Link></li>
+                <li><Link to='/react-regular-exam/welcome/messages'><i className={`fa-solid fa-envelope ${styles.i}`}></i><span>Messages</span></Link></li>
+                <li><Link to='/react-regular-exam/welcome/profile'><i className={`fa-solid fa-user ${styles.i}`}></i><span>Profile</span></Link></li>
+                <li><Link to='/react-regular-exam/welcome/jobs'><i className={`fa-solid fa-suitcase ${styles.i}`}></i><span>Jobs</span></Link></li>
                 <li><Link onClick={handleLogout} to="#"><i className={`fa-solid fa-circle-xmark ${styles.i}`}></i><span>Logout</span></Link></li>
-                <li><Link to="/react-regular-exam/create"><span>Post</span></Link></li>
+                <li><Link to="/react-regular-exam/welcome/post"><span>Post</span></Link></li>
 
             </ul>
             <img src="https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-png-image_3918418.jpg" alt="Guest" />

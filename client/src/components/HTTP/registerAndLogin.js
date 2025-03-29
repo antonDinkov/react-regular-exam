@@ -21,8 +21,6 @@ export const loginUser = async (contextData) => {
         const user = userdata.user;
         const token = await user.getIdToken();
         const currentUserInfo = await getUser(user.uid);
-        console.log(currentUserInfo);
-        
         setUser(currentUserInfo, token);
         return currentUserInfo;
     } catch (err) {

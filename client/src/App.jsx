@@ -9,6 +9,7 @@ import CreateNext from './components/CreateAccount page/CreateNext';
 import Welcome from './components/Social media/Welcome page/Welcome';
 import Main from './components/Social media/Welcome page/Main/Main';
 import GuardWelcome from './components/Social media/GuardWelcome';
+import Post from './components/Social media/Welcome page/Post/Post';
 function App() {
 
     return (
@@ -22,6 +23,7 @@ function App() {
                 <Route path='/react-regular-exam/create/submit' element={<CreateNext />}></Route>
                 <Route path="/react-regular-exam/welcome" element={<GuardWelcome><Welcome /></GuardWelcome>}>
                     <Route index element={<Main />} />
+                    <Route path='post' element={<Post />} />
                 </Route>
             </Routes>
         </FormDataProvider>
