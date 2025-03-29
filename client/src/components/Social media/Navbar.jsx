@@ -6,13 +6,29 @@ import { delUserData, getUser } from '../HTTP/localeStorageApi';
 import { auth, signOut } from '../../firebase';
 
 function Navbar() {
-    const {formData, updateForm} = useContext(FormContext);
+    const { formData, updateForm } = useContext(FormContext);
     const [currentUser, setCurrentUser] = useState('Loading...');
     const navigate = useNavigate();
     const handleLogout = async (e) => {
         e.preventDefault();
         try {
             await signOut(auth);
+            updateForm({
+                name: '',
+                email: '',
+                password: '',
+                birthday: {
+                    month: '',
+                    day: '',
+                    year: '',
+                },
+                checkbox: {
+                    getMore: '',
+                    connectWith: '',
+                    peronalizedAds: '',
+                    noThanks: '',
+                },
+            })
             delUserData();
             navigate('/react-regular-exam')
         } catch (error) {

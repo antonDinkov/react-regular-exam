@@ -1,9 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from './Main.module.css'
-import { db } from "../../../firebase";
-import { collection, getDocs } from "../../../firebase";
-import { FormContext } from "../../../../context/UserContext";
-import { getUser } from "../../HTTP/localeStorageApi";
+import { db, collection, getDocs } from "../../../../firebase";
+
 function Main() {
     const searchValue = useRef();
     const isDone = useRef(false);

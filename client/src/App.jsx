@@ -7,7 +7,8 @@ import Create from './components/CreateAccount page/Create';
 import { FormDataProvider } from '../context/UserContext';
 import CreateNext from './components/CreateAccount page/CreateNext';
 import Welcome from './components/Social media/Welcome page/Welcome';
-import Main from './components/Social media/Welcome page/Main';
+import Main from './components/Social media/Welcome page/Main/Main';
+import GuardWelcome from './components/Social media/GuardWelcome';
 function App() {
 
     return (
@@ -19,7 +20,7 @@ function App() {
                 <Route path='/react-regular-exam/login/pass' element={<LoginNext />}></Route>
                 <Route path='/react-regular-exam/create' element={<Create />}></Route>
                 <Route path='/react-regular-exam/create/submit' element={<CreateNext />}></Route>
-                <Route path="/react-regular-exam/welcome" element={<Welcome />}>
+                <Route path="/react-regular-exam/welcome" element={<GuardWelcome><Welcome /></GuardWelcome>}>
                     <Route index element={<Main />} />
                 </Route>
             </Routes>

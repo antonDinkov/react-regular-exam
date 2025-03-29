@@ -1,14 +1,6 @@
 import { createContext, useState } from "react";
 
-export const FormContext = createContext(/* {
-    name: '',
-    email: '',
-    birthday: {
-        month: '',
-        day: '',
-        year: '',
-    },
-} */);
+export const FormContext = createContext();
 
 export function FormDataProvider ({children}) {
     const [formData, setFormData] = useState({
