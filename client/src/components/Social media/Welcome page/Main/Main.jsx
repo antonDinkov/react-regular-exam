@@ -9,11 +9,11 @@ function Main() {
     const [filteredPosts, setFilteredPosts] = useState([]);
 
     const handleSearch = () => {
-        const searchText = searchValue.current.value.trim().toLowerCase(); // Малки букви за case-insensitive
+        const searchText = searchValue.current.value.trim().toLowerCase();
         searchValue.current.value = '';
 
         if (searchText === "") {
-            setFilteredPosts(posts); // Ако полето е празно, показваме всички постове
+            setFilteredPosts(posts);
         } else {
             const results = posts.filter((post) =>
                 post.content?.toLowerCase().includes(searchText)
@@ -32,13 +32,14 @@ function Main() {
                     const postsArray = querySnapShot.docs.map((doc) => doc.data());
                     postsArray.sort((a, b) => new Date(b.meta.date) - new Date(a.meta.date));
                     setPosts(postsArray)
-                    setFilteredPosts(postsArray); // При първоначално зареждане, показваме всички постове
+                    setFilteredPosts(postsArray);
                 } catch (error) {
                     console.error("Грешка при взимане на постовете:", error);
                 }
             }
             fetchPost();
         }, []);
+       
     
     return (
         <>
