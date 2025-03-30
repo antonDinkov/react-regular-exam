@@ -14,8 +14,8 @@ function Post() {
     const handleMediaUpload = (e) => {
         const file = e.target.files[0];
         if (file) {
-            const imageUrl = URL.createObjectURL(file);
-            setMedia(imageUrl);
+            /* const imageUrl = URL.createObjectURL(file); */
+            setMedia(/* imageUrl */file);
         }
     };
 
