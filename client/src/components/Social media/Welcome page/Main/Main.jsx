@@ -1,94 +1,106 @@
-import { useEffect, useRef, useState } from 'react';
-import styles from './Main.module.css'
+import { useEffect, useState } from "react";
+import { useOutletContext } from "react-router"; // 👈 Взимаме mainRef от Outlet контекста
+import styles from "./Main.module.css";
 import { db, collection, getDocs } from "../../../../firebase";
 
 function Main() {
-    const searchValue = useRef();
-    const isDone = useRef(false);
+    const { mainRef } = useOutletContext(); // 👈 Взимаме mainRef от Welcome
     const [posts, setPosts] = useState([]);
     const [filteredPosts, setFilteredPosts] = useState([]);
+    const [page, setPage] = useState(1);
+    const postsPerPage = 6;
+    const [loading, setLoading] = useState(false);
 
-    const handleSearch = () => {
-        const searchText = searchValue.current.value.trim().toLowerCase();
-        searchValue.current.value = '';
+    useEffect(() => {
+        const fetchPosts = async () => {
+            try {
+                const postsCollection = collection(db, "posts");
+                const querySnapShot = await getDocs(postsCollection);
+                const postsArray = querySnapShot.docs.map((doc) => doc.data());
+                postsArray.sort((a, b) => new Date(b.meta.date) - new Date(a.meta.date));
+                setPosts(postsArray);
+                setFilteredPosts(postsArray.slice(0, postsPerPage));
+            } catch (error) {
+                console.error("Грешка при взимане на постовете:", error);
+            }
+        };
+        fetchPosts();
+    }, []);
 
-        if (searchText === "") {
-            setFilteredPosts(posts);
-        } else {
-            const results = posts.filter((post) =>
-                post.content?.toLowerCase().includes(searchText)
-            );
-            setFilteredPosts(results);
+    const loadMorePosts = () => {
+        if (loading || filteredPosts.length >= posts.length) return; // Проверка дали сме заредили всичко
+        setLoading(true);
+    
+        setTimeout(() => {
+            const nextPage = page + 1;
+            const newPosts = posts.slice(page * postsPerPage, nextPage * postsPerPage);
+    
+            if (newPosts.length > 0) {
+                setFilteredPosts(prevPosts => [...prevPosts, ...newPosts]); // Добавяме, а не презаписваме!
+                setPage(nextPage);
+            }
+    
+            setLoading(false);
+        }, 500);
+    };
+
+    const handleScroll = (e) => {
+        const mainElement = mainRef.current;
+        if (!mainElement) return;
+    
+        const scrollHeight = mainElement.scrollHeight;
+        const currentHeight = mainElement.scrollTop + mainElement.clientHeight;
+    
+        if (currentHeight + 1 >= scrollHeight && filteredPosts.length < posts.length) {
+            loadMorePosts();
         }
     };
 
     useEffect(() => {
-            if (isDone.current) return;
-            isDone.current = true;
-            const fetchPost = async () => {
-                try {
-                    const postsCollection = collection(db, "posts");
-                    const querySnapShot = await getDocs(postsCollection);
-                    const postsArray = querySnapShot.docs.map((doc) => doc.data());
-                    postsArray.sort((a, b) => new Date(b.meta.date) - new Date(a.meta.date));
-                    setPosts(postsArray)
-                    setFilteredPosts(postsArray);
-                } catch (error) {
-                    console.error("Грешка при взимане на постовете:", error);
-                }
-            }
-            fetchPost();
-        }, []);
-       
+        if (!mainRef?.current) return;
     
+        const mainElement = mainRef.current;
+        mainElement.addEventListener("scroll", handleScroll);
+    
+        return () => {
+            if (mainElement) {
+                mainElement.removeEventListener("scroll", handleScroll);
+            }
+        };
+    }, [filteredPosts]);
+
     return (
         <>
             <section id="search" className={styles.search}>
                 <h3>What do you need?</h3>
-                <input type="search" ref={searchValue} name="search" id="search" placeholder="search" />
-                <button onClick={handleSearch}>🔍</button>
+                <input type="search" name="search" id="search" placeholder="search" />
+                <button>🔍</button>
             </section>
             <section id="posts" className={styles.posts}>
-                <div id="post" className={styles.post}>
-                    <div id="meta" className={styles.meta}>
-                        <img src="https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-png-image_3918418.jpg" alt="Profile image" />
-                        <h4>Author</h4>
-                        <p>Date</p>
-                    </div>
-                    <p>Text content. This is my first post is text content, which is going to become viral!</p>
-                    <img src="https://images.indianexpress.com/2017/12/2017-viral-photos-main_759_combo.jpg?w=350" alt="Img or Video" />
-                    <div id="feedback" className={styles.feedback}>
-                        <p><i className="fa-regular fa-comment"></i><span>5</span></p>
-                        <p><i className="fa-regular fa-heart"></i><span>12</span></p>
-                        <p><i className="fa-solid fa-magnifying-glass"></i><span>57</span></p>
-                    </div>
-                </div>
                 {filteredPosts.length > 0 ? (
-                    filteredPosts.map((pos, index) => {
-                        const postDate = pos.meta.date;
-                        return (
-                            <div id="post" className={styles.post} key={index}>
-                                <div id="meta" className={styles.meta}>
-                                    <img src={pos.meta.img || pos.meta.avatar} alt="Profile image" />
-                                    <h4>{pos.meta.author}</h4>
-                                    <p>{postDate}</p>
-                                </div>
-                                <p>{pos.content}</p>
-                                <img src={pos.img} alt="Img or Video" />
-                                <div id="feedback" className={styles.feedback}>
-                                    <p><i className="fa-regular fa-comment"></i><span>{pos.feedback.comments}</span></p>
-                                    <p><i className="fa-regular fa-heart"></i><span>{pos.feedback.likes}</span></p>
-                                    <p><i className="fa-solid fa-magnifying-glass"></i><span>{pos.feedback.views}</span></p>
-                                </div>
+                    filteredPosts.map((post, index) => (
+                        <div key={index} className={styles.post}>
+                            <div className={styles.meta}>
+                                <img src={post.meta.img || post.meta.avatar} alt="Profile" />
+                                <h4>{post.meta.author}</h4>
+                                <p>{post.meta.date}</p>
                             </div>
-                        );
-                    })
+                            <p>{post.content}</p>
+                            <img src={post.img} alt="Img or Video" />
+                            <div className={styles.feedback}>
+                                <p><i className="fa-regular fa-comment"></i><span>{post.feedback.comments}</span></p>
+                                <p><i className="fa-regular fa-heart"></i><span>{post.feedback.likes}</span></p>
+                                <p><i className="fa-solid fa-magnifying-glass"></i><span>{post.feedback.views}</span></p>
+                            </div>
+                        </div>
+                    ))
                 ) : (
                     <p>No posts found</p>
                 )}
             </section>
+            {loading && <p className={styles.loading}>Loading more posts...</p>}
         </>
-    )
+    );
 }
 
 export default Main;
