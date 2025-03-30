@@ -7,6 +7,7 @@ import { useContext, useRef, useState } from "react";
 
 function Post() {
     const [media, setMedia] = useState(null);
+    const [tempUrl, setTempUrl] = useState(null);
     const textRef = useRef(null);
     const fileInputRef = useRef(null);
     const {formData} = useContext(FormContext);
@@ -14,8 +15,9 @@ function Post() {
     const handleMediaUpload = (e) => {
         const file = e.target.files[0];
         if (file) {
-            /* const imageUrl = URL.createObjectURL(file); */
-            setMedia(/* imageUrl */file);
+            const imageUrl = URL.createObjectURL(file);
+            setMedia(file);
+            setTempUrl(imageUrl)
         }
     };
 
@@ -67,7 +69,7 @@ function Post() {
 
                     {media && (
                         <div className={styles.mediaPreview}>
-                            <img src={media} alt="Uploaded media preview" />
+                            <img src={tempUrl} alt="Uploaded media preview" />
                         </div>
                     )}
 

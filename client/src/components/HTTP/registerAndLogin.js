@@ -66,7 +66,7 @@ const uploadToCloudinary = async (file) => {
 
     try {
         const response = await fetch(
-            `https://api.cloudinary.com/v1_1/${process.env.dsqegonee}/image/upload`,
+            `https://api.cloudinary.com/v1_1/dsqegonee/image/upload`,
             {
                 method: "POST",
                 body: formData,
