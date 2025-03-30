@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useOutletContext } from "react-router"; // 👈 Взимаме mainRef от Outlet контекста
 import styles from "./Main.module.css";
 import { db, collection, getDocs } from "../../../../firebase";
@@ -10,6 +10,21 @@ function Main() {
     const [page, setPage] = useState(1);
     const postsPerPage = 6;
     const [loading, setLoading] = useState(false);
+    const searchValue = useRef();
+
+    const handleSearch = () => {
+        const searchText = searchValue.current.value.trim().toLowerCase();
+        searchValue.current.value = '';
+
+        if (searchText === "") {
+            setFilteredPosts(posts.slice(0, page * postsPerPage));
+        } else {
+            const results = posts.filter((post) =>
+                post.content?.toLowerCase().includes(searchText)
+            );
+            setFilteredPosts(results);
+        }
+    };
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -73,8 +88,8 @@ function Main() {
         <>
             <section id="search" className={styles.search}>
                 <h3>What do you need?</h3>
-                <input type="search" name="search" id="search" placeholder="search" />
-                <button>🔍</button>
+                <input type="search" ref={searchValue} name="search" id="search" placeholder="search" />
+                <button onClick={handleSearch}>🔍</button>
             </section>
             <section id="posts" className={styles.posts}>
                 {filteredPosts.length > 0 ? (
