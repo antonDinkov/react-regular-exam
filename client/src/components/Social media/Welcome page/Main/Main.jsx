@@ -30,6 +30,7 @@ function Main() {
                     const postsCollection = collection(db, "posts");
                     const querySnapShot = await getDocs(postsCollection);
                     const postsArray = querySnapShot.docs.map((doc) => doc.data());
+                    postsArray.sort((a, b) => new Date(b.meta.date) - new Date(a.meta.date));
                     setPosts(postsArray)
                     setFilteredPosts(postsArray); // При първоначално зареждане, показваме всички постове
                 } catch (error) {
