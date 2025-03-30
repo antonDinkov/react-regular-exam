@@ -63,13 +63,13 @@ function Main() {
                 </div>
                 {filteredPosts.length > 0 ? (
                     filteredPosts.map((pos, index) => {
-                        const postDate = pos.meta.date.toDate()
+                        const postDate = pos.meta.date;
                         return (
                             <div id="post" className={styles.post} key={index}>
                                 <div id="meta" className={styles.meta}>
-                                    <img src={pos.meta.img} alt="Profile image" />
+                                    <img src={pos.meta.img || pos.meta.avatar} alt="Profile image" />
                                     <h4>{pos.meta.author}</h4>
-                                    <p>{postDate.toLocaleDateString()}</p>
+                                    <p>{postDate}</p>
                                 </div>
                                 <p>{pos.content}</p>
                                 <img src={pos.img} alt="Img or Video" />

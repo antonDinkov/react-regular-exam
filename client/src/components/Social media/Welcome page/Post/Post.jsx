@@ -1,4 +1,5 @@
 import { FormContext } from '../../../../../context/UserContext';
+import { postCreate } from '../../../HTTP/registerAndLogin';
 import styles from './Post.module.css';
 import { useContext, useRef, useState } from "react";
 
@@ -25,20 +26,27 @@ function Post() {
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const content = textRef.current.value.trim();
-        if (!content && !media) return;
+        if (!content) return;
 
-        const post = {
+        /* const post = {
             content,
-            media,
-            author: "Kristian Vigenin",
-            date: new Date().toLocaleString(),
-            avatar: "https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-png-image_3918418.jpg"
-        };
+            feedback: {
+                comments: 0,
+                likes: 0,
+                views: 0,
+            },
+            img: media,
+            meta: {
+                author: formData.name,
+                date: new Date().toLocaleString(),
+                avatar: "https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-png-image_3918418.jpg"
+            },
+        }; */
 
-        console.log("Post submitted:", post);
+        /* await postCreate(post); */
         textRef.current.value = "";
         setMedia(null);
         if (fileInputRef.current) {
