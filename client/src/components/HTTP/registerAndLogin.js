@@ -31,7 +31,11 @@ export const loginUser = async (contextData) => {
 export const postCreate = async (data) => {
     try {
         const imgUrl = await uploadToCloudinary(data.img);
-        data.img = imgUrl
+        if (!imgUrl) {
+            data.img = '';
+        } else {
+            data.img = imgUrl;
+        }
         const post = await addDoc(collection(db, "posts"), data);
         const postWithId = { ...data, id: post.id };
         await setDoc(doc(db, "posts", post.id), postWithId);
@@ -59,6 +63,7 @@ async function getUser(userId) {
 }
 
 const uploadToCloudinary = async (file) => {
+    if (!file) {return};
     const formData = new FormData();
 
     formData.append("file", file);

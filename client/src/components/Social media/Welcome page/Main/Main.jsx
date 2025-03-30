@@ -17,6 +17,7 @@ function Main() {
         searchValue.current.value = '';
 
         if (searchText === "") {
+            setPage(1)
             setFilteredPosts(posts.slice(0, page * postsPerPage));
         } else {
             const results = posts.filter((post) =>
@@ -45,16 +46,16 @@ function Main() {
     const loadMorePosts = () => {
         if (loading || filteredPosts.length >= posts.length) return; // Проверка дали сме заредили всичко
         setLoading(true);
-    
+
         setTimeout(() => {
             const nextPage = page + 1;
             const newPosts = posts.slice(page * postsPerPage, nextPage * postsPerPage);
-    
+
             if (newPosts.length > 0) {
                 setFilteredPosts(prevPosts => [...prevPosts, ...newPosts]); // Добавяме, а не презаписваме!
                 setPage(nextPage);
             }
-    
+
             setLoading(false);
         }, 500);
     };
@@ -62,21 +63,21 @@ function Main() {
     const handleScroll = (e) => {
         const mainElement = mainRef.current;
         if (!mainElement) return;
-    
+
         const scrollHeight = mainElement.scrollHeight;
         const currentHeight = mainElement.scrollTop + mainElement.clientHeight;
-    
-        if (currentHeight + 1 >= scrollHeight && filteredPosts.length < posts.length) {
+
+        if (currentHeight + 5 >= scrollHeight && filteredPosts.length < posts.length) {
             loadMorePosts();
         }
     };
 
     useEffect(() => {
         if (!mainRef?.current) return;
-    
+
         const mainElement = mainRef.current;
         mainElement.addEventListener("scroll", handleScroll);
-    
+
         return () => {
             if (mainElement) {
                 mainElement.removeEventListener("scroll", handleScroll);
@@ -95,13 +96,16 @@ function Main() {
                 {filteredPosts.length > 0 ? (
                     filteredPosts.map((post, index) => (
                         <div key={index} className={styles.post}>
-                            <div className={styles.meta}>
-                                <img src={post.meta.img || post.meta.avatar} alt="Profile" />
-                                <h4>{post.meta.author}</h4>
-                                <p>{post.meta.date}</p>
+                            <div className={styles.imgWrap}>
+                                <div className={styles.meta}>
+                                    <img src={post.meta.img || post.meta.avatar || "https://example.com/default-avatar.jpg"} alt="Profile" />
+                                    <h4>{post.meta.author}</h4>
+                                    <p>{post.meta.date}</p>
+                                </div>
+                                <p>{post.content}</p>
+                                <img src={post.img || "https://example.com/default-avatar.jpg"} alt="Img or Video" />
                             </div>
-                            <p>{post.content}</p>
-                            <img src={post.img} alt="Img or Video" />
+
                             <div className={styles.feedback}>
                                 <p><i className="fa-regular fa-comment"></i><span>{post.feedback.comments}</span></p>
                                 <p><i className="fa-regular fa-heart"></i><span>{post.feedback.likes}</span></p>
