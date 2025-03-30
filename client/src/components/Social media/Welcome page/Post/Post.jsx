@@ -31,7 +31,7 @@ function Post() {
         const content = textRef.current.value.trim();
         if (!content) return;
 
-        /* const post = {
+        const post = {
             content,
             feedback: {
                 comments: 0,
@@ -44,9 +44,9 @@ function Post() {
                 date: new Date().toLocaleString(),
                 avatar: "https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-png-image_3918418.jpg"
             },
-        }; */
+        };
 
-        /* await postCreate(post); */
+        await postCreate(post);
         textRef.current.value = "";
         setMedia(null);
         if (fileInputRef.current) {
