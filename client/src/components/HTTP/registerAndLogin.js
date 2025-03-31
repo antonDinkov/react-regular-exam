@@ -57,20 +57,35 @@ export const postComment = async (postId, data) => {
     }
 }
 
+export const getPostById = async (postId) => {
+    try {
+        const postRef = doc(db, "posts", postId);
+        const postSnap = await getDoc(postRef);
+
+        if (postSnap.exists()) {
+            return postSnap.data();
+        } else {
+            console.log("No such document!");
+            return null;
+        }
+    } catch (error) {
+        console.error("Error fetching post:", error);
+        return null;
+    }
+};
+
 async function getUser(userId) {
     try {
         const docRef = doc(db, 'users', userId);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-            /* console.log(docSnap.data()); */
-
             return docSnap.data();
         } else {
             throw new Error('no such user!');
         }
     } catch (error) {
         console.error("Error fetching user:", error.message);
-        return null;//за да се избегне срив!
+        return null;
     }
 }
 
