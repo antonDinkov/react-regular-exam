@@ -88,16 +88,16 @@ function Guest() {
                     </div>
                     {filteredPosts.length > 0 ? (
                         filteredPosts.map((pos, index) => {
-                            const postDate = pos.meta.date.toDate()
+                            const postDate = pos.meta.date
                             return (
                                 <div id="post" className={styles.post} key={index}>
                                     <div id="meta" className={styles.meta}>
-                                        <img src={pos.meta.img} alt="Profile image" />
+                                        <img src="https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-png-image_3918418.jpg" alt="Profile image" />
                                         <h4>{pos.meta.author}</h4>
-                                        <p>{postDate.toLocaleDateString()}</p>
+                                        <p>{postDate}</p>
                                     </div>
                                     <p>{pos.content}</p>
-                                    <img src={pos.img} alt="Img or Video" />
+                                    <img src={pos.img || "https://example.com/default-image.jpg"} alt="Img or Video" />
                                     <div id="feedback" className={styles.feedback}>
                                         <p><i className="fa-regular fa-comment"></i><span>{pos.feedback.comments}</span></p>
                                         <p><i className="fa-regular fa-heart"></i><span>{pos.feedback.likes}</span></p>

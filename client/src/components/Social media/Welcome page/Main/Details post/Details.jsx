@@ -15,7 +15,7 @@ function Details() {
     if (!post) return <p>No post data found</p>;
 
     const handleReply = async () => {
-        const newComment = await handleComment(post, refComment);
+        const newComment = await handleComment(postData, refComment);
         if (newComment) {
             setComments((prevComments) => [...prevComments, newComment]); 6
         }
@@ -25,8 +25,6 @@ function Details() {
         const fetchPost = async () => {
             const data = await getPostById(post.id);
             setPostData(data)
-            /* console.log(postData); */
-
         }
         fetchPost();
     }, [comments]);
@@ -68,36 +66,27 @@ function Details() {
                     </div>
                 </div>
             )}
-
-            <div className={styles.commentsContainer}>
-                {post.comments && post.comments.length > 0 ? (
-                    post.comments.map((comment) => (
-                        <div key={comment.data.id} className={styles.comment}>
-                            <div className={styles.commentHeader}>
-                                {/* <img src={comment.avatar || "https://example.com/default-avatar.jpg"} alt="User" /> */}
-                                <h5>{comment.data.author}</h5>
-                                <p className={styles.commentDate}>{comment.data.date}</p>
+            {!postData ? (
+                <p>Loading post data...</p>
+            ) : (
+                <div className={styles.commentsContainer}>
+                    {postData.comments && postData.comments.length > 0 ? (
+                        postData.comments.map((comment) => (
+                            <div key={comment.data.id} className={styles.comment}>
+                                <div className={styles.commentHeader}>
+                                    {/* <img src={comment.avatar || "https://example.com/default-avatar.jpg"} alt="User" /> */}
+                                    <h5>{comment.data.author}</h5>
+                                    <p className={styles.commentDate}>{comment.data.date}</p>
+                                </div>
+                                <p className={styles.commentText}>{comment.data.text}</p>
                             </div>
-                            <p className={styles.commentText}>{comment.data.text}</p>
-                        </div>
-                    ))
-                ) : (
-                    <p className={styles.noComments}>No comments yet. Be the first to reply!</p>
-                )}
-                {comments.length > 0 ? (
-                    comments.map((data) => (
-                        <div key={data.id} className={styles.comment}>
-                            <div className={styles.commentHeader}>
-                                {/* <img src={comment.avatar || "https://example.com/default-avatar.jpg"} alt="User" /> */}
-                                <h5>{data.author}</h5>
-                                <p className={styles.commentDate}>{data.date}</p>
-                            </div>
-                            <p className={styles.commentText}>{data.text}</p>
-                        </div>
-                    ))
-                ) : ''
-                }
-            </div>
+                        ))
+                    ) : (
+                        <p className={styles.noComments}>No comments yet. Be the first to reply!</p>
+                    )}
+                    
+                </div>
+            )}
         </>
 
     )
