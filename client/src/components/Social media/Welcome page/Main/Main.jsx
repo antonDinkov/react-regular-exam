@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useOutletContext } from "react-router"; // 👈 Взимаме mainRef от Outlet контекста
 import styles from "./Main.module.css";
 import { db, collection, getDocs } from "../../../../firebase";
+import Search from "./Search";
 
 function Main() {
     const { mainRef } = useOutletContext(); // 👈 Взимаме mainRef от Welcome
@@ -46,15 +47,15 @@ function Main() {
     const loadMorePosts = () => {
         if (loading || filteredPosts.length >= posts.length) return;
         setLoading(true);
-            const nextPage = page + 1;
-            const newPosts = posts.slice(page * postsPerPage, nextPage * postsPerPage);
+        const nextPage = page + 1;
+        const newPosts = posts.slice(page * postsPerPage, nextPage * postsPerPage);
 
-            if (newPosts.length > 0) {
-                setFilteredPosts(prevPosts => [...prevPosts, ...newPosts]);
-                setPage(nextPage);
-            }
+        if (newPosts.length > 0) {
+            setFilteredPosts(prevPosts => [...prevPosts, ...newPosts]);
+            setPage(nextPage);
+        }
 
-            setLoading(false);
+        setLoading(false);
     };
 
     const handleScroll = (e) => {
@@ -84,11 +85,7 @@ function Main() {
 
     return (
         <>
-            <section id="search" className={styles.search}>
-                <h3>What do you need?</h3>
-                <input type="search" ref={searchValue} name="search" id="search" placeholder="search" />
-                <button onClick={handleSearch}>🔍</button>
-            </section>
+            <Search ref={searchValue} onSearch={handleSearch} />
             <section id="posts" className={styles.posts}>
                 {filteredPosts.length > 0 ? (
                     filteredPosts.map((post, index) => (
