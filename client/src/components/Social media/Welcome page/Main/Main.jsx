@@ -44,20 +44,17 @@ function Main() {
     }, []);
 
     const loadMorePosts = () => {
-        if (loading || filteredPosts.length >= posts.length) return; // Проверка дали сме заредили всичко
+        if (loading || filteredPosts.length >= posts.length) return;
         setLoading(true);
-
-        setTimeout(() => {
             const nextPage = page + 1;
             const newPosts = posts.slice(page * postsPerPage, nextPage * postsPerPage);
 
             if (newPosts.length > 0) {
-                setFilteredPosts(prevPosts => [...prevPosts, ...newPosts]); // Добавяме, а не презаписваме!
+                setFilteredPosts(prevPosts => [...prevPosts, ...newPosts]);
                 setPage(nextPage);
             }
 
             setLoading(false);
-        }, 500);
     };
 
     const handleScroll = (e) => {
