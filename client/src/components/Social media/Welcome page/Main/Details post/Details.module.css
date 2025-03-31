@@ -1,0 +1,92 @@
+.meta {
+    background-color: #868686;
+    display: flex;
+    gap: 1em;
+    margin-bottom: 0.3em;
+    position: relative;
+}
+
+.meta > img {
+    width: 40px;
+    border-radius: 50%;
+    position: absolute;
+    right: 100%;
+}
+
+.post:not(:last-child) {
+    margin-bottom: 1em;
+}
+
+.post > p {
+    margin-bottom: 1em;
+    overflow: hidden;
+}
+
+.post > div > img {
+    width: auto;
+    max-height: 300px;
+    border-radius: 0.5em;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 0.5em;
+}
+
+.feedback {
+    display: flex;
+    justify-content: space-between;
+}
+
+.feedback > p > i {
+    margin-right: 0.3em;
+}
+
+.imgWrap:hover {
+    cursor: pointer;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5em;
+}
+
+.editButton, .deleteButton {
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 1em;
+    cursor: pointer;
+    color: white;
+}
+
+.editButton {
+    background-color: #f0ad4e;
+}
+
+.deleteButton {
+    background-color: #d9534f;
+}
+
+.commentSection {
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.commentInput {
+    width: 95%;
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 0.4em;
+    resize: none;
+}
+
+.commentButton {
+    align-self: flex-end;
+    padding: 0.5em 1em;
+    background-color: #5bc0de;
+    color: white;
+    border: none;
+    border-radius: 0.4em;
+    cursor: pointer;
+}

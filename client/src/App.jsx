@@ -11,6 +11,7 @@ import Main from './components/Social media/Welcome page/Main/Main';
 import GuardWelcome from './components/Social media/GuardWelcome';
 import Post from './components/Social media/Welcome page/Post/Post';
 import UnderConstruction from './components/Under construction/UnderConstruction';
+import Details from './components/Social media/Welcome page/Main/Details post/details';
 function App() {
 
     return (
@@ -25,6 +26,7 @@ function App() {
                 <Route path='/react-regular-exam/create/submit' element={<CreateNext />}></Route>
                 <Route path="/react-regular-exam/welcome" element={<GuardWelcome><Welcome /></GuardWelcome>}>
                     <Route index element={<Main />} />
+                    <Route path=':postId/details' element={<Details />} />
                     <Route path='post' element={<Post />} />
                 </Route>
             </Routes>

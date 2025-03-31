@@ -65,7 +65,7 @@ function Post() {
                     className={styles.avatar} 
                 />
                 <form onSubmit={handleSubmit} className={styles.formContent}>
-                    <textarea ref={textRef} placeholder="What’s happening?" className={styles.textarea} />
+                    <textarea ref={textRef} placeholder="What's happening?" className={styles.textarea} />
 
                     {media && (
                         <div className={styles.mediaPreview}>

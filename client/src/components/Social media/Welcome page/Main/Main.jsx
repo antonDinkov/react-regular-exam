@@ -4,11 +4,14 @@ import styles from "./Main.module.css";
 import Search from "./Search";
 import useMainFunctionality from "./mainFunctionality";
 import { useInfiniteScroll } from "./infinityScrollHook";
+import useDetailsClick from "./detailsClickHook";
 
 function Main() {
     const searchValue = useRef();
     const { filteredPosts, loadMorePosts, loading, handleSearch } = useMainFunctionality();
     const { mainRef } = useOutletContext();
+    const { handleDetailsClick } = useDetailsClick()
+
     const handleSearchClick = () => {
         if (searchValue.current) {
             handleSearch(searchValue.current.value);
@@ -16,13 +19,16 @@ function Main() {
     };
     useInfiniteScroll(mainRef, loadMorePosts);
 
+
+    
+
     return (
         <>
             <Search ref={searchValue} onSearch={handleSearchClick} />
             <section id="posts" className={styles.posts}>
                 {filteredPosts.length > 0 ? (
                     filteredPosts.map((post, index) => (
-                        <div key={index} className={styles.post}>
+                        <div onClick={() => handleDetailsClick(post)} key={post.id} className={styles.post}>
                             <div className={styles.imgWrap}>
                                 <div className={styles.meta}>
                                     <img src={post.meta.img || post.meta.avatar || "https://example.com/default-avatar.jpg"} alt="Profile" />
