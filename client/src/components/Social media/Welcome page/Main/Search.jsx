@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import styles from './Main.module.css';
 
-function name(props, ref) {
+function Search(props, ref) {
     return (
         <>
             <section id="search" className={styles.search}>

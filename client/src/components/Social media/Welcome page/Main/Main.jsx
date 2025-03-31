@@ -1,91 +1,24 @@
-import { useEffect, useRef, useState } from "react";
-import { useOutletContext } from "react-router"; // 👈 Взимаме mainRef от Outlet контекста
+import { useRef } from "react";
+import { useOutletContext } from "react-router";
 import styles from "./Main.module.css";
-import { db, collection, getDocs } from "../../../../firebase";
 import Search from "./Search";
+import useMainFunctionality from "./mainFunctionality";
+import { useInfiniteScroll } from "./infinityScrollHook";
 
 function Main() {
-    const { mainRef } = useOutletContext(); // 👈 Взимаме mainRef от Welcome
-    const [posts, setPosts] = useState([]);
-    const [filteredPosts, setFilteredPosts] = useState([]);
-    const [page, setPage] = useState(1);
-    const postsPerPage = 6;
-    const [loading, setLoading] = useState(false);
     const searchValue = useRef();
-
-    const handleSearch = () => {
-        const searchText = searchValue.current.value.trim().toLowerCase();
-        searchValue.current.value = '';
-
-        if (searchText === "") {
-            setPage(1)
-            setFilteredPosts(posts.slice(0, page * postsPerPage));
-        } else {
-            const results = posts.filter((post) =>
-                post.content?.toLowerCase().includes(searchText)
-            );
-            setFilteredPosts(results);
+    const { filteredPosts, loadMorePosts, loading, handleSearch } = useMainFunctionality();
+    const { mainRef } = useOutletContext();
+    const handleSearchClick = () => {
+        if (searchValue.current) {
+            handleSearch(searchValue.current.value);
         }
     };
-
-    useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                const postsCollection = collection(db, "posts");
-                const querySnapShot = await getDocs(postsCollection);
-                const postsArray = querySnapShot.docs.map((doc) => doc.data());
-                postsArray.sort((a, b) => new Date(b.meta.date) - new Date(a.meta.date));
-                setPosts(postsArray);
-                setFilteredPosts(postsArray.slice(0, postsPerPage));
-            } catch (error) {
-                console.error("Грешка при взимане на постовете:", error);
-            }
-        };
-        fetchPosts();
-    }, []);
-
-    const loadMorePosts = () => {
-        if (loading || filteredPosts.length >= posts.length) return;
-        setLoading(true);
-        const nextPage = page + 1;
-        const newPosts = posts.slice(page * postsPerPage, nextPage * postsPerPage);
-
-        if (newPosts.length > 0) {
-            setFilteredPosts(prevPosts => [...prevPosts, ...newPosts]);
-            setPage(nextPage);
-        }
-
-        setLoading(false);
-    };
-
-    const handleScroll = (e) => {
-        const mainElement = mainRef.current;
-        if (!mainElement) return;
-
-        const scrollHeight = mainElement.scrollHeight;
-        const currentHeight = mainElement.scrollTop + mainElement.clientHeight;
-
-        if (currentHeight + 5 >= scrollHeight && filteredPosts.length < posts.length) {
-            loadMorePosts();
-        }
-    };
-
-    useEffect(() => {
-        if (!mainRef?.current) return;
-
-        const mainElement = mainRef.current;
-        mainElement.addEventListener("scroll", handleScroll);
-
-        return () => {
-            if (mainElement) {
-                mainElement.removeEventListener("scroll", handleScroll);
-            }
-        };
-    }, [filteredPosts]);
+    useInfiniteScroll(mainRef, loadMorePosts);
 
     return (
         <>
-            <Search ref={searchValue} onSearch={handleSearch} />
+            <Search ref={searchValue} onSearch={handleSearchClick} />
             <section id="posts" className={styles.posts}>
                 {filteredPosts.length > 0 ? (
                     filteredPosts.map((post, index) => (
