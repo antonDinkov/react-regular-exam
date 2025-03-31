@@ -67,6 +67,19 @@ function Details() {
                 ) : (
                     <p className={styles.noComments}>No comments yet. Be the first to reply!</p>
                 )}
+                {comments.length > 0 ? (
+                    comments.map((data) => (
+                        <div key={data.id} className={styles.comment}>
+                            <div className={styles.commentHeader}>
+                                {/* <img src={comment.avatar || "https://example.com/default-avatar.jpg"} alt="User" /> */}
+                                <h5>{data.author}</h5>
+                                <p className={styles.commentDate}>{data.date}</p>
+                            </div>
+                            <p className={styles.commentText}>{data.text}</p>
+                        </div>
+                    ))
+                ) : ''
+                }
             </div>
         </>
 
