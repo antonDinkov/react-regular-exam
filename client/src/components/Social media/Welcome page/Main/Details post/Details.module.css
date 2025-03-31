@@ -90,3 +90,57 @@
     border-radius: 0.4em;
     cursor: pointer;
 }
+
+.commentsContainer {
+    margin-top: 1em;
+    padding: 1em;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.comment {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    padding: 0.8em;
+    border-bottom: 1px solid #ddd;
+}
+
+.comment:last-child {
+    border-bottom: none;
+}
+
+.commentHeader {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+}
+
+.commentHeader img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.commentHeader h5 {
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #333;
+}
+
+.commentDate {
+    font-size: 0.8em;
+    color: #888;
+}
+
+.commentText {
+    font-size: 1em;
+    color: #444;
+}
+
+.noComments {
+    font-size: 0.9em;
+    color: #777;
+    text-align: center;
+    padding: 0.5em;
+}

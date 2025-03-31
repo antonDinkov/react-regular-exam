@@ -1,15 +1,23 @@
 import { useLocation } from 'react-router';
 import styles from './Details.module.css';
 import usePostComment from './postCommentHook';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 function Details() {
     const location = useLocation();
-    const {handleComment} = usePostComment();
+    const { handleComment } = usePostComment();
     const post = location.state?.post;
     const refComment = useRef();
+    const [comments, setComments] = useState([]);
 
     if (!post) return <p>No post data found</p>;
+
+    const handleReply = async () => {
+        const newComment = await handleComment(post, refComment);
+        if (newComment) {
+            setComments((prevComments) => [...prevComments, newComment]);6
+        }
+    };
 
 
 
@@ -41,8 +49,24 @@ function Details() {
 
                 <div className={styles.commentSection}>
                     <textarea ref={refComment} placeholder="Post your reply" className={styles.commentInput}></textarea>
-                    <button className={styles.commentButton} onClick={() => handleComment(post, refComment)}>Reply</button>
+                    <button className={styles.commentButton} onClick={() => handleReply()}>Reply</button>
                 </div>
+            </div>
+            <div className={styles.commentsContainer}>
+                {post.comments && post.comments.length > 0 ? (
+                    post.comments.map((comment) => (
+                        <div key={comment.data.id} className={styles.comment}>
+                            <div className={styles.commentHeader}>
+                                {/* <img src={comment.avatar || "https://example.com/default-avatar.jpg"} alt="User" /> */}
+                                <h5>{comment.data.author}</h5>
+                                <p className={styles.commentDate}>{comment.data.date}</p>
+                            </div>
+                            <p className={styles.commentText}>{comment.data.text}</p>
+                        </div>
+                    ))
+                ) : (
+                    <p className={styles.noComments}>No comments yet. Be the first to reply!</p>
+                )}
             </div>
         </>
 
