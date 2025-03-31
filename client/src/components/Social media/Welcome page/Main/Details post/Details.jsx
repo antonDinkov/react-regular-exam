@@ -1,11 +1,17 @@
 import { useLocation } from 'react-router';
 import styles from './Details.module.css';
+import usePostComment from './postCommentHook';
+import { useRef } from 'react';
 
 function Details() {
     const location = useLocation();
-    const post = location.state?.post
+    const {handleComment} = usePostComment();
+    const post = location.state?.post;
+    const refComment = useRef();
 
     if (!post) return <p>No post data found</p>;
+
+
 
     return (
         <>
@@ -34,8 +40,8 @@ function Details() {
 
 
                 <div className={styles.commentSection}>
-                    <textarea placeholder="Post your reply" className={styles.commentInput}></textarea>
-                    <button className={styles.commentButton} onClick={() => handleComment(post.id)}>Reply</button>
+                    <textarea ref={refComment} placeholder="Post your reply" className={styles.commentInput}></textarea>
+                    <button className={styles.commentButton} onClick={() => handleComment(post, refComment)}>Reply</button>
                 </div>
             </div>
         </>

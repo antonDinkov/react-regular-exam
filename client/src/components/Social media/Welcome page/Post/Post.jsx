@@ -46,6 +46,7 @@ function Post() {
                 date: new Date().toLocaleString(),
                 avatar: "https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-png-image_3918418.jpg"
             },
+            comments: [],
         };
 
         await postCreate(post);

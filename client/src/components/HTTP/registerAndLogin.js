@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, db, doc, setDoc, getDoc, getDocs, auth, signInWithEmailAndPassword, addDoc, collection } from "../../firebase";
+import { createUserWithEmailAndPassword, db, doc, setDoc, getDoc, auth, signInWithEmailAndPassword, addDoc, collection, arrayUnion, increment, updateDoc } from "../../firebase";
 import { setUser } from "./localeStorageApi";
 export const registerUser = async (contextData) => {
     const { email, password } = contextData;
@@ -42,6 +42,18 @@ export const postCreate = async (data) => {
         console.log(postWithId);
     } catch (error) {
         console.error("Error adding document:", error);
+    }
+}
+
+export const postComment = async (postId, data) => {
+    const postRef = doc(db, "posts", postId);
+    try {
+        await updateDoc(postRef, {
+            comments: arrayUnion({data}),
+            "feedback.comments": increment(1)
+        });
+    } catch (error) {
+        console.error("Error adding comment: ", error);
     }
 }
 
