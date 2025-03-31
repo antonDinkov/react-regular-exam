@@ -10,11 +10,13 @@ import Welcome from './components/Social media/Welcome page/Welcome';
 import Main from './components/Social media/Welcome page/Main/Main';
 import GuardWelcome from './components/Social media/GuardWelcome';
 import Post from './components/Social media/Welcome page/Post/Post';
+import UnderConstruction from './components/Under construction/UnderConstruction';
 function App() {
 
     return (
         <FormDataProvider>
             <Routes>
+                <Route path='/react-regular-exam/about' element={<UnderConstruction />} />
                 <Route path='/react-regular-exam' element={<FrontPage />} />
                 <Route path='/react-regular-exam/guest' element={<Guest />} />
                 <Route path='/react-regular-exam/login' element={<Login />}></Route>

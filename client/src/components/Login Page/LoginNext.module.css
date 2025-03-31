@@ -128,7 +128,7 @@
 }
 
 .login>input {
-    background-color: #88898c;
+    background-color: black;
     text-align: center;
     padding: 1em;
     border-radius: 1.8em;
@@ -136,6 +136,10 @@
     text-decoration: none;
     border: none;
     cursor: pointer;
+}
+
+.login>input:hover {
+    background-color: rgba(0, 0, 0, 0.7);;
 }
 
 .signup {

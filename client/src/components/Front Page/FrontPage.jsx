@@ -10,15 +10,15 @@ function FrontPage() {
                     <h1 className={styles.happening}>Happening now</h1>
                     <h2 className={styles.h2}>Join Today.</h2>
                     <nav className={styles.nav}>
-                        <Link className={`${styles.button} ${styles.awesome}`}><i className="fa-brands fa-google"></i>Sign up with Google</Link>
-                        <Link className={`${styles.button} ${styles.awesome}`}><i className="fa-brands fa-apple"></i>Sign up with Apple</Link>
+                        <Link to="/react-regular-exam/about" className={`${styles.button} ${styles.awesome}`}><i className="fa-brands fa-google"></i>Sign up with Google</Link>
+                        <Link to="/react-regular-exam/about" className={`${styles.button} ${styles.awesome}`}><i className="fa-brands fa-apple"></i>Sign up with Apple</Link>
                         <div className={styles.separator}>
                             <hr className={styles.hr} />
                             <p>or</p>
                             <hr className={styles.hr} />
                         </div>
                         <Link to='/react-regular-exam/create' className={styles.button}>Create account</Link>
-                        <p className={styles.terms}>By signing up, you agree of the <a href="#">Term of Service</a>and <a href="#">Privacy Policy</a>, incliding <a href="#">Cookie Use.</a></p>
+                        <p className={styles.terms}>By signing up, you agree of the <Link to="/react-regular-exam/about">Term of Service</Link>and <Link to="/react-regular-exam/about">Privacy Policy</Link>, incliding <Link to="/react-regular-exam/about">Cookie Use.</Link></p>
                         <p id="account">Already have an account?</p>
                         <Link to="/react-regular-exam/login" className={styles.button}>Sign in</Link>
                         <p>Take a look:</p>
@@ -28,24 +28,24 @@ function FrontPage() {
             </main>
             <footer>
                 <ul className={styles.ul}>
-                    <li className={styles.li}><Link to="#">About</Link></li>
-                    <li className={styles.li}><Link to="#">Download the At app</Link></li>
-                    <li className={styles.li}><Link to="#">Help Center</Link></li>
-                    <li className={styles.li}><Link to="#">Terms of Service</Link></li>
-                    <li className={styles.li}><Link to="#">Privacy Policy</Link></li>
-                    <li className={styles.li}><Link to="#">Cookie Policy</Link></li>
-                    <li className={styles.li}><Link to="#">Accessibillity</Link></li>
-                    <li className={styles.li}><Link to="#">Ads Info</Link></li>
-                    <li className={styles.li}><Link to="#">Blog</Link></li>
-                    <li className={styles.li}><Link to="#">Careers</Link></li>
-                    <li className={styles.li}><Link to="#">Brand Resources</Link></li>
-                    <li className={styles.li}><Link to="#">Advertising</Link></li>
-                    <li className={styles.li}><Link to="#">Marketing</Link></li>
-                    <li className={styles.li}><Link to="#">At for Business</Link></li>
-                    <li className={styles.li}><Link to="#">Developers</Link></li>
-                    <li className={styles.li}><Link to="#">Directory</Link></li>
-                    <li className={styles.li}><Link to="#">Settings</Link></li>
-                    <li className={styles.li}><Link to="#" className={styles.flexli} href="#"><i className="fa-regular fa-copyright"></i>2025 X Corp</Link></li>
+                    <li className={styles.li}><Link to="/react-regular-exam/about">About</Link></li>
+                    <li className={styles.li}><Link to="/react-regular-exam/about">Download the At app</Link></li>
+                    <li className={styles.li}><Link to="/react-regular-exam/about">Help Center</Link></li>
+                    <li className={styles.li}><Link to="/react-regular-exam/about">Terms of Service</Link></li>
+                    <li className={styles.li}><Link to="/react-regular-exam/about">Privacy Policy</Link></li>
+                    <li className={styles.li}><Link to="/react-regular-exam/about">Cookie Policy</Link></li>
+                    <li className={styles.li}><Link to="/react-regular-exam/about">Accessibillity</Link></li>
+                    <li className={styles.li}><Link to="/react-regular-exam/about">Ads Info</Link></li>
+                    <li className={styles.li}><Link to="/react-regular-exam/about">Blog</Link></li>
+                    <li className={styles.li}><Link to="/react-regular-exam/about">Careers</Link></li>
+                    <li className={styles.li}><Link to="/react-regular-exam/about">Brand Resources</Link></li>
+                    <li className={styles.li}><Link to="/react-regular-exam/about">Advertising</Link></li>
+                    <li className={styles.li}><Link to="/react-regular-exam/about">Marketing</Link></li>
+                    <li className={styles.li}><Link to="/react-regular-exam/about">At for Business</Link></li>
+                    <li className={styles.li}><Link to="/react-regular-exam/about">Developers</Link></li>
+                    <li className={styles.li}><Link to="/react-regular-exam/about">Directory</Link></li>
+                    <li className={styles.li}><Link to="/react-regular-exam/about">Settings</Link></li>
+                    <li className={styles.li}><Link to="/react-regular-exam/about" className={styles.flexli} href="#"><i className="fa-regular fa-copyright"></i>2025 X Corp</Link></li>
                 </ul>
             </footer>
         </div>
