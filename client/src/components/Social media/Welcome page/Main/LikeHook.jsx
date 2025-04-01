@@ -9,14 +9,16 @@ function useLikeHandle() {
         try {
             const currentUser = JSON.parse(getUser());
             const currUserName = currentUser.name;
-            console.log(currUserName);
+            
             const postInfo = await getPostById(postId);
             const likesArray = postInfo.feedback.likedPeople;
-            console.log(likesArray);
-            
+            if (!likesArray) {
+                await postLike(postId, currUserName);
+                return;
+            }
+
             const isLiked = likesArray.filter((name) => name === currUserName);
-            console.log(isLiked);
-            
+
             if (isLiked.length > 0) {
                 return alert('You  can like only once');
             }
