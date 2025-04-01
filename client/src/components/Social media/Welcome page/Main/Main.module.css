@@ -59,6 +59,10 @@
     justify-content: space-between;
 }
 
+.feedback > p:hover {
+    cursor: pointer;
+}
+
 .feedback > p > i {
     margin-right: 0.3em;
 }

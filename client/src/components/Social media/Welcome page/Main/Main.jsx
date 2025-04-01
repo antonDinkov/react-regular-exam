@@ -11,7 +11,7 @@ function Main() {
     const { filteredPosts, loadMorePosts, loading, handleSearch } = useMainFunctionality();
     const { mainRef } = useOutletContext();
     const { handleDetailsClick } = useDetailsClick();
-    const [id, setId] = useState('');
+    
     const handleSearchClick = () => {
         if (searchValue.current) {
             handleSearch(searchValue.current.value);
