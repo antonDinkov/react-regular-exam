@@ -42,8 +42,8 @@ function Main() {
             handleSearch(searchValue.current.value);
         }
     };
-    
-    useInfiniteScroll(mainRef, loadMorePosts(posts, filteredPosts, setFilteredPosts));
+
+    useInfiniteScroll(mainRef, () => loadMorePosts(posts, filteredPosts, setFilteredPosts));
 
     const makeVisible = (e) => {
         const sourceElement = e.target.closest('#closestID');
