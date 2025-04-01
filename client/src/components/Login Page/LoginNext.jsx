@@ -34,7 +34,16 @@ function LoginNext() {
             }
         }
         login();
-    }, [formData.password])
+    }, [formData.password]);
+
+    const handlePasswordVisibility = () => {
+        const passwordInput = document.getElementById("password");
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+        } else {
+            passwordInput.type = "password";
+        }
+    }
 
     return (
         <form onSubmit={submitHandler}>
@@ -59,8 +68,8 @@ function LoginNext() {
                                 </div>
 
                                 <div className={styles.inputWrapper}>
-                                    <input className={styles.pass} type="password" name="password" id="" placeholder='' />
-                                    <i className="fa-regular fa-eye"></i>
+                                    <input className={styles.pass} type="password" name="password" id="password" placeholder='' />
+                                    <i onClick={handlePasswordVisibility} className="fa-regular fa-eye"></i>
                                 </div>
 
                             </div>
