@@ -39,6 +39,24 @@ const handleSubmit = async (e) => {
     navigate('/react-regular-exam/create/submit');
 };
 
+const handlePasswordVisibility = () => {
+    const passwordInput = document.getElementById("password");
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+    } else {
+        passwordInput.type = "password";
+    }
+}
+
+const handleRepeatVisibility = () => {
+    const passwordInput = document.getElementById("repeat");
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+    } else {
+        passwordInput.type = "password";
+    }
+}
+
     return (
         <form onSubmit={handleSubmit}>
             <div className={styles.wrapperMajor}>
@@ -57,7 +75,7 @@ const handleSubmit = async (e) => {
                                 </div>
 
                                 <div className={styles.inputWrapper}>
-                                    <input className={styles.pass} type="text" name="name" id="" placeholder='' />
+                                    <input className={styles.pass} type="text" name="name" id="name" placeholder='' />
                                 </div>
                             </div>
                             <div className={styles.password}>
@@ -67,7 +85,7 @@ const handleSubmit = async (e) => {
                                 </div>
 
                                 <div className={styles.inputWrapper}>
-                                    <input className={styles.pass} type="email" name="email" id="" placeholder='' />
+                                    <input className={styles.pass} type="email" name="email" id="email" placeholder='' />
                                 </div>
                             </div>
                             <div className={styles.password}>
@@ -77,7 +95,8 @@ const handleSubmit = async (e) => {
                                 </div>
 
                                 <div className={styles.inputWrapper}>
-                                    <input className={styles.pass} type="password" name="password" id="" placeholder='At least 6 characters' />
+                                    <input className={styles.pass} type="password" name="password" id="password" placeholder='At least 6 characters' />
+                                    <i onClick={handlePasswordVisibility} className="fa-regular fa-eye"></i>
                                 </div>
                             </div>
                             <div className={styles.password}>
@@ -87,7 +106,8 @@ const handleSubmit = async (e) => {
                                 </div>
 
                                 <div className={styles.inputWrapper}>
-                                    <input className={styles.pass} type="password" name="repeat" id="" placeholder='' />
+                                    <input className={styles.pass} type="password" name="repeat" id="repeat" placeholder='' />
+                                    <i onClick={handleRepeatVisibility} className="fa-regular fa-eye"></i>
                                 </div>
                             </div>
                             <div className={styles.birth}>
