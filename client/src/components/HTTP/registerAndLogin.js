@@ -1,5 +1,6 @@
-import { createUserWithEmailAndPassword, db, doc, setDoc, getDoc, auth, signInWithEmailAndPassword, addDoc, collection, arrayUnion, increment, updateDoc } from "../../firebase";
+import { createUserWithEmailAndPassword, db, doc, setDoc, getDoc, getDocs, auth, signInWithEmailAndPassword, addDoc, collection, arrayUnion, increment, updateDoc } from "../../firebase";
 import { setUser } from "./localeStorageApi";
+
 export const registerUser = async (contextData) => {
     const { email, password } = contextData;
     try {
@@ -48,11 +49,33 @@ export const postComment = async (postId, data) => {
     const postRef = doc(db, "posts", postId);
     try {
         await updateDoc(postRef, {
-            comments: arrayUnion({data}),
+            comments: arrayUnion({ data }),
             "feedback.comments": increment(1)
         });
     } catch (error) {
         console.error("Error adding comment: ", error);
+    }
+}
+
+export const postLike = async (postId) => {
+    const postRef = doc(db, "posts", postId);
+    try {
+        await updateDoc(postRef, {
+            "feedback.likes": increment(1)
+        });
+    } catch (error) {
+        console.error("Error adding like: ", error);
+    }
+}
+
+export const postView = async (postId) => {
+    const postRef = doc(db, "posts", postId);
+    try {
+        await updateDoc(postRef, {
+            "feedback.views": increment(1)
+        });
+    } catch (error) {
+        console.error("Error adding like: ", error);
     }
 }
 
@@ -73,6 +96,18 @@ export const getPostById = async (postId) => {
     }
 };
 
+export const getAllPosts = async () => {
+    try {
+        const postsCollection = collection(db, "posts");
+        const querySnapShot = await getDocs(postsCollection);
+        const postsArray = querySnapShot.docs.map((doc) => doc.data());
+        postsArray.sort((a, b) => new Date(b.meta.date) - new Date(a.meta.date));
+        return postsArray
+    } catch (error) {
+        console.error("Грешка при взимане на постовете:", error);
+    }
+};
+
 async function getUser(userId) {
     try {
         const docRef = doc(db, 'users', userId);
@@ -89,7 +124,7 @@ async function getUser(userId) {
 }
 
 const uploadToCloudinary = async (file) => {
-    if (!file) {return};
+    if (!file) { return };
     const formData = new FormData();
 
     formData.append("file", file);

@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { collection, db, getDocs } from "../../../../firebase";
 
 function useMainFunctionality (postsPerPage = 6) {
-    const [posts, setPosts] = useState([]);
-    const [filteredPosts, setFilteredPosts] = useState([]);
+    /* const [posts, setPosts] = useState([]);
+    const [filteredPosts, setFilteredPosts] = useState([]); */
     const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(1);
     
 
-    const handleSearch = (searchValue) => {
+    const handleSearch = (searchValue, setFilteredPosts) => {
         const searchText = searchValue.trim().toLowerCase();
 
         if (searchText === "") {
@@ -22,8 +22,8 @@ function useMainFunctionality (postsPerPage = 6) {
         }
     };
 
-    useEffect(() => {
-        const fetchPosts = async () => {
+    /* useEffect(() => { */
+        const fetchPosts = async (setPosts, setFilteredPosts) => {
             try {
                 const postsCollection = collection(db, "posts");
                 const querySnapShot = await getDocs(postsCollection);
@@ -35,11 +35,9 @@ function useMainFunctionality (postsPerPage = 6) {
                 console.error("Грешка при взимане на постовете:", error);
             }
         };
+    /* }, [postsPerPage]); */
 
-        fetchPosts();
-    }, [postsPerPage]);
-
-    const loadMorePosts = () => {
+    const loadMorePosts = (posts, filteredPosts, setFilteredPosts) => {
         if (loading || filteredPosts.length >= posts.length) return;
         setLoading(true);
         const nextPage = page + 1;
@@ -53,7 +51,7 @@ function useMainFunctionality (postsPerPage = 6) {
         setLoading(false);
     };
 
-    return { posts, filteredPosts, loadMorePosts, loading, handleSearch };
+    return { /* posts, */ /* filteredPosts, */fetchPosts, loadMorePosts, loading, handleSearch };
 };
 
 export default useMainFunctionality;

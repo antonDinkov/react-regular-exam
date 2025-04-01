@@ -7,21 +7,33 @@ import { useInfiniteScroll } from "./infinityScrollHook";
 import useDetailsClick from "./detailsClickHook";
 import { getUser } from "../../../HTTP/localeStorageApi";
 import { v4 as uuidv4 } from 'uuid';
-import { getPostById, postComment } from "../../../HTTP/registerAndLogin";
+import { getAllPosts, getPostById, postComment } from "../../../HTTP/registerAndLogin";
+import useLikeHandle from "./LikeHook";
 
 function Main() {
+    const [posts, setPosts] = useState([]);
+    const [filteredPosts, setFilteredPosts] = useState([]);
     const searchValue = useRef();
-    const { filteredPosts, loadMorePosts, loading, handleSearch } = useMainFunctionality();
+    const { fetchPosts, loadMorePosts, loading, handleSearch } = useMainFunctionality();
     const { mainRef } = useOutletContext();
     const { handleDetailsClick } = useDetailsClick();
-    const[commentsNumber, setCommentNumber] = useState('')
+    const {handleLike} = useLikeHandle();
     
+
+    useEffect(() => {
+        const fetched = async () => {
+            await fetchPosts(setPosts, setFilteredPosts);
+        }
+        fetched();
+    }, [])
+    
+
     const handleSearchClick = () => {
         if (searchValue.current) {
             handleSearch(searchValue.current.value);
         }
     };
-    useInfiniteScroll(mainRef, loadMorePosts);
+    useInfiniteScroll(mainRef, loadMorePosts(posts, filteredPosts, setFilteredPosts));
 
     const makeVisible = (e) => {
         const sourceElement = e.target.closest('#closestID');
@@ -54,10 +66,20 @@ function Main() {
         await postComment(postId, data);
         const theComment = document.getElementById(postId);
         theComment.style.display = "none";
-        const num = await getPostById(postId);
-        if(num){
-            const exactNumber = num.feedback.comments;
-            setCommentNumber(exactNumber);
+        const allPosts = await getAllPosts();
+        if(allPosts){
+            setFilteredPosts(allPosts);
+        }
+    }
+
+    const likesHandle = async (e) => {
+        const sourceElement = e.target.closest('#closestID');
+        const postId = sourceElement.getAttribute("data-key");
+
+        await handleLike(postId)
+        const allPosts = await getAllPosts();
+        if(allPosts){
+            setFilteredPosts(allPosts);
         }
     }
 
@@ -80,8 +102,8 @@ function Main() {
                                 </div>
                             </div>
                             <div className={styles.feedback}>
-                                <p onClick={(e) => makeVisible(e)}><i className="fa-regular fa-comment"></i><span>{commentsNumber ? commentsNumber : post.feedback.comments}</span></p>
-                                <p><i className="fa-regular fa-heart"></i><span>{post.feedback.likes}</span></p>
+                                <p onClick={(e) => makeVisible(e)}><i className="fa-regular fa-comment"></i><span>{post.feedback.comments}</span></p>
+                                <p onClick={(e) => likesHandle(e)}><i className="fa-regular fa-heart"></i><span>{post.feedback.likes}</span></p>
                                 <p><i className="fa-solid fa-magnifying-glass"></i><span>{post.feedback.views}</span></p>
                             </div>
 
