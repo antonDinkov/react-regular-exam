@@ -66,7 +66,7 @@
 .imgWrap:hover {
     cursor: pointer;
 }
-  /* Фонът зад модала */
+  
   .modalOverlay {
     top: 0;
     left: 0;
@@ -78,7 +78,7 @@
     align-items: center;
   }
   
-  /* Съдържанието на модала */
+  
   .modalContent {
     background: white;
     padding: 15px;
@@ -88,7 +88,7 @@
     position: relative;
   }
   
-  /* Текстовото поле */
+  
   .commentBox {
     width: 93%;
     height: 80px;
@@ -98,7 +98,7 @@
     resize: none;
   }
   
-  /* Бутоните */
+  
   .modalButtons {
     display: flex;
     justify-content: space-between;
