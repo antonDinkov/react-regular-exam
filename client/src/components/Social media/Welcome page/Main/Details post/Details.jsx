@@ -3,14 +3,17 @@ import styles from './Details.module.css';
 import usePostComment from './postCommentHook';
 import { useEffect, useRef, useState } from 'react';
 import { getPostById } from '../../../../HTTP/registerAndLogin';
+/* import useViewHandle from '../ViewHook'; */
 
 function Details() {
     const location = useLocation();
     const { handleComment } = usePostComment();
-    const post = location.state?.post;
+    const post = location.state?.postId;
     const refComment = useRef();
     const [postData, setPostData] = useState(null);
     const [comments, setComments] = useState([]);
+    /* const [stoper, setStoper] = useState(false) */
+    /* const {handleView} = useViewHandle(); */
 
     if (!post) return <p>No post data found</p>;
 
@@ -23,12 +26,22 @@ function Details() {
 
     useEffect(() => {
         const fetchPost = async () => {
-            const data = await getPostById(post.id);
+            const data = await getPostById(post);
             setPostData(data)
         }
         fetchPost();
     }, [comments]);
 
+    /* useEffect(() => {
+        if (!stoper) {
+            setStoper(true);
+            const fetchPost = async () => {
+                const views = await handleView(post.id);
+            }
+            fetchPost();
+        };
+    }, [stoper]);
+ */
 
 
     return (

@@ -9,6 +9,7 @@ import { getUser } from "../../../HTTP/localeStorageApi";
 import { v4 as uuidv4 } from 'uuid';
 import { getAllPosts, getPostById, postComment } from "../../../HTTP/registerAndLogin";
 import useLikeHandle from "./LikeHook";
+import useViewHandle from "./ViewHook";
 
 function Main() {
     const [posts, setPosts] = useState([]);
@@ -17,7 +18,15 @@ function Main() {
     const { fetchPosts, loadMorePosts, loading, handleSearch } = useMainFunctionality();
     const { mainRef } = useOutletContext();
     const { handleDetailsClick } = useDetailsClick();
+    const {handleView} = useViewHandle()
     const {handleLike} = useLikeHandle();
+
+    const handleClick = async (e) => {
+        const sourceElement = e.target.closest('#closestID');
+        const postId = sourceElement.getAttribute("data-key");
+        await handleView(postId);
+        handleDetailsClick(postId);
+    }
     
 
     useEffect(() => {
@@ -33,6 +42,7 @@ function Main() {
             handleSearch(searchValue.current.value);
         }
     };
+    
     useInfiniteScroll(mainRef, loadMorePosts(posts, filteredPosts, setFilteredPosts));
 
     const makeVisible = (e) => {
@@ -90,7 +100,7 @@ function Main() {
                 {filteredPosts.length > 0 ? (
                     filteredPosts.map((post) => (
                         <div id="closestID" data-key={post.id} key={post.id} className={styles.postWrapper}>
-                            <div onClick={() => handleDetailsClick(post)} key={post.id} className={styles.post}>
+                            <div onClick={(e) => handleClick(e)} key={post.id} className={styles.post}>
                                 <div className={styles.imgWrap}>
                                     <div className={styles.meta}>
                                         <img src={post.meta.img || post.meta.avatar || "https://example.com/default-avatar.jpg"} alt="Profile" />
@@ -104,7 +114,7 @@ function Main() {
                             <div className={styles.feedback}>
                                 <p onClick={(e) => makeVisible(e)}><i className="fa-regular fa-comment"></i><span>{post.feedback.comments}</span></p>
                                 <p onClick={(e) => likesHandle(e)}><i className="fa-regular fa-heart"></i><span>{post.feedback.likes}</span></p>
-                                <p><i className="fa-solid fa-magnifying-glass"></i><span>{post.feedback.views}</span></p>
+                                <p onClick={(e) => handleClick(e)}><i className="fa-solid fa-magnifying-glass"></i><span>{post.feedback.views}</span></p>
                             </div>
 
                             <div data-key={post.id} id={post.id} style={{ display: "none" }} className={styles.modalOverlay}>

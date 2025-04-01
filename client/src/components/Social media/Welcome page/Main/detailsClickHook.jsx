@@ -3,8 +3,8 @@ import { useNavigate } from "react-router";
 function useDetailsClick() {
     const navigate = useNavigate();
 
-    const handleDetailsClick = (post) => {
-        navigate(`/react-regular-exam/welcome/${post.id}/details`, { state: {post} });
+    const handleDetailsClick = (postId) => {
+        navigate(`/react-regular-exam/welcome/${postId}/details`, { state: {postId} });
     }
     return {
         handleDetailsClick,
