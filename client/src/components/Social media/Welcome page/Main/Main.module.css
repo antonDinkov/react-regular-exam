@@ -36,7 +36,7 @@
     margin-bottom: 1em;
 }
 
-.post > p {
+.post > div:first-child > p {
     margin-bottom: 1em;
     overflow: hidden;
 }

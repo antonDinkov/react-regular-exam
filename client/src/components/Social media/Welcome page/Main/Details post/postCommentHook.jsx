@@ -14,6 +14,7 @@ function usePostComment() {
             date: new Date().toLocaleString()
         }
         refComment.current.value = '';
+        if (!data.text) return alert ("Your reply is empty!");
         await postComment(postId, data);
         return data;
     }

@@ -17,9 +17,8 @@
     margin-bottom: 1em;
 }
 
-.post > p {
+.imgWrap > p {
     margin-bottom: 1em;
-    overflow: hidden;
 }
 
 .post > div > img {
@@ -40,9 +39,9 @@
     margin-right: 0.3em;
 }
 
-.imgWrap:hover {
+/* .imgWrap:hover {
     cursor: pointer;
-}
+} */
 
 .actions {
     display: flex;

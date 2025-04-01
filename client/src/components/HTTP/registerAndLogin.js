@@ -39,7 +39,6 @@ export const postCreate = async (data) => {
         const post = await addDoc(collection(db, "posts"), data);
         const postWithId = { ...data, id: post.id };
         await setDoc(doc(db, "posts", post.id), postWithId);
-        console.log(postWithId);
     } catch (error) {
         console.error("Error adding document:", error);
     }
