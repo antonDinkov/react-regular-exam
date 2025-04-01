@@ -57,11 +57,12 @@ export const postComment = async (postId, data) => {
     }
 }
 
-export const postLike = async (postId) => {
+export const postLike = async (postId, name) => {
     const postRef = doc(db, "posts", postId);
     try {
         await updateDoc(postRef, {
-            "feedback.likes": increment(1)
+            "feedback.likes": increment(1),
+            "feedback.likedPeople":arrayUnion(name)
         });
     } catch (error) {
         console.error("Error adding like: ", error);

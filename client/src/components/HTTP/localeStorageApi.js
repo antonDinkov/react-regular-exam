@@ -4,14 +4,6 @@ export function setUser(user, token) {
     /* localStorage.setItem('userName', JSON.stringify(userName)); */
 }
 
-export function setLiked(postId) {
-    localStorage.setItem(`liked-${postId}`, "true");
-}
-
-export function getLiked(postId) {
-    return localStorage.getItem(`liked-${postId}`);
-}
-
 export function getUserToken() {
     return localStorage.getItem('userToken');
 }
