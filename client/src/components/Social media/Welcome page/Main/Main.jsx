@@ -61,7 +61,7 @@ function Main() {
                                 <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
                                     <textarea
                                         className={styles.commentBox}
-                                        placeholder="Напишете коментар..."
+                                        placeholder="Post your reply"
                                         onChange={(e) => setMessage(e.target.value)}
                                     />
                                     <div className={styles.modalButtons}>
@@ -70,7 +70,7 @@ function Main() {
                                             setIsOpen(false);
                                             setMessage("");
                                         }}>
-                                            Изпрати
+                                            Reply
                                         </button>
                                         <button className={styles.closeBtn} onClick={(e) => makeInvisible(e)}>
                                             X
