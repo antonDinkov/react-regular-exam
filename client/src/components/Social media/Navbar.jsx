@@ -51,7 +51,7 @@ function Navbar() {
                 <li><Link to='/react-regular-exam/welcome'><i className={`fa-solid fa-house-flag ${styles.i}`}></i><span>Welcome</span></Link></li>
                 <li><Link to='/react-regular-exam/about'><i className={`fa-solid fa-bell ${styles.i}`}></i><span>Notification</span></Link></li>
                 <li><Link to='/react-regular-exam/about'><i className={`fa-solid fa-envelope ${styles.i}`}></i><span>Messages</span></Link></li>
-                <li><Link to='/react-regular-exam/about'><i className={`fa-solid fa-user ${styles.i}`}></i><span>Profile</span></Link></li>
+                <li><Link to='/react-regular-exam/welcome/profile'><i className={`fa-solid fa-user ${styles.i}`}></i><span>Profile</span></Link></li>
                 <li><Link to='/react-regular-exam/about'><i className={`fa-solid fa-suitcase ${styles.i}`}></i><span>Jobs</span></Link></li>
                 <li><Link onClick={handleLogout} to="#"><i className={`fa-solid fa-circle-xmark ${styles.i}`}></i><span>Logout</span></Link></li>
                 <li><Link to="/react-regular-exam/welcome/post"><span>Post</span></Link></li>

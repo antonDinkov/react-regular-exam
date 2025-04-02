@@ -12,6 +12,8 @@ import GuardWelcome from './components/Social media/GuardWelcome';
 import Post from './components/Social media/Welcome page/Post/Post';
 import UnderConstruction from './components/Under construction/UnderConstruction';
 import Details from './components/Social media/Welcome page/Main/Details post/details';
+import Profile from './components/Social media/Welcome page/Profile/Profile';
+import EditProfile from './components/Social media/Welcome page/Profile/EditProfile';
 function App() {
 
     return (
@@ -28,6 +30,8 @@ function App() {
                     <Route index element={<Main />} />
                     <Route path=':postId/details' element={<Details />} />
                     <Route path='post' element={<Post />} />
+                    <Route path='profile' element={<Profile />} />
+                    <Route path='profile/edit' element={<EditProfile />} />
                 </Route>
             </Routes>
         </FormDataProvider>

@@ -1,0 +1,83 @@
+.profileContainer {
+    width: 95%;
+    margin: 0 auto;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+  }
+  
+  .header {
+    position: relative;
+  }
+  
+  .coverPhoto {
+    width: 100%;
+    height: 150px;
+    background: #ccc;
+  }
+  
+  .profileInfo {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    margin-right: 15px;
+  }
+  
+  .details {
+    flex: 1;
+  }
+  
+  .name {
+    margin: 0;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .username {
+    color: gray;
+  }
+  
+  .bio {
+    margin-top: 5px;
+    font-size: 14px;
+  }
+  
+  .content {
+    padding: 20px;
+  }
+  
+  .posts {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .post {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #f9f9f9;
+  }
+
+  .editProfile {
+    margin-left: auto;
+    padding: 8px 16px;
+    background-color: #1d9bf0;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 20px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .editProfile:hover {
+    background-color: #0c7abf;
+  }

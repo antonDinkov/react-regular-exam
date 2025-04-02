@@ -1,0 +1,125 @@
+.editProfileContainer {
+    width: 90%;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .editProfileTitle {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .editProfileForm {
+    display: flex;
+    flex-direction: column;
+    width: 96.5%;
+  }
+  
+  .editProfileLabel {
+    font-size: 14px;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .editProfileInput,
+  .editProfileTextarea,
+  .editProfileSelect {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  .editProfileTextarea {
+    resize: none;
+    height: 80px;
+  }
+  
+  .editProfileSaveButton {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #1d9bf0;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .editProfileSaveButton:hover {
+    background-color: #0c7abf;
+  }
+  
+  /* Секции за снимки */
+  .imageUploadContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .coverPhotoLabel,
+  .profileImageLabel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .coverPhotoPreview {
+    width: 100%;
+    max-height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-top: 10px;
+  }
+  
+  .profileImagePreview {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid white;
+    object-fit: cover;
+    margin-top: 10px;
+  }
+  
+  /* Падащи менюта за дата на раждане */
+  .birthdateContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .editProfileSelect {
+    flex: 1;
+  }
+  
+  /* Чекбоксове */
+  .checkboxContainer {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+  }
+  
+  .checkboxContainer label {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  input[type="file"] {
+    display: none;
+  }
