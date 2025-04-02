@@ -57,6 +57,26 @@ export const deletePost = async (/* imgId */postId) => {
     }
 };
 
+export const upDatePost = async (postId, newImage, content, oldUrl, oldImgId) => {
+    let imgInfo = '';
+    if (newImage) {
+        imgInfo = await uploadToCloudinary(newImage);
+        console.log('Info');
+        
+    }
+
+    const postRef = doc(db, "posts", postId);
+    try {
+        await updateDoc(postRef, {
+            content,
+            img: imgInfo.url ? imgInfo.url : oldUrl,
+            imgId: imgInfo.id ? imgInfo.id : oldImgId
+        });
+    } catch (error) {
+        console.error("Error adding comment: ", error);
+    }
+}
+
 export const postComment = async (postId, data) => {
     const postRef = doc(db, "posts", postId);
     try {

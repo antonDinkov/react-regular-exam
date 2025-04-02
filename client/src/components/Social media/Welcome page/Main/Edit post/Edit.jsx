@@ -1,19 +1,26 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./Edit.module.css";
-import { useLocation } from "react-router";
-import { getPostById, removeImg } from "../../../../HTTP/registerAndLogin";
+import { useLocation, useNavigate } from "react-router";
+import { getPostById, removeImg, upDatePost } from "../../../../HTTP/registerAndLogin";
 
-const Edit = ({ initialPost, onSave }) => {
+const Edit = () => {
     const [image, setImage] = useState(false);
     const[newImage, setNewImage] = useState('');
+    const [tempUrl, setTempUrl] = useState(null);
     const location = useLocation();
     const post = location.state?.postData;
     const [currPostInfo, setCurrPostInfo] = useState('');
+    const [content, setContent] = useState('');
+    const [media, setMedia] = useState(null);
+    const navigate = useNavigate();
+    console.log(currPostInfo.content);
+    console.log(content);
     
     useEffect (() => {
         const postInfo = async () => {
             const data = await getPostById(post.id);
-            setCurrPostInfo(data)
+            setContent(data.content)
+            setCurrPostInfo(data);
             if (data.img) {
                 setImage(true);
             }
@@ -21,28 +28,35 @@ const Edit = ({ initialPost, onSave }) => {
         postInfo();
     }, [image]);
 
+    const handleContentChange = (e) => {
+        setContent(e.target.value); // Актуализира състоянието с новото съдържание
+    };
+    
     const fileInputRef = useRef(null);
 
     const handleImageUpload = (e) => {
         const file = e.target.files[0];
         if (file) {
             const imageUrl = URL.createObjectURL(file);
-            setNewImage(imageUrl);
+            setNewImage(file);
+            setTempUrl(imageUrl);
         }
     };
 
-    /* const handleRemoveImage = () => {
-        
-    }; */
+    const handleRemoveImage = () => {
+        setNewImage('');
+    };
 
     const handleRemoveOldImage = () => {
         removeImg(currPostInfo.id)
         setImage(false);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        onSave({ title: post.title, content: post.content, image });
+        console.log(newImage);
+        await upDatePost(currPostInfo.id, newImage, content, currPostInfo.img, currPostInfo.imgId);
+        navigate(`/react-regular-exam/welcome/${currPostInfo.id}/details`);
     };
 
     const handleAddImageClick = () => {
@@ -55,10 +69,7 @@ const Edit = ({ initialPost, onSave }) => {
             <form onSubmit={handleSubmit} className={styles.editForm}>
 
                 <label className={styles.editLabel}>Content:</label>
-                <textarea
-                    value={currPostInfo.content}
-                    className={styles.editTextarea}
-                />
+                <textarea value={content} onChange={handleContentChange} className={styles.editTextarea}></textarea>
 
                 <label className={styles.editLabel}>Image:</label>
                 <div className={styles.imageUploadContainer}>
@@ -90,7 +101,7 @@ const Edit = ({ initialPost, onSave }) => {
 
                 {newImage && (
                     <div className={styles.imagePreviewContainer}>
-                        <img src={image} alt="Preview" className={styles.imagePreview} />
+                        <img src={tempUrl} alt="Preview" className={styles.imagePreview} />
                         <button
                             type="button"
                             className={styles.removeButton}

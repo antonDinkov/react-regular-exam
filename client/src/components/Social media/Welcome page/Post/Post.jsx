@@ -17,7 +17,7 @@ function Post() {
         if (file) {
             const imageUrl = URL.createObjectURL(file);
             setMedia(file);
-            setTempUrl(imageUrl)
+            setTempUrl(imageUrl);
         }
     };
 
