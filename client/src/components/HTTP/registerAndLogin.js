@@ -6,7 +6,6 @@ export const registerUser = async (contextData) => {
     try {
         const userdata = await createUserWithEmailAndPassword(auth, email, password);
         const user = userdata.user;
-        /* console.log(user); */
 
         await setDoc(doc(db, "users", user.uid), { ...contextData, createdAt: new Date(), userId: user.uid });
     } catch (err) {
@@ -116,7 +115,7 @@ export const getAllPosts = async () => {
         postsArray.sort((a, b) => new Date(b.meta.date) - new Date(a.meta.date));
         return postsArray
     } catch (error) {
-        console.error("Грешка при взимане на постовете:", error);
+        console.error("Error loading posts", error);
     }
 };
 
@@ -152,7 +151,6 @@ const uploadToCloudinary = async (file) => {
         );
         const data = await response.json();
         if (data.secure_url) {
-            console.log("Succeded", data.secure_url);
             return {
                 url: data.secure_url,
                 id: data.public_id
@@ -166,16 +164,27 @@ const uploadToCloudinary = async (file) => {
 }
 
 const deleteImage = async (publicId) => {
+    const cloudName = "dsqegonee"; 
+    const apiKey = "296126373257215";
+    const apiSecret = "msuSspZaijhdnN0podqRAvgpyVo";
+    const url = `https://api.cloudinary.com/v1_1/${cloudName}/destroy/${publicId}`;
+
+    const headers = {
+        "Authorization": "Basic " + btoa(`${apiKey}:${apiSecret}`),  // Базова автентикация
+        "Content-Type": "application/json"
+    };
+
     try {
-      const response = await fetch("http://localhost:5000/delete-image", {
+      const response = await fetch(url, {
         method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ publicId }),
+        headers
       });
   
       const data = await response.json();
       console.log(data);
+      return data;
     } catch (error) {
       console.error("Error deleting image:", error);
+      return null;
     }
   };
