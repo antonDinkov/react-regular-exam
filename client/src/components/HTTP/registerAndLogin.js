@@ -31,11 +31,13 @@ export const loginUser = async (contextData) => {
 
 export const postCreate = async (data) => {
     try {
-        const imgUrl = await uploadToCloudinary(data.img);
-        if (!imgUrl) {
+        const imgInfo = await uploadToCloudinary(data.img);
+        if (!imgInfo) {
             data.img = '';
+            data.imgId = '';
         } else {
-            data.img = imgUrl;
+            data.img = imgInfo.url;
+            data.imgId = imgInfo.id;
         }
         const post = await addDoc(collection(db, "posts"), data);
         const postWithId = { ...data, id: post.id };
@@ -150,13 +152,16 @@ const uploadToCloudinary = async (file) => {
         );
         const data = await response.json();
         if (data.secure_url) {
-            console.log("Изображението е качено успешно:", data.secure_url);
-            return data.secure_url;
+            console.log("Succeded", data.secure_url);
+            return {
+                url: data.secure_url,
+                id: data.public_id
+            };
         } else {
-            console.error("Грешка при качването на изображението", data);
+            console.error("Error uploading your media: ", data);
         }
     } catch (error) {
-        console.error("Грешка при качването на изображението:", error);
+        console.error("Error uploading your media: ", error);
     }
 }
 
