@@ -8,7 +8,7 @@ function useMainFunctionality (postsPerPage = 6) {
     const [page, setPage] = useState(1);
     
 
-    const handleSearch = (searchValue, setFilteredPosts) => {
+    const handleSearch = (searchValue, setFilteredPosts, posts) => {
         const searchText = searchValue.trim().toLowerCase();
 
         if (searchText === "") {
@@ -51,7 +51,7 @@ function useMainFunctionality (postsPerPage = 6) {
         setLoading(false);
     };
 
-    return { /* posts, */ /* filteredPosts, */fetchPosts, loadMorePosts, loading, handleSearch };
+    return { fetchPosts, loadMorePosts, loading, handleSearch };
 };
 
 export default useMainFunctionality;

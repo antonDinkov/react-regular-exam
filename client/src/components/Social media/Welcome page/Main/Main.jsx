@@ -7,7 +7,7 @@ import { useInfiniteScroll } from "./infinityScrollHook";
 import useDetailsClick from "./detailsClickHook";
 import { getUser } from "../../../HTTP/localeStorageApi";
 import { v4 as uuidv4 } from 'uuid';
-import { getAllPosts, getPostById, postComment } from "../../../HTTP/registerAndLogin";
+import { getAllPosts, postComment } from "../../../HTTP/registerAndLogin";
 import useLikeHandle from "./LikeHook";
 import useViewHandle from "./ViewHook";
 
@@ -39,7 +39,7 @@ function Main() {
 
     const handleSearchClick = () => {
         if (searchValue.current) {
-            handleSearch(searchValue.current.value);
+            handleSearch(searchValue.current.value, setFilteredPosts, posts);
         }
     };
 
