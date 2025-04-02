@@ -32,17 +32,6 @@ function Details() {
         fetchPost();
     }, [comments]);
 
-    /* useEffect(() => {
-        if (!stoper) {
-            setStoper(true);
-            const fetchPost = async () => {
-                const views = await handleView(post.id);
-            }
-            fetchPost();
-        };
-    }, [stoper]);
- */
-
 
     return (
         <>
