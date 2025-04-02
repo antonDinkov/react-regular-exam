@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, db, doc, setDoc, getDoc, getDocs, deleteDoc auth, signInWithEmailAndPassword, addDoc, collection, arrayUnion, increment, updateDoc } from "../../firebase";
+import { createUserWithEmailAndPassword, db, doc, setDoc, getDoc, getDocs, deleteDoc, auth, signInWithEmailAndPassword, addDoc, collection, arrayUnion, increment, updateDoc } from "../../firebase";
 import { setUser } from "./localeStorageApi";
 
 export const registerUser = async (contextData) => {
@@ -159,3 +159,18 @@ const uploadToCloudinary = async (file) => {
         console.error("Грешка при качването на изображението:", error);
     }
 }
+
+const deleteImage = async (publicId) => {
+    try {
+      const response = await fetch("http://localhost:5000/delete-image", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ publicId }),
+      });
+  
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("Error deleting image:", error);
+    }
+  };

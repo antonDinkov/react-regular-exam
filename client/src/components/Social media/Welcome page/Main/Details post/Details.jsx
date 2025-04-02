@@ -3,7 +3,8 @@ import styles from './Details.module.css';
 import usePostComment from './postCommentHook';
 import { useEffect, useRef, useState } from 'react';
 import { getPostById } from '../../../../HTTP/registerAndLogin';
-/* import useViewHandle from '../ViewHook'; */
+import { getUser } from '../../../../HTTP/localeStorageApi';
+
 
 function Details() {
     const location = useLocation();
@@ -12,8 +13,8 @@ function Details() {
     const refComment = useRef();
     const [postData, setPostData] = useState(null);
     const [comments, setComments] = useState([]);
-    /* const [stoper, setStoper] = useState(false) */
-    /* const {handleView} = useViewHandle(); */
+    const [owner, setOwner] = useState(false);
+    
 
     if (!post) return <p>No post data found</p>;
 
@@ -27,6 +28,11 @@ function Details() {
     useEffect(() => {
         const fetchPost = async () => {
             const data = await getPostById(post);
+            const currUserInfo = JSON.parse(getUser());
+            const currUserName = currUserInfo.name;
+            if (currUserName === data.meta.author) {
+                setOwner(true)
+            }
             setPostData(data)
         }
         fetchPost();
@@ -55,11 +61,13 @@ function Details() {
                         <p><i className="fa-solid fa-magnifying-glass"></i><span>{postData.feedback.views}</span></p>
                     </div>
 
-
-                    <div className={styles.actions}>
+                    {owner && (
+                        <div className={styles.actions}>
                         <button className={styles.editButton} onClick={() => handleEdit(post.id)}>Edit</button>
                         <button className={styles.deleteButton} onClick={() => handleDelete(post.id)}>Delete</button>
                     </div>
+                    )}
+                    
 
 
                     <div className={styles.commentSection}>
@@ -76,7 +84,7 @@ function Details() {
                         postData.comments.map((comment) => (
                             <div key={comment.data.id} className={styles.comment}>
                                 <div className={styles.commentHeader}>
-                                    {/* <img src={comment.avatar || "https://example.com/default-avatar.jpg"} alt="User" /> */}
+                                    
                                     <h5>{comment.data.author}</h5>
                                     <p className={styles.commentDate}>{comment.data.date}</p>
                                 </div>
