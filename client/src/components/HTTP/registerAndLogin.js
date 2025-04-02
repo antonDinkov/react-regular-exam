@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, db, doc, setDoc, getDoc, getDocs, auth, signInWithEmailAndPassword, addDoc, collection, arrayUnion, increment, updateDoc } from "../../firebase";
+import { createUserWithEmailAndPassword, db, doc, setDoc, getDoc, getDocs, deleteDoc auth, signInWithEmailAndPassword, addDoc, collection, arrayUnion, increment, updateDoc } from "../../firebase";
 import { setUser } from "./localeStorageApi";
 
 export const registerUser = async (contextData) => {
@@ -44,6 +44,15 @@ export const postCreate = async (data) => {
         console.error("Error adding document:", error);
     }
 }
+
+export const deletePost = async (postId) => {
+    try {
+      await deleteDoc(doc(db, "posts", postId));
+      console.log("Post deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting post:", error);
+    }
+};
 
 export const postComment = async (postId, data) => {
     const postRef = doc(db, "posts", postId);
