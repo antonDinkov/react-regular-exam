@@ -69,6 +69,18 @@ export const postComment = async (postId, data) => {
     }
 }
 
+export const removeImg = async (postId) => {
+    const postRef = doc(db, "posts", postId);
+    try {
+        await updateDoc(postRef, {
+            img: '',
+            imgId: ''
+        });
+    } catch (error) {
+        console.error("Error adding comment: ", error);
+    }
+}
+
 export const postLike = async (postId, name) => {
     const postRef = doc(db, "posts", postId);
     try {

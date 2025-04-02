@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import styles from './Details.module.css';
 import usePostComment from './postCommentHook';
 import { useEffect, useRef, useState } from 'react';
@@ -15,9 +15,11 @@ function Details() {
     const [comments, setComments] = useState([]);
     const [owner, setOwner] = useState(false);
     const navigate = useNavigate();
-    
+
 
     if (!post) return <p>No post data found</p>;
+    console.log(post);
+    
 
     const handleReply = async () => {
         const newComment = await handleComment(postData, refComment);
@@ -40,7 +42,7 @@ function Details() {
     }, [comments]);
 
     const handleDelete = async () => {
-        
+
         const postId = postData.id;
         /* const img = postData.imgId;
         const imgId = img ? img : ''; */
@@ -50,7 +52,13 @@ function Details() {
         navigate('/react-regular-exam/welcome');
     };
 
-    
+    const handleEdit = () => {
+        if (postData) {
+            navigate(`/react-regular-exam/welcome/${postData.id}/details/edit`, {state: {postData}});
+        }
+    }
+
+
 
 
     return (
@@ -77,11 +85,11 @@ function Details() {
 
                     {owner && (
                         <div className={styles.actions}>
-                        <Link to={`/react-regular-exam/welcome/${postData.id}/details/edit`} className={styles.editButton} onClick={() => handleEdit(post.id)}>Edit</Link>
-                        <button className={styles.deleteButton} onClick={() => handleDelete()}>Delete</button>
-                    </div>
+                            <button className={styles.editButton} onClick={() => handleEdit()}>Edit</button>
+                            <button className={styles.deleteButton} onClick={() => handleDelete()}>Delete</button>
+                        </div>
                     )}
-                    
+
 
 
                     <div className={styles.commentSection}>
@@ -98,7 +106,7 @@ function Details() {
                         postData.comments.map((comment) => (
                             <div key={comment.data.id} className={styles.comment}>
                                 <div className={styles.commentHeader}>
-                                    
+
                                     <h5>{comment.data.author}</h5>
                                     <p className={styles.commentDate}>{comment.data.date}</p>
                                 </div>
@@ -108,7 +116,7 @@ function Details() {
                     ) : (
                         <p className={styles.noComments}>No comments yet. Be the first to reply!</p>
                     )}
-                    
+
                 </div>
             )}
         </>
