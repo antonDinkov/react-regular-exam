@@ -27,6 +27,7 @@
 
 .imgWrap > p {
     margin-bottom: 1em;
+    overflow-y: auto;
 }
 
 .imgWrap > img {
