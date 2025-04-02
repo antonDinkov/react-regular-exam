@@ -46,12 +46,14 @@ export const postCreate = async (data) => {
     }
 }
 
-export const deletePost = async (postId) => {
+export const deletePost = async (/* imgId */postId) => {
     try {
-      await deleteDoc(doc(db, "posts", postId));
-      console.log("Post deleted successfully!");
+        /* deleteImage(imgId) */
+        const postRef = doc(db, "posts", postId);
+        await deleteDoc(postRef);
+        console.log("Post deleted successfully!");
     } catch (error) {
-      console.error("Error deleting post:", error);
+        console.error("Error deleting post:", error);
     }
 };
 
@@ -72,7 +74,7 @@ export const postLike = async (postId, name) => {
     try {
         await updateDoc(postRef, {
             "feedback.likes": increment(1),
-            "feedback.likedPeople":arrayUnion(name)
+            "feedback.likedPeople": arrayUnion(name)
         });
     } catch (error) {
         console.error("Error adding like: ", error);
@@ -164,7 +166,8 @@ const uploadToCloudinary = async (file) => {
 }
 
 const deleteImage = async (publicId) => {
-    const cloudName = "dsqegonee"; 
+    if (!publicId) return;
+    const cloudName = "dsqegonee";
     const apiKey = "296126373257215";
     const apiSecret = "msuSspZaijhdnN0podqRAvgpyVo";
     const url = `https://api.cloudinary.com/v1_1/${cloudName}/destroy/${publicId}`;
@@ -175,16 +178,16 @@ const deleteImage = async (publicId) => {
     };
 
     try {
-      const response = await fetch(url, {
-        method: "DELETE",
-        headers
-      });
-  
-      const data = await response.json();
-      console.log(data);
-      return data;
+        const response = await fetch(url, {
+            method: "DELETE",
+            headers
+        });
+
+        const data = await response.json();
+        console.log(data);
+        return data;
     } catch (error) {
-      console.error("Error deleting image:", error);
-      return null;
+        console.error("Error deleting image:", error);
+        return null;
     }
-  };
+};

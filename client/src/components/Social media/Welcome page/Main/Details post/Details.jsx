@@ -1,8 +1,8 @@
-import { useLocation } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import styles from './Details.module.css';
 import usePostComment from './postCommentHook';
 import { useEffect, useRef, useState } from 'react';
-import { getPostById } from '../../../../HTTP/registerAndLogin';
+import { deletePost, getPostById } from '../../../../HTTP/registerAndLogin';
 import { getUser } from '../../../../HTTP/localeStorageApi';
 
 
@@ -14,6 +14,7 @@ function Details() {
     const [postData, setPostData] = useState(null);
     const [comments, setComments] = useState([]);
     const [owner, setOwner] = useState(false);
+    const navigate = useNavigate();
     
 
     if (!post) return <p>No post data found</p>;
@@ -38,13 +39,24 @@ function Details() {
         fetchPost();
     }, [comments]);
 
+    const handleDelete = async () => {
+        
+        const postId = postData.id;
+        /* const img = postData.imgId;
+        const imgId = img ? img : ''; */
+
+        deletePost(postId);
+
+        navigate('/react-regular-exam/welcome');
+    }   
+
 
     return (
         <>
             {!postData ? (
                 <p>Loading post data...</p>
             ) : (
-                <div key={postData.id} className={styles.post}>
+                <div id='closestId' data-id={postData.id} data-imgid={postData.imgId} key={postData.id} className={styles.post}>
                     <div className={styles.imgWrap}>
                         <div className={styles.meta}>
                             <img src={postData.meta.img || postData.meta.avatar || "https://example.com/default-avatar.jpg"} alt="Profile" />
@@ -64,7 +76,7 @@ function Details() {
                     {owner && (
                         <div className={styles.actions}>
                         <button className={styles.editButton} onClick={() => handleEdit(post.id)}>Edit</button>
-                        <button className={styles.deleteButton} onClick={() => handleDelete(post.id)}>Delete</button>
+                        <button className={styles.deleteButton} onClick={() => handleDelete()}>Delete</button>
                     </div>
                     )}
                     
