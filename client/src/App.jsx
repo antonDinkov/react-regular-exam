@@ -14,6 +14,7 @@ import UnderConstruction from './components/Under construction/UnderConstruction
 import Details from './components/Social media/Welcome page/Main/Details post/details';
 import Profile from './components/Social media/Welcome page/Profile/Profile';
 import EditProfile from './components/Social media/Welcome page/Profile/EditProfile';
+import Edit from './components/Social media/Welcome page/Main/Edit post/Edit';
 function App() {
 
     return (
@@ -29,6 +30,7 @@ function App() {
                 <Route path="/react-regular-exam/welcome" element={<GuardWelcome><Welcome /></GuardWelcome>}>
                     <Route index element={<Main />} />
                     <Route path=':postId/details' element={<Details />} />
+                    <Route path=':postId/details/edit' element={<Edit />} />
                     <Route path='post' element={<Post />} />
                     <Route path='profile' element={<Profile />} />
                     <Route path='profile/edit' element={<EditProfile />} />

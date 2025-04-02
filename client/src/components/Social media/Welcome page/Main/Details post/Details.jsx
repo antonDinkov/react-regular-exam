@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import styles from './Details.module.css';
 import usePostComment from './postCommentHook';
 import { useEffect, useRef, useState } from 'react';
@@ -48,7 +48,9 @@ function Details() {
         deletePost(postId);
 
         navigate('/react-regular-exam/welcome');
-    }   
+    };
+
+    
 
 
     return (
@@ -75,7 +77,7 @@ function Details() {
 
                     {owner && (
                         <div className={styles.actions}>
-                        <button className={styles.editButton} onClick={() => handleEdit(post.id)}>Edit</button>
+                        <Link to={`/react-regular-exam/welcome/${postData.id}/details/edit`} className={styles.editButton} onClick={() => handleEdit(post.id)}>Edit</Link>
                         <button className={styles.deleteButton} onClick={() => handleDelete()}>Delete</button>
                     </div>
                     )}

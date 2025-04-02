@@ -72,6 +72,7 @@
 
 .editButton {
     background-color: #f0ad4e;
+    text-decoration: none;
 }
 
 .deleteButton {
