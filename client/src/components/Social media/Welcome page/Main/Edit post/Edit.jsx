@@ -56,7 +56,8 @@ const Edit = () => {
         e.preventDefault();
         console.log(newImage);
         await upDatePost(currPostInfo.id, newImage, content, currPostInfo.img, currPostInfo.imgId);
-        navigate(`/react-regular-exam/welcome/${currPostInfo.id}/details`);
+        const postId = currPostInfo.id;
+        navigate(`/react-regular-exam/welcome/${postId}/details`, {state: {postId}});
     };
 
     const handleAddImageClick = () => {
