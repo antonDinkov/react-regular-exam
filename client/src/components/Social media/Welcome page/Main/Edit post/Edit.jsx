@@ -11,10 +11,7 @@ const Edit = () => {
     const post = location.state?.postData;
     const [currPostInfo, setCurrPostInfo] = useState('');
     const [content, setContent] = useState('');
-    const [media, setMedia] = useState(null);
     const navigate = useNavigate();
-    console.log(currPostInfo.content);
-    console.log(content);
     
     useEffect (() => {
         const postInfo = async () => {
@@ -29,7 +26,7 @@ const Edit = () => {
     }, [image]);
 
     const handleContentChange = (e) => {
-        setContent(e.target.value); // Актуализира състоянието с новото съдържание
+        setContent(e.target.value);
     };
     
     const fileInputRef = useRef(null);
@@ -54,7 +51,6 @@ const Edit = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(newImage);
         await upDatePost(currPostInfo.id, newImage, content, currPostInfo.img, currPostInfo.imgId);
         const postId = currPostInfo.id;
         navigate(`/react-regular-exam/welcome/${postId}/details`, {state: {postId}});

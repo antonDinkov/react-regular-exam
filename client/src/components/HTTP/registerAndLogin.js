@@ -46,9 +46,8 @@ export const postCreate = async (data) => {
     }
 }
 
-export const deletePost = async (/* imgId */postId) => {
+export const deletePost = async (postId) => {
     try {
-        /* deleteImage(imgId) */
         const postRef = doc(db, "posts", postId);
         await deleteDoc(postRef);
         console.log("Post deleted successfully!");
@@ -61,8 +60,6 @@ export const upDatePost = async (postId, newImage, content, oldUrl, oldImgId) =>
     let imgInfo = '';
     if (newImage) {
         imgInfo = await uploadToCloudinary(newImage);
-        console.log('Info');
-        
     }
 
     const postRef = doc(db, "posts", postId);

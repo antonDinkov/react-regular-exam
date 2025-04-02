@@ -2,8 +2,9 @@ import { useLocation, useNavigate } from 'react-router';
 import styles from './Details.module.css';
 import usePostComment from './postCommentHook';
 import { useEffect, useRef, useState } from 'react';
-import { deletePost, getPostById } from '../../../../HTTP/registerAndLogin';
+import { deletePost, getAllPosts, getPostById } from '../../../../HTTP/registerAndLogin';
 import { getUser } from '../../../../HTTP/localeStorageApi';
+import useLikeHandle from '../LikeHook'
 
 
 function Details() {
@@ -15,11 +16,10 @@ function Details() {
     const [comments, setComments] = useState([]);
     const [owner, setOwner] = useState(false);
     const navigate = useNavigate();
+    const {handleLike} = useLikeHandle();
 
 
     if (!post) return <p>No post data found</p>;
-    console.log(post);
-    
 
     const handleReply = async () => {
         const newComment = await handleComment(postData, refComment);
@@ -58,7 +58,16 @@ function Details() {
         }
     }
 
-
+    const likesHandle = async (e) => {
+            const sourceElement = e.target.closest('#closestId');
+            const postId = sourceElement.getAttribute("data-id");
+    
+            await handleLike(postId)
+            const data = await getPostById(post);
+            if(data){
+                setPostData(data);
+            }
+        }
 
 
     return (
@@ -79,7 +88,7 @@ function Details() {
 
                     <div className={styles.feedback}>
                         <p><i className="fa-regular fa-comment"></i><span>{postData.feedback.comments}</span></p>
-                        <p><i className="fa-regular fa-heart"></i><span>{postData.feedback.likes}</span></p>
+                        <p onClick={(e) => likesHandle(e)}><i className="fa-regular fa-heart"></i><span>{postData.feedback.likes}</span></p>
                         <p><i className="fa-solid fa-magnifying-glass"></i><span>{postData.feedback.views}</span></p>
                     </div>
 
