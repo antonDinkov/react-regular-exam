@@ -1,3 +1,11 @@
+.post {
+    box-sizing: border-box;
+}
+
+.post * {
+    box-sizing: inherit;
+}
+
 .meta {
     background-color: #868686;
     display: flex;
@@ -19,6 +27,11 @@
 
 .imgWrap > p {
     margin-bottom: 1em;
+}
+
+.imgWrap > img {
+    max-width: 100%;
+    height: auto;
 }
 
 .post > div > img {
