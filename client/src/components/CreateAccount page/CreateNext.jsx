@@ -34,7 +34,7 @@ function CreateNext() {
             try {
                 await registerUser(formData);
                 setSpinner(false);
-                navigate('/react-regular-exam/guest');
+                navigate('/react-regular-exam/welcome');
                 
             } catch (error) {
                 alert (error.message);

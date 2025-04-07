@@ -8,6 +8,10 @@ export const registerUser = async (contextData) => {
         const user = userdata.user;
 
         await setDoc(doc(db, "users", user.uid), { ...contextData, createdAt: new Date(), userId: user.uid });
+        const token = await user.getIdToken();
+        const currentUserInfo = await getUser(user.uid);
+        setUser(currentUserInfo, token);
+        return currentUserInfo;
     } catch (err) {
         console.error("Error registering user:", err.message);
     }
