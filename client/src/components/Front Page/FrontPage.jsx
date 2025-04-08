@@ -7,7 +7,10 @@ function FrontPage() {
     const {resetFormData} = useContext(FormContext);
     useEffect (()=>{
         resetFormData();
-    }, [])
+        return () => {
+            console.log('Front page unmounted');
+        }
+    }, []);
 
     return (
         <div className={styles.container}>
