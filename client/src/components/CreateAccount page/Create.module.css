@@ -101,7 +101,7 @@
 }
 
 .login > button {
-    background-color: #88898c;
+    background-color: black;
     text-align: center;
     padding: 1em;
     border: none;
@@ -111,6 +111,10 @@
     font-weight: bold;
     font-size: 14pt;
     cursor: pointer;
+}
+
+.login > button:hover {
+    background-color: #88898c;
 }
 
 .birth {

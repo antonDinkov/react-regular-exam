@@ -5,15 +5,18 @@ import { FormContext } from "../../../context/UserContext";
 import {registerUser} from "../HTTP/registerAndLogin";
 import LoadingSpinner from "../Loading spinner/Spinner";
 import AbortButton from "./AbortButton";
+import Timer from "./Timer";
 
 function CreateNext() {
     const navigate = useNavigate();
     const { formData, updateForm, resetFormData } = useContext(FormContext);
     const [spinner, setSpinner] = useState(false);
+    const [timer, setTimer] = useState(0);
     
     const handleSubmit = async (e) => {
         e.preventDefault();
         setSpinner(true);
+        setTimer(10);
         const formDataBoxes = {
             checkbox: {
                 getMore: e.target.elements.getMore?.checked ? "yes" : "no",
@@ -27,6 +30,18 @@ function CreateNext() {
             console.error("Error registering user:", error.message);
         }
     }
+
+    useEffect(()=>{
+        if (!spinner) return;
+        if (timer === 0) return;
+        const countdown = setTimeout(() => {
+            setTimer((prev) => prev - 1);
+        }, 1000);
+        return () => {
+            clearTimeout(countdown);
+        }
+    }, [timer, spinner])
+
     useEffect(() => {
         if (!formData.checkbox.getMore) {
             return;
@@ -63,6 +78,7 @@ function CreateNext() {
         <form onSubmit={handleSubmit}>
             <div className={styles.wrapperMajor}>
             {spinner && <LoadingSpinner />}
+            {spinner && <Timer onTimer={timer} />}
             {spinner && <AbortButton onClick={handleAbort}/>}
                 <header className={styles.header}>
                     <Link className={styles.x} to='/react-regular-exam'><i className="fa-solid fa-xmark"></i></Link>
