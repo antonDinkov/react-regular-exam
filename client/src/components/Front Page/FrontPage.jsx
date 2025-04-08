@@ -1,7 +1,14 @@
+import { useContext, useEffect } from "react";
 import styles from "./FrontPage.module.css"
 import { Link } from "react-router";
+import { FormContext } from "../../../context/UserContext";
 
 function FrontPage() {
+    const {resetFormData} = useContext(FormContext);
+    useEffect (()=>{
+        resetFormData();
+    }, [])
+
     return (
         <div className={styles.container}>
             <main className={styles.main}>

@@ -24,8 +24,27 @@ export function FormDataProvider ({children}) {
         setFormData((oldData) => ({...oldData, ...newData,}));
     };
 
+    const resetFormData = () => {
+        setFormData ({
+            name: '',
+            email: '',
+            password: '',
+            birthday: {
+                month: '',
+                day: '',
+                year: '',
+            },
+            checkbox: {
+                getMore: '',
+                connectWith: '',
+                peronalizedAds: '',
+                noThanks: '',
+            },
+        });
+    }
+
     return (
-        <FormContext.Provider value={{formData, updateForm}}>
+        <FormContext.Provider value={{formData, updateForm, resetFormData}}>
             {children}
         </FormContext.Provider>
     );

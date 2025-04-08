@@ -1,0 +1,18 @@
+.button {
+    width: 150px;
+    height: 150px;
+    border: none;
+    border-radius: 50%;
+    position: absolute;
+    top: 70%;
+    left: 47%;
+    color: white;
+    font-weight: bold;
+    font-size: 20pt;
+    background-color: red;
+}
+
+.button:hover{
+    background-color: #e53935;
+    cursor: pointer;
+}
