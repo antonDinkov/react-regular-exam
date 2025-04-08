@@ -57,7 +57,6 @@ function CreateNext() {
     }, [formData.checkbox.getMore])
 
     const handleAbort = () => {
-        /* resetFormData(); */
         navigate("/react-regular-exam");
     }
     return (
