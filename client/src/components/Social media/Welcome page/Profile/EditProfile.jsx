@@ -15,7 +15,7 @@ const EditProfile = () => {
     const [birthDay, setBirthDay] = useState({ day: '', month: '', year: '' })
     const [preferences, setPreferences] = useState({ connectWith: '', getMore: '', peronalizedAds: '' });
     const navigate = useNavigate();
-    const {formData, updateForm, resetFormData} = useContext(FormContext);
+    const { formData, updateForm, resetFormData } = useContext(FormContext);
     /* const [user, setUser] = useState({
         name: '',
         email: '',
@@ -38,8 +38,8 @@ const EditProfile = () => {
         setName(userInfo.name);
         setEmail(userInfo.email);
         setBio(userInfo.bio);
-        setBirthDay((currBirthday) => ({...currBirthday, ...userInfo.birthday}));
-        setPreferences((currPref) => ({...currPref, ...userInfo.checkbox}));
+        setBirthDay((currBirthday) => ({ ...currBirthday, ...userInfo.birthday }));
+        setPreferences((currPref) => ({ ...currPref, ...userInfo.checkbox }));
     }, [])
 
     const handleImageUpload = (e, setImage) => {
@@ -50,7 +50,12 @@ const EditProfile = () => {
     };
 
     const handleCheckboxChange = (e) => {
-        setPreferences({ ...preferences, [e.target.name]: e.target.checked });
+        const { name, checked } = e.target;
+
+        setPreferences((prev) => ({
+            ...prev,
+            [name]: checked ? "yes" : "no"
+        }));
     };
 
     const handleInputsChange = (e, setInput) => {
@@ -70,7 +75,7 @@ const EditProfile = () => {
         }
         updateForm(content);
         await upDateUserInfo(userId,)
-        navigate('/react-regular-exam/welcome');
+        navigate('/react-regular-exam/welcome/profile');
     };
 
 
@@ -101,7 +106,7 @@ const EditProfile = () => {
                 </label>
 
                 <div className={styles.birthdateContainer}>
-                    <select value={birthDay.day || ''} onChange={(e) => setBirthDay((birthDay) => ({...birthDay, day: e.target.value}))} className={styles.editProfileSelect}>
+                    <select value={birthDay.day || ''} onChange={(e) => setBirthDay((birthDay) => ({ ...birthDay, day: e.target.value }))} className={styles.editProfileSelect}>
                         <option value=""></option>
                         {Array.from({ length: 31 }, (_, index) => (
                             <option key={index + 1} value={(index + 1) || ''}>
@@ -109,7 +114,7 @@ const EditProfile = () => {
                             </option>
                         ))}
                     </select>
-                    <select value={birthDay.month || ''} onChange={(e) => setBirthDay((birthDay) => ({...birthDay, month: e.target.value}))} className={styles.editProfileSelect}>
+                    <select value={birthDay.month || ''} onChange={(e) => setBirthDay((birthDay) => ({ ...birthDay, month: e.target.value }))} className={styles.editProfileSelect}>
                         <option value=""></option>
                         <option value="January">January</option>
                         <option value="February">February</option>
@@ -124,7 +129,7 @@ const EditProfile = () => {
                         <option value="November">November</option>
                         <option value="December">December</option>
                     </select>
-                    <select value={birthDay.year || ''} onChange={(e) => setBirthDay((birthDay) => ({...birthDay, year: e.target.value}))} className={styles.editProfileSelect}>
+                    <select value={birthDay.year || ''} onChange={(e) => setBirthDay((birthDay) => ({ ...birthDay, year: e.target.value }))} className={styles.editProfileSelect}>
                         <option value=""></option>
                         {Array.from({ length: 121 }, (_, index) => (
                             <option key={index + 1905} value={(index + 1905) || ''}>
@@ -134,9 +139,9 @@ const EditProfile = () => {
                     </select>
                 </div>
                 <div className={styles.checkboxContainer}>
-                    <label><input type="checkbox" name="connect" checked={preferences.connectWith==="yes"?true:false} onChange={handleCheckboxChange} /> Connect</label>
-                    <label><input type="checkbox" name="more" checked={preferences.getMore==='yes'?true:false} onChange={handleCheckboxChange} /> More</label>
-                    <label><input type="checkbox" name="ads" checked={preferences.peronalizedAds==='yes'?true:false} onChange={handleCheckboxChange} /> Ads</label>
+                    <label><input type="checkbox" name="connectWith" checked={preferences.connectWith === "yes" ? true : false} onChange={(e) => handleCheckboxChange(e)} /> Connect</label>
+                    <label><input type="checkbox" name="getMore" checked={preferences.getMore === 'yes' ? true : false} onChange={(e) => handleCheckboxChange(e)} /> More</label>
+                    <label><input type="checkbox" name="peronalizedAds" checked={preferences.peronalizedAds === 'yes' ? true : false} onChange={(e) => handleCheckboxChange(e)} /> Ads</label>
                 </div>
                 <button type="submit" className={styles.editProfileSaveButton}>Save</button>
             </form>
