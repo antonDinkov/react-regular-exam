@@ -5,9 +5,13 @@ import { getUser } from "../../../HTTP/localeStorageApi";
 import { FormContext } from "../../../../../context/UserContext";
 
 const EditProfile = () => {
-    const [profileImage, setProfileImage] = useState(null);
-    const [coverPhoto, setCoverPhoto] = useState(null);
-    const [preferences, setPreferences] = useState({ connect: false, more: false, ads: false });
+    const [profileImg, setProfileImg] = useState(null);
+    const [wallImg, setWallImg] = useState(null);
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [bio, setBio] = useState('');
+    const [birthDay, setBirthDay] = useState({ day: '', month: '', year: '' })
+    const [preferences, setPreferences] = useState({ connectWith: '', getMore: '', peronalizedAds: '' });
     const navigate = useNavigate();
     const {formData, updateForm, resetFormData} = useContext(FormContext);
     const [user, setUser] = useState({
@@ -28,6 +32,11 @@ const EditProfile = () => {
     useEffect(() => {
         const userInfo = JSON.parse(getUser());
         setUser((currInfo) => ({...currInfo, ...userInfo}));
+        setName(userInfo.name);
+        setEmail(userInfo.email);
+        setBio(userInfo.bio);
+        setBirthDay((currBirthday) => ({...currBirthday, ...userInfo.birthday}));
+        setPreferences((currPref) => ({...currPref, ...userInfo.checkbox}));
     }, [])
 
     const handleImageUpload = (e, setImage) => {
@@ -41,9 +50,16 @@ const EditProfile = () => {
         setPreferences({ ...preferences, [e.target.name]: e.target.checked });
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleInputsChange = (e, setInput) => {
 
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const content = {
+            profileImg,
+            wallImg,
+        }
         navigate('/react-regular-exam/welcome');
     };
 
@@ -55,27 +71,27 @@ const EditProfile = () => {
                 <div className={styles.imageUploadContainer}>
                     <label className={styles.coverPhotoLabel}>
                         Cover Photo:
-                        <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, setCoverPhoto)} />
-                        {coverPhoto && <img src={coverPhoto} alt="Cover" className={styles.coverPhotoPreview} />}
+                        <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, setWallImg)} />
+                        {wallImg && <img src={wallImg} alt="Cover" className={styles.coverPhotoPreview} />}
                     </label>
                     <label className={styles.profileImageLabel}>
                         Profile Image:
-                        <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, setProfileImage)} />
-                        {profileImage && <img src={profileImage} alt="Profile" className={styles.profileImagePreview} />}
+                        <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, setProfileImg)} />
+                        {profileImg && <img src={profileImg} alt="Profile" className={styles.profileImagePreview} />}
                     </label>
                 </div>
                 <label className={styles.editProfileLabel}>Name:
-                    <input type="text" defaultValue={user.name || ''} className={styles.editProfileInput} />
+                    <input type="text" value={name || ''} className={styles.editProfileInput} />
                 </label>
                 <label className={styles.editProfileLabel}>Email:
-                    <input type="email" defaultValue={user.email || ''} className={styles.editProfileInput} />
+                    <input type="email" value={email || ''} className={styles.editProfileInput} />
                 </label>
                 <label className={styles.editProfileLabel}>Bio:
-                    <textarea defaultValue='User Bio' className={styles.editProfileTextarea} />
+                    <textarea value={bio || ''} className={styles.editProfileTextarea} />
                 </label>
 
                 <div className={styles.birthdateContainer}>
-                    <select defaultValue={user.birthday.day || ''} className={styles.editProfileSelect}>
+                    <select value={birthDay.day || ''} className={styles.editProfileSelect}>
                         <option value=""></option>
                         {Array.from({ length: 31 }, (_, index) => (
                             <option key={index + 1} value={(index + 1) || ''}>
@@ -83,7 +99,7 @@ const EditProfile = () => {
                             </option>
                         ))}
                     </select>
-                    <select defaultValue={user.birthday.month || ''} className={styles.editProfileSelect}>
+                    <select value={birthDay.month || ''} className={styles.editProfileSelect}>
                         <option value=""></option>
                         <option value="January">January</option>
                         <option value="February">February</option>
@@ -98,7 +114,7 @@ const EditProfile = () => {
                         <option value="November">November</option>
                         <option value="December">December</option>
                     </select>
-                    <select defaultValue={user.birthday.year || ''} className={styles.editProfileSelect}>
+                    <select value={birthDay.year || ''} className={styles.editProfileSelect}>
                         <option value=""></option>
                         {Array.from({ length: 121 }, (_, index) => (
                             <option key={index + 1905} value={(index + 1905) || ''}>
@@ -108,9 +124,9 @@ const EditProfile = () => {
                     </select>
                 </div>
                 <div className={styles.checkboxContainer}>
-                    <label><input type="checkbox" name="connect" checked={preferences.connect} onChange={handleCheckboxChange} /> Connect</label>
-                    <label><input type="checkbox" name="more" checked={preferences.more} onChange={handleCheckboxChange} /> More</label>
-                    <label><input type="checkbox" name="ads" checked={preferences.ads} onChange={handleCheckboxChange} /> Ads</label>
+                    <label><input type="checkbox" name="connect" checked={preferences.connectWith==="yes"?true:false} onChange={handleCheckboxChange} /> Connect</label>
+                    <label><input type="checkbox" name="more" checked={preferences.getMore==='yes'?true:false} onChange={handleCheckboxChange} /> More</label>
+                    <label><input type="checkbox" name="ads" checked={preferences.peronalizedAds==='yes'?true:false} onChange={handleCheckboxChange} /> Ads</label>
                 </div>
                 <button type="submit" className={styles.editProfileSaveButton}>Save</button>
             </form>

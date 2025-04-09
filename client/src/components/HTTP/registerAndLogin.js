@@ -79,7 +79,7 @@ export const upDatePost = async (postId, newImage, content, oldUrl, oldImgId) =>
     }
 }
 
-export const upDateUserInfo = async (userId, newProfileImg, newWallImg, content/* oldPrifileImgUrl, oldPrifileImgId, oldWallImgUrl, oldWallImgId,  */) => {
+export const upDateUserInfo = async (userId, content, newProfileImg, newWallImg,/* oldPrifileImgUrl, oldPrifileImgId, oldWallImgUrl, oldWallImgId,  */) => {
     let imgInfoProfi = '';
     const presetProfi = 'profile_upload';
     const presetWall = 'wall_upload';
