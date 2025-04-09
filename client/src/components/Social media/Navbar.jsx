@@ -8,6 +8,7 @@ import { auth, signOut } from '../../firebase';
 function Navbar() {
     const { formData, updateForm } = useContext(FormContext);
     const [currentUser, setCurrentUser] = useState('Loading...');
+    const [imgUser, setImgUser] = useState('')
     const navigate = useNavigate();
     const handleLogout = async (e) => {
         e.preventDefault();
@@ -40,6 +41,7 @@ function Navbar() {
         const user = JSON.parse(getUser());
         if (user && user.name) {
             setCurrentUser(user.name);
+            setImgUser(user.profileImg)
         } else {
             setCurrentUser('Guest');
         }
@@ -57,8 +59,11 @@ function Navbar() {
                 <li><Link to="/react-regular-exam/welcome/post"><span>Post</span></Link></li>
 
             </ul>
-            <img src="https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-png-image_3918418.jpg" alt="Guest" />
-            <p>{currentUser}</p>
+            <div className={styles.pic}>
+                <img src={imgUser ? imgUser : "https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-png-image_3918418.jpg"} alt="Guest" />
+                <p>{currentUser}</p>
+            </div>
+
         </nav>
     )
 }
