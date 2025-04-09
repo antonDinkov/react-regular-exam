@@ -8,7 +8,9 @@ import { upDateUserInfo } from "../../../HTTP/registerAndLogin";
 const EditProfile = () => {
     const [userId, setUserId] = useState('')
     const [profileImg, setProfileImg] = useState(null);
+    const [tempProfImg, setTempProfImg] = useState(null);
     const [wallImg, setWallImg] = useState(null);
+    const [tempWallImg, setTempWallImg] = useState(null);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [bio, setBio] = useState('');
@@ -37,15 +39,18 @@ const EditProfile = () => {
         setUserId(userInfo.userId);
         setName(userInfo.name);
         setEmail(userInfo.email);
-        setBio(userInfo.bio);
+        if (userInfo.bio) {
+            setBio(userInfo.bio);
+        }
         setBirthDay((currBirthday) => ({ ...currBirthday, ...userInfo.birthday }));
         setPreferences((currPref) => ({ ...currPref, ...userInfo.checkbox }));
     }, [])
 
-    const handleImageUpload = (e, setImage) => {
+    const handleImageUpload = (e, setImage, setTempImg) => {
         const file = e.target.files[0];
         if (file) {
-            setImage(URL.createObjectURL(file));
+            setImage(file);
+            setTempImg(URL.createObjectURL(file))
         }
     };
 
@@ -58,15 +63,9 @@ const EditProfile = () => {
         }));
     };
 
-    const handleInputsChange = (e, setInput) => {
-
-    }
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         const content = {
-            profileImg,
-            wallImg,
             name,
             email,
             bio,
@@ -74,7 +73,7 @@ const EditProfile = () => {
             preferences
         }
         updateForm(content);
-        await upDateUserInfo(userId,)
+        await upDateUserInfo(userId, content, profileImg, wallImg)
         navigate('/react-regular-exam/welcome/profile');
     };
 
@@ -86,13 +85,13 @@ const EditProfile = () => {
                 <div className={styles.imageUploadContainer}>
                     <label className={styles.coverPhotoLabel}>
                         Cover Photo:
-                        <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, setWallImg)} />
-                        {wallImg && <img src={wallImg} alt="Cover" className={styles.coverPhotoPreview} />}
+                        <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, setWallImg, setTempWallImg)} />
+                        {wallImg && <img src={tempWallImg} alt="Cover" className={styles.coverPhotoPreview} />}
                     </label>
                     <label className={styles.profileImageLabel}>
                         Profile Image:
-                        <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, setProfileImg)} />
-                        {profileImg && <img src={profileImg} alt="Profile" className={styles.profileImagePreview} />}
+                        <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, setProfileImg, setTempProfImg)} />
+                        {profileImg && <img src={tempProfImg} alt="Profile" className={styles.profileImagePreview} />}
                     </label>
                 </div>
                 <label className={styles.editProfileLabel}>Name:

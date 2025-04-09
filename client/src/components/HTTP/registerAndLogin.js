@@ -79,15 +79,15 @@ export const upDatePost = async (postId, newImage, content, oldUrl, oldImgId) =>
     }
 }
 
-export const upDateUserInfo = async (userId, content/* oldPrifileImgUrl, oldPrifileImgId, oldWallImgUrl, oldWallImgId,  */) => {
+export const upDateUserInfo = async (userId, content, profileImg, wallImg) => {
     let imgInfoProfi = '';
     const presetProfi = 'profile_upload';
     const presetWall = 'wall_upload';
-    if (newProfileImg) {
+    if (profileImg) {
         imgInfoProfi = await uploadToCloudinary(content.profileImg, presetProfi);
     }
     let imgInfoWall = '';
-    if (newWallImg) {
+    if (wallImg) {
         imgInfoWall = await uploadToCloudinary(content.wallImg, presetWall);
     }
 
@@ -96,10 +96,10 @@ export const upDateUserInfo = async (userId, content/* oldPrifileImgUrl, oldPrif
         await updateDoc(postRef,{
             ...content,
             updatesHistory: arrayUnion(new Date().toLocaleString()),
-            /* profileImg: imgInfoProfi.url ? imgInfoProfi.url : '',
+            profileImg: imgInfoProfi.url ? imgInfoProfi.url : '',
             profileImgID: imgInfoProfi.id ? imgInfoProfi.id : '',
             wallImg: imgInfoWall.url ? imgInfoWall.url : '',
-            wallImgId: imgInfoWall.id ? imgInfoWall.id : '', */
+            wallImgId: imgInfoWall.id ? imgInfoWall.id : '',
         });
     } catch (error) {
         console.error("Error adding comment: ", error);
