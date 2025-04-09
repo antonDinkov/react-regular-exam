@@ -79,7 +79,7 @@ export const upDatePost = async (postId, newImage, content, oldUrl, oldImgId) =>
     }
 }
 
-export const upDateUserInfo = async (userId, newProfileImg, newWallImg, oldPrifileImgUrl, oldPrifileImgId, oldWallImgUrl, oldWallImgId, content, ) => {
+export const upDateUserInfo = async (userId, newProfileImg, newWallImg, content/* oldPrifileImgUrl, oldPrifileImgId, oldWallImgUrl, oldWallImgId,  */) => {
     let imgInfoProfi = '';
     const presetProfi = 'profile_upload';
     const presetWall = 'wall_upload';
@@ -95,10 +95,10 @@ export const upDateUserInfo = async (userId, newProfileImg, newWallImg, oldPrifi
     try {
         await updateDoc(postRef, {
             content,
-            profileImg: imgInfoProfi.url ? imgInfoProfi.url : oldPrifileImgUrl,
-            profileImgID: imgInfoProfi.id ? imgInfoProfi.id : oldPrifileImgId,
-            wallImg: imgInfoWall.url ? imgInfoWall.url : oldWallImgUrl,
-            wallImgId: imgInfoWall.id ? imgInfoWall.id : oldWallImgId,
+            profileImg: imgInfoProfi.url ? imgInfoProfi.url : '',
+            profileImgID: imgInfoProfi.id ? imgInfoProfi.id : '',
+            wallImg: imgInfoWall.url ? imgInfoWall.url : '',
+            wallImgId: imgInfoWall.id ? imgInfoWall.id : '',
         });
     } catch (error) {
         console.error("Error adding comment: ", error);
