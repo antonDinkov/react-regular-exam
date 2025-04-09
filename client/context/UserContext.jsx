@@ -18,6 +18,12 @@ export function FormDataProvider ({children}) {
             peronalizedAds: '',
             noThanks: '',
         },
+        bio: '',
+        updateHistory: [],
+        profileImg: '',
+        profileImgID: '',
+        wallImg: '',
+        wallImgId: '',
     });
 
     const updateForm = (newData) => {

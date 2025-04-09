@@ -62,8 +62,9 @@ export const deletePost = async (postId) => {
 
 export const upDatePost = async (postId, newImage, content, oldUrl, oldImgId) => {
     let imgInfo = '';
+    const preset = 'my_unsigned_preset';
     if (newImage) {
-        imgInfo = await uploadToCloudinary(newImage);
+        imgInfo = await uploadToCloudinary(newImage, preset);
     }
 
     const postRef = doc(db, "posts", postId);
@@ -72,6 +73,32 @@ export const upDatePost = async (postId, newImage, content, oldUrl, oldImgId) =>
             content,
             img: imgInfo.url ? imgInfo.url : oldUrl,
             imgId: imgInfo.id ? imgInfo.id : oldImgId
+        });
+    } catch (error) {
+        console.error("Error adding comment: ", error);
+    }
+}
+
+export const upDateUserInfo = async (userId, newProfileImg, newWallImg, oldPrifileImgUrl, oldPrifileImgId, oldWallImgUrl, oldWallImgId, content, ) => {
+    let imgInfoProfi = '';
+    const presetProfi = 'profile_upload';
+    const presetWall = 'wall_upload';
+    if (newProfileImg) {
+        imgInfoProfi = await uploadToCloudinary(newProfileImg, presetProfi);
+    }
+    let imgInfoWall = '';
+    if (newWallImg) {
+        imgInfoWall = await uploadToCloudinary(newWallImg, presetWall);
+    }
+
+    const postRef = doc(db, "users", userId);
+    try {
+        await updateDoc(postRef, {
+            content,
+            profileImg: imgInfoProfi.url ? imgInfoProfi.url : oldPrifileImgUrl,
+            profileImgID: imgInfoProfi.id ? imgInfoProfi.id : oldPrifileImgId,
+            wallImg: imgInfoWall.url ? imgInfoWall.url : oldWallImgUrl,
+            wallImgId: imgInfoWall.id ? imgInfoWall.id : oldWallImgId,
         });
     } catch (error) {
         console.error("Error adding comment: ", error);
@@ -169,12 +196,12 @@ async function getUser(userId) {
     }
 }
 
-const uploadToCloudinary = async (file) => {
+const uploadToCloudinary = async (file, uploadPreset) => {
     if (!file) { return };
     const formData = new FormData();
 
     formData.append("file", file);
-    formData.append("upload_preset", "my_unsigned_preset");
+    formData.append("upload_preset", uploadPreset);
 
     try {
         const response = await fetch(

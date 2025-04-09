@@ -1,28 +1,34 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from "./EditProfile.module.css";
 import { useNavigate } from "react-router";
 import { getUser } from "../../../HTTP/localeStorageApi";
+import { FormContext } from "../../../../../context/UserContext";
 
 const EditProfile = () => {
-
-
     const [profileImage, setProfileImage] = useState(null);
     const [coverPhoto, setCoverPhoto] = useState(null);
     const [preferences, setPreferences] = useState({ connect: false, more: false, ads: false });
     const navigate = useNavigate();
+    const {formData, updateForm, resetFormData} = useContext(FormContext);
     const [user, setUser] = useState({
         name: '',
         email: '',
-        birthday: { day: '', month: '', year: '' }
+        birthday: { day: '', month: '', year: '' },
+        checkbox: {
+            getMore: '',
+            connectWith: '',
+            peronalizedAds: '',
+        },
+        bio: '',
+        updatesHistory: [],
+        profileImg: '',
+        wallImg: '',
     });
 
     useEffect(() => {
         const userInfo = JSON.parse(getUser());
-        setUser(userInfo);
+        setUser((currInfo) => ({...currInfo, ...userInfo}));
     }, [])
-
-
-
 
     const handleImageUpload = (e, setImage) => {
         const file = e.target.files[0];
@@ -41,9 +47,6 @@ const EditProfile = () => {
         navigate('/react-regular-exam/welcome');
     };
 
-    const days = Array.from({ length: 31 }, (_, i) => i + 1);
-    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    const years = Array.from({ length: 121 }, (_, i) => 2025 - i);
 
     return (
         <div className={styles.editProfileContainer}>
