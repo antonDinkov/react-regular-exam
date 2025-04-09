@@ -3,8 +3,10 @@ import styles from "./EditProfile.module.css";
 import { useNavigate } from "react-router";
 import { getUser } from "../../../HTTP/localeStorageApi";
 import { FormContext } from "../../../../../context/UserContext";
+import { upDateUserInfo } from "../../../HTTP/registerAndLogin";
 
 const EditProfile = () => {
+    const [userId, setUserId] = useState('')
     const [profileImg, setProfileImg] = useState(null);
     const [wallImg, setWallImg] = useState(null);
     const [name, setName] = useState('');
@@ -14,7 +16,7 @@ const EditProfile = () => {
     const [preferences, setPreferences] = useState({ connectWith: '', getMore: '', peronalizedAds: '' });
     const navigate = useNavigate();
     const {formData, updateForm, resetFormData} = useContext(FormContext);
-    const [user, setUser] = useState({
+    /* const [user, setUser] = useState({
         name: '',
         email: '',
         birthday: { day: '', month: '', year: '' },
@@ -27,11 +29,12 @@ const EditProfile = () => {
         updatesHistory: [],
         profileImg: '',
         wallImg: '',
-    });
+    }); */
 
     useEffect(() => {
         const userInfo = JSON.parse(getUser());
-        setUser((currInfo) => ({...currInfo, ...userInfo}));
+        /* setUser((currInfo) => ({...currInfo, ...userInfo})); */
+        setUserId(userInfo.userId);
         setName(userInfo.name);
         setEmail(userInfo.email);
         setBio(userInfo.bio);
@@ -59,7 +62,14 @@ const EditProfile = () => {
         const content = {
             profileImg,
             wallImg,
+            name,
+            email,
+            bio,
+            birthDay,
+            preferences
         }
+        updateForm(content);
+        await upDateUserInfo(userId,)
         navigate('/react-regular-exam/welcome');
     };
 
@@ -81,13 +91,13 @@ const EditProfile = () => {
                     </label>
                 </div>
                 <label className={styles.editProfileLabel}>Name:
-                    <input type="text" value={name || ''} className={styles.editProfileInput} />
+                    <input type="text" value={name || ''} onChange={(e) => setName(e.target.value)} className={styles.editProfileInput} />
                 </label>
                 <label className={styles.editProfileLabel}>Email:
-                    <input type="email" value={email || ''} className={styles.editProfileInput} />
+                    <input type="email" value={email || ''} onChange={(e) => setEmail(e.target.value)} className={styles.editProfileInput} />
                 </label>
                 <label className={styles.editProfileLabel}>Bio:
-                    <textarea value={bio || ''} className={styles.editProfileTextarea} />
+                    <textarea value={bio || ''} onChange={(e) => setBio(e.target.value)} className={styles.editProfileTextarea} />
                 </label>
 
                 <div className={styles.birthdateContainer}>

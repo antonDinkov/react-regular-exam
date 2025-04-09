@@ -79,26 +79,26 @@ export const upDatePost = async (postId, newImage, content, oldUrl, oldImgId) =>
     }
 }
 
-export const upDateUserInfo = async (userId, content, newProfileImg, newWallImg,/* oldPrifileImgUrl, oldPrifileImgId, oldWallImgUrl, oldWallImgId,  */) => {
+export const upDateUserInfo = async (userId, content/* oldPrifileImgUrl, oldPrifileImgId, oldWallImgUrl, oldWallImgId,  */) => {
     let imgInfoProfi = '';
     const presetProfi = 'profile_upload';
     const presetWall = 'wall_upload';
     if (newProfileImg) {
-        imgInfoProfi = await uploadToCloudinary(newProfileImg, presetProfi);
+        imgInfoProfi = await uploadToCloudinary(content.profileImg, presetProfi);
     }
     let imgInfoWall = '';
     if (newWallImg) {
-        imgInfoWall = await uploadToCloudinary(newWallImg, presetWall);
+        imgInfoWall = await uploadToCloudinary(content.wallImg, presetWall);
     }
 
     const postRef = doc(db, "users", userId);
     try {
         await updateDoc(postRef, {
             content,
-            profileImg: imgInfoProfi.url ? imgInfoProfi.url : '',
+            /* profileImg: imgInfoProfi.url ? imgInfoProfi.url : '',
             profileImgID: imgInfoProfi.id ? imgInfoProfi.id : '',
             wallImg: imgInfoWall.url ? imgInfoWall.url : '',
-            wallImgId: imgInfoWall.id ? imgInfoWall.id : '',
+            wallImgId: imgInfoWall.id ? imgInfoWall.id : '', */
         });
     } catch (error) {
         console.error("Error adding comment: ", error);
