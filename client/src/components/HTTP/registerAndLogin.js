@@ -93,8 +93,9 @@ export const upDateUserInfo = async (userId, content/* oldPrifileImgUrl, oldPrif
 
     const postRef = doc(db, "users", userId);
     try {
-        await updateDoc(postRef, {
-            content,
+        await updateDoc(postRef,{
+            ...content,
+            updatesHistory: arrayUnion(new Date().toLocaleString()),
             /* profileImg: imgInfoProfi.url ? imgInfoProfi.url : '',
             profileImgID: imgInfoProfi.id ? imgInfoProfi.id : '',
             wallImg: imgInfoWall.url ? imgInfoWall.url : '',
