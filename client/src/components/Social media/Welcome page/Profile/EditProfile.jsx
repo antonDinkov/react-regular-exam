@@ -41,7 +41,7 @@ const EditProfile = () => {
         setEmail(userInfo.email);
 
         if(userInfo.wallImg){
-            setProfileImg(userInfo.wallImg)
+            setWallImg(userInfo.wallImg)
         }
 
         if(userInfo.profileImg){
@@ -97,12 +97,12 @@ const EditProfile = () => {
                     <label className={styles.coverPhotoLabel}>
                         Cover Photo:
                         <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, setWallImg, setTempWallImg)} />
-                        {wallImg && <img src={tempWallImg} alt="Cover" className={styles.coverPhotoPreview} />}
+                        {wallImg && <img src={tempWallImg?tempWallImg:wallImg} alt="Cover" className={styles.coverPhotoPreview} />}
                     </label>
                     <label className={styles.profileImageLabel}>
                         Profile Image:
                         <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, setProfileImg, setTempProfImg)} />
-                        {profileImg && <img src={tempProfImg?tempProfImg:"https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-png-image_3918418.jpg"} alt="Profile" className={styles.profileImagePreview} />}
+                        {profileImg && <img src={tempProfImg?tempProfImg:profileImg||"https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-png-image_3918418.jpg"} alt="Profile" className={styles.profileImagePreview} />}
                     </label>
                 </div>
                 <label className={styles.editProfileLabel}>Name:
