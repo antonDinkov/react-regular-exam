@@ -103,7 +103,7 @@ function Main() {
                             <div onClick={(e) => handleClick(e)} key={post.id} className={styles.post}>
                                 <div className={styles.imgWrap}>
                                     <div className={styles.meta}>
-                                        <img src={post.meta.img || post.meta.avatar || "https://example.com/default-avatar.jpg"} alt="Profile" />
+                                        <img src={post.meta.profileImg || "https://example.com/default-avatar.jpg"} alt="Profile" />
                                         <h4>{post.meta.author}</h4>
                                         <p>{post.meta.date}</p>
                                     </div>

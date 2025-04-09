@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, db, doc, setDoc, getDoc, getDocs, deleteDoc, auth, signInWithEmailAndPassword, addDoc, collection, arrayUnion, increment, updateDoc } from "../../firebase";
+import { createUserWithEmailAndPassword, db, doc, setDoc, getDoc, getDocs, deleteDoc, auth, signInWithEmailAndPassword, addDoc, collection, arrayUnion, increment, updateDoc, query, where } from "../../firebase";
 import { setUser } from "./localeStorageApi";
 
 export const registerUser = async (contextData) => {
@@ -34,7 +34,8 @@ export const loginUser = async (contextData) => {
 
 export const postCreate = async (data) => {
     try {
-        const imgInfo = await uploadToCloudinary(data.img);
+        const preset = "my_unsigned_preset"
+        const imgInfo = await uploadToCloudinary(data.img, preset);
         if (!imgInfo) {
             data.img = '';
             data.imgId = '';
@@ -79,12 +80,29 @@ export const upDatePost = async (postId, newImage, content, oldUrl, oldImgId) =>
     }
 }
 
-export const upDateUserInfo = async (userId, content, profileImg, wallImg) => {
+export const upDateUserInfo = async (userName, userId, content, profileImg, wallImg) => {
+    console.log(userName);
+    console.log(userId);
+    
+    
     let imgInfoProfi = '';
     const presetProfi = 'profile_upload';
     const presetWall = 'wall_upload';
     if (profileImg) {
         imgInfoProfi = await uploadToCloudinary(profileImg, presetProfi);
+        const postsRef = collection(db, "posts");
+        const q = query(postsRef, where("meta.author", "==", userName));
+        const querySnapshot = await getDocs(q);
+
+        const updatePromises = querySnapshot.docs.map(async (postDoc) => {
+            const postRef = doc(db, "posts", postDoc.id);
+            await updateDoc(postRef, {
+                "meta.profileImg": imgInfoProfi.url
+            });
+        });
+
+        await Promise.all(updatePromises);
+
     }
     let imgInfoWall = '';
     if (wallImg) {
@@ -93,7 +111,7 @@ export const upDateUserInfo = async (userId, content, profileImg, wallImg) => {
 
     const postRef = doc(db, "users", userId);
     try {
-        await updateDoc(postRef,{
+        await updateDoc(postRef, {
             ...content,
             updatesHistory: arrayUnion(new Date().toLocaleString()),
             profileImg: imgInfoProfi.url ? imgInfoProfi.url : '',
@@ -176,7 +194,10 @@ export const getAllPosts = async () => {
         const querySnapShot = await getDocs(postsCollection);
         const postsArray = querySnapShot.docs.map((doc) => doc.data());
         postsArray.sort((a, b) => new Date(b.meta.date) - new Date(a.meta.date));
-        return postsArray
+        const filteredArray = (name) => {
+            return postsArray.filter((post) => post.meta.author === name);
+        }
+        return { postsArray, filteredArray };
     } catch (error) {
         console.error("Error loading posts", error);
     }
@@ -252,3 +273,17 @@ const deleteImage = async (publicId) => {
         return null;
     }
 };
+
+export async function getUserId(userName) {
+    const postsRef = collection(db, "users");
+        const q = query(postsRef, where("name", "==", userName));
+        const querySnapshot = await getDocs(q);
+
+        const userDoc = querySnapshot.docs.find(doc => doc.data().name === userName);
+        if (userDoc) {
+            return userDoc.id; 
+        } else {
+            alert ('Somthing went wrong! Please report the mistake!');
+            return null;
+        }
+}

@@ -3,9 +3,10 @@ import styles from "./EditProfile.module.css";
 import { useNavigate } from "react-router";
 import { getUser, updateUserLocalStorage } from "../../../HTTP/localeStorageApi";
 import { FormContext } from "../../../../../context/UserContext";
-import { upDateUserInfo, getUser as getUserById } from "../../../HTTP/registerAndLogin";
+import { upDateUserInfo, getUser as getUserById, getUserId } from "../../../HTTP/registerAndLogin";
 
 const EditProfile = () => {
+    const [userName, setUserName] = useState('');
     const [userId, setUserId] = useState('')
     const [profileImg, setProfileImg] = useState(null);
     const [tempProfImg, setTempProfImg] = useState(null);
@@ -18,42 +19,40 @@ const EditProfile = () => {
     const [preferences, setPreferences] = useState({ connectWith: '', getMore: '', peronalizedAds: '' });
     const navigate = useNavigate();
     const { formData, updateForm, resetFormData } = useContext(FormContext);
-    /* const [user, setUser] = useState({
-        name: '',
-        email: '',
-        birthday: { day: '', month: '', year: '' },
-        checkbox: {
-            getMore: '',
-            connectWith: '',
-            peronalizedAds: '',
-        },
-        bio: '',
-        updatesHistory: [],
-        profileImg: '',
-        wallImg: '',
-    }); */
+    
 
     useEffect(() => {
-        const userInfo = JSON.parse(getUser());
-        /* setUser((currInfo) => ({...currInfo, ...userInfo})); */
-        setUserId(userInfo.userId);
-        setName(userInfo.name);
-        setEmail(userInfo.email);
-
-        if(userInfo.wallImg){
-            setWallImg(userInfo.wallImg)
-        }
-
-        if(userInfo.profileImg){
-            setProfileImg(userInfo.profileImg)
-        }
-
-        if (userInfo.bio) {
-            setBio(userInfo.bio);
-        }
-        setBirthDay((currBirthday) => ({ ...currBirthday, ...userInfo.birthday }));
-        setPreferences((currPref) => ({ ...currPref, ...userInfo.checkbox }));
-    }, [])
+        const initialSetup = async () => {
+            const userInfo = JSON.parse(getUser());
+            setUserName(userInfo.name);
+    
+            // Тук изчакваме да получим userId
+            const id = await getUserId(userInfo.name);  // Това ще върне вече ID-то, а не промис
+            setUserId(id);
+            console.log(userId);
+            
+            setName(userInfo.name);
+            setEmail(userInfo.email);
+            setBio(userInfo.bio || '');
+            setBirthDay(userInfo.birthday || { day: '', month: '', year: '' });
+    
+            if (userInfo.wallImg) {
+                setWallImg(userInfo.wallImg);
+            }
+    
+            if (userInfo.profileImg) {
+                setProfileImg(userInfo.profileImg);
+            }
+    
+            setPreferences({
+                connectWith: userInfo.checkbox.connectWith || '',
+                getMore: userInfo.checkbox.getMore || '',
+                peronalizedAds: userInfo.checkbox.peronalizedAds || ''
+            });
+        };
+    
+        initialSetup();
+    }, [userId]);
 
     const handleImageUpload = (e, setImage, setTempImg) => {
         const file = e.target.files[0];
@@ -82,7 +81,7 @@ const EditProfile = () => {
             preferences
         }
         updateForm(content);
-        await upDateUserInfo(userId, content, profileImg, wallImg);
+        await upDateUserInfo(userName, userId, content, profileImg, wallImg);
         const user = await getUserById(userId);
         updateUserLocalStorage(user);
         navigate('/react-regular-exam/welcome/profile');
@@ -97,12 +96,12 @@ const EditProfile = () => {
                     <label className={styles.coverPhotoLabel}>
                         Cover Photo:
                         <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, setWallImg, setTempWallImg)} />
-                        {wallImg && <img src={tempWallImg?tempWallImg:wallImg} alt="Cover" className={styles.coverPhotoPreview} />}
+                        {wallImg && <img src={tempWallImg ? tempWallImg : wallImg} alt="Cover" className={styles.coverPhotoPreview} />}
                     </label>
                     <label className={styles.profileImageLabel}>
                         Profile Image:
                         <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, setProfileImg, setTempProfImg)} />
-                        {profileImg && <img src={tempProfImg?tempProfImg:profileImg||"https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-png-image_3918418.jpg"} alt="Profile" className={styles.profileImagePreview} />}
+                        {profileImg && <img src={tempProfImg ? tempProfImg : profileImg || "https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-png-image_3918418.jpg"} alt="Profile" className={styles.profileImagePreview} />}
                     </label>
                 </div>
                 <label className={styles.editProfileLabel}>Name:

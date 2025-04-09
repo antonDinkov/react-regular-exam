@@ -11,8 +11,8 @@ function Profile() {
 
     useEffect(() => {
         const postsAll = async () => {
-            const posts = await getAllPosts();
-            const myposts = posts.filter((post) => post.meta.author === user.name);
+            const {postsArray} = await getAllPosts();
+            const myposts = postsArray.filter((post) => post.meta.author === user.name);
             setUserPosts(myposts)
         }
         postsAll();
@@ -21,7 +21,7 @@ function Profile() {
     return (
         <div className={styles.profileContainer}>
             <div className={styles.header}>
-                <div className={styles.coverPhoto}><img src={user.wallImg} alt="wall_img" /></div>
+                <div className={styles.coverPhoto}><img src={user.wallImg?user.wallImg:'No image'} alt="wall_img" /></div>
                 <div className={styles.profileInfo}>
                     <img src={user.profileImg?user.profileImg:"https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-png-image_3918418.jpg"} alt="Profile" className={styles.avatar} />
                     <div className={styles.details}>
@@ -38,7 +38,7 @@ function Profile() {
                     {userPosts.map((post) => (
                         <div key={post.id} className={styles.post}>
                             <p>{post.content}</p>
-                            <img src={post.img} alt="Ni image" />
+                            <img src={post.img?post.img:'No Image'} alt="No image" />
                         </div>
                     ))}
                 </div>
