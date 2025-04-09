@@ -101,7 +101,7 @@ const EditProfile = () => {
                 </label>
 
                 <div className={styles.birthdateContainer}>
-                    <select value={birthDay.day || ''} className={styles.editProfileSelect}>
+                    <select value={birthDay.day || ''} onChange={(e) => setBirthDay((birthDay) => ({...birthDay, day: e.target.value}))} className={styles.editProfileSelect}>
                         <option value=""></option>
                         {Array.from({ length: 31 }, (_, index) => (
                             <option key={index + 1} value={(index + 1) || ''}>
@@ -109,7 +109,7 @@ const EditProfile = () => {
                             </option>
                         ))}
                     </select>
-                    <select value={birthDay.month || ''} className={styles.editProfileSelect}>
+                    <select value={birthDay.month || ''} onChange={(e) => setBirthDay((birthDay) => ({...birthDay, month: e.target.value}))} className={styles.editProfileSelect}>
                         <option value=""></option>
                         <option value="January">January</option>
                         <option value="February">February</option>
@@ -124,7 +124,7 @@ const EditProfile = () => {
                         <option value="November">November</option>
                         <option value="December">December</option>
                     </select>
-                    <select value={birthDay.year || ''} className={styles.editProfileSelect}>
+                    <select value={birthDay.year || ''} onChange={(e) => setBirthDay((birthDay) => ({...birthDay, year: e.target.value}))} className={styles.editProfileSelect}>
                         <option value=""></option>
                         {Array.from({ length: 121 }, (_, index) => (
                             <option key={index + 1905} value={(index + 1905) || ''}>
