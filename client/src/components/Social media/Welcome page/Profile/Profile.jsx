@@ -21,7 +21,7 @@ function Profile() {
     return (
         <div className={styles.profileContainer}>
             <div className={styles.header}>
-                <div className={styles.coverPhoto}></div>
+                <div className={styles.coverPhoto}><img src={user.wallImg} alt="wall_img" /></div>
                 <div className={styles.profileInfo}>
                     <img src={user.profileImg?user.profileImg:"https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-png-image_3918418.jpg"} alt="Profile" className={styles.avatar} />
                     <div className={styles.details}>

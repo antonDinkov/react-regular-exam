@@ -84,11 +84,11 @@ export const upDateUserInfo = async (userId, content, profileImg, wallImg) => {
     const presetProfi = 'profile_upload';
     const presetWall = 'wall_upload';
     if (profileImg) {
-        imgInfoProfi = await uploadToCloudinary(content.profileImg, presetProfi);
+        imgInfoProfi = await uploadToCloudinary(profileImg, presetProfi);
     }
     let imgInfoWall = '';
     if (wallImg) {
-        imgInfoWall = await uploadToCloudinary(content.wallImg, presetWall);
+        imgInfoWall = await uploadToCloudinary(wallImg, presetWall);
     }
 
     const postRef = doc(db, "users", userId);

@@ -39,6 +39,15 @@ const EditProfile = () => {
         setUserId(userInfo.userId);
         setName(userInfo.name);
         setEmail(userInfo.email);
+
+        if(userInfo.wallImg){
+            setProfileImg(userInfo.wallImg)
+        }
+
+        if(userInfo.profileImg){
+            setProfileImg(userInfo.profileImg)
+        }
+
         if (userInfo.bio) {
             setBio(userInfo.bio);
         }
@@ -93,7 +102,7 @@ const EditProfile = () => {
                     <label className={styles.profileImageLabel}>
                         Profile Image:
                         <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, setProfileImg, setTempProfImg)} />
-                        {profileImg && <img src={tempProfImg} alt="Profile" className={styles.profileImagePreview} />}
+                        {profileImg && <img src={tempProfImg?tempProfImg:"https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-png-image_3918418.jpg"} alt="Profile" className={styles.profileImagePreview} />}
                     </label>
                 </div>
                 <label className={styles.editProfileLabel}>Name:
