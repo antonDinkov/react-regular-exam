@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import styles from "./EditProfile.module.css";
 import { useNavigate } from "react-router";
-import { getUser } from "../../../HTTP/localeStorageApi";
+import { getUser, updateUserLocalStorage } from "../../../HTTP/localeStorageApi";
 import { FormContext } from "../../../../../context/UserContext";
-import { upDateUserInfo } from "../../../HTTP/registerAndLogin";
+import { upDateUserInfo, getUser as getUserById } from "../../../HTTP/registerAndLogin";
 
 const EditProfile = () => {
     const [userId, setUserId] = useState('')
@@ -73,7 +73,9 @@ const EditProfile = () => {
             preferences
         }
         updateForm(content);
-        await upDateUserInfo(userId, content, profileImg, wallImg)
+        await upDateUserInfo(userId, content, profileImg, wallImg);
+        const user = await getUserById(userId);
+        updateUserLocalStorage(user);
         navigate('/react-regular-exam/welcome/profile');
     };
 

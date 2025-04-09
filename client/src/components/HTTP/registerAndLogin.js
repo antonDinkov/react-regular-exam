@@ -182,7 +182,7 @@ export const getAllPosts = async () => {
     }
 };
 
-async function getUser(userId) {
+export async function getUser(userId) {
     try {
         const docRef = doc(db, 'users', userId);
         const docSnap = await getDoc(docRef);
