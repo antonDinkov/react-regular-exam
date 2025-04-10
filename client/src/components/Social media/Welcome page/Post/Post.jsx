@@ -1,5 +1,6 @@
 import { FormContext } from '../../../../../context/UserContext';
 import { postCreate } from '../../../HTTP/registerAndLogin';
+import xssProtect from '../../../Utils/xssProtect';
 import styles from './Post.module.css';
 import { useContext, useRef, useState } from "react";
 
@@ -14,7 +15,18 @@ function Post() {
 
     const handleMediaUpload = (e) => {
         const file = e.target.files[0];
+        const MAX_SIZE_MB = 5;
         if (file) {
+            const imageRegex = /^image\/[a-zA-Z0-9.+-]+$/;
+            if (!imageRegex.test(file.type)) {
+                alert("Please, upload only images!");
+                return;
+            }
+    
+            if (file.size > MAX_SIZE_MB * 1024 * 1024) {
+                alert("Your file is too big! Max size: 5MB.");
+                return;
+            }
             const imageUrl = URL.createObjectURL(file);
             setMedia(file);
             setTempUrl(imageUrl);
@@ -30,8 +42,18 @@ function Post() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const content = textRef.current.value.trim();
-        if (!content) return;
+        
+        const rawContent = textRef.current.value.trim();
+        const content = xssProtect(rawContent);
+
+        if (!content || content.length < 3) {
+            alert("👉 Please enter at least 3 characters.");
+            return;
+        }
+        if (content.length > 500) {
+            alert("👉 The post cannot exceed 500 characters.");
+            return;
+        }
 
         const post = {
             content,
