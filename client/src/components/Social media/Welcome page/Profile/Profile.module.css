@@ -3,6 +3,7 @@
     margin: 0 auto;
     font-family: Arial, sans-serif;
     color: #333;
+    box-sizing: border-box;
 }
 
 .header {
@@ -19,8 +20,8 @@
 
 .coverPhoto > img {
     height: 100%;
-    width: auto;
-    
+    width: 100%;
+    object-fit: cover;
 }
 
 .profileInfo {
@@ -70,10 +71,16 @@
 }
 
 .posts {
+    /* display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center; */
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
     justify-content: center;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .post {
@@ -85,8 +92,13 @@
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.post img {
-    width: 100%;
+.post > p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.post > img {
+    max-width: 100%;
     height: auto;
     border-radius: 10px;
     margin-top: 10px;

@@ -3,23 +3,28 @@ import styles from "./Profile.module.css";
 import { getUser } from "../../../HTTP/localeStorageApi";
 import { useEffect, useState } from "react";
 import { getAllPosts } from "../../../HTTP/registerAndLogin";
+import LoadingSpinner from "../../../Loading spinner/Spinner";
 
 function Profile() {
     const [userPosts, setUserPosts] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const user = JSON.parse(getUser());
 
     useEffect(() => {
+        setLoading(true);
         const postsAll = async () => {
             const {postsArray} = await getAllPosts();
             const myposts = postsArray.filter((post) => post.meta.author === user.name);
             setUserPosts(myposts)
+            setLoading(false);
         }
         postsAll();
     }, [])
 
     return (
         <div className={styles.profileContainer}>
+            {loading && <LoadingSpinner />}
             <div className={styles.header}>
                 <div className={styles.coverPhoto}><img src={user.wallImg?user.wallImg:'No image'} alt="wall_img" /></div>
                 <div className={styles.profileInfo}>
@@ -38,7 +43,7 @@ function Profile() {
                     {userPosts.map((post) => (
                         <div key={post.id} className={styles.post}>
                             <p>{post.content}</p>
-                            <img src={post.img?post.img:'No Image'} alt="No image" />
+                            {post.img && <img src={post.img} alt="" />}
                         </div>
                     ))}
                 </div>

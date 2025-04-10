@@ -18,8 +18,9 @@ function Main() {
     const { fetchPosts, loadMorePosts, loading, handleSearch } = useMainFunctionality();
     const { mainRef } = useOutletContext();
     const { handleDetailsClick } = useDetailsClick();
-    const {handleView} = useViewHandle()
+    const {handleView} = useViewHandle();
     const {handleLike} = useLikeHandle();
+    const [loadingg, setLoadingg] = useState(false);
 
     const handleClick = async (e) => {
         const sourceElement = e.target.closest('#closestID');

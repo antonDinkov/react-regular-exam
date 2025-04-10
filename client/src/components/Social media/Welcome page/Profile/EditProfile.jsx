@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import { getUser, updateUserLocalStorage } from "../../../HTTP/localeStorageApi";
 import { FormContext } from "../../../../../context/UserContext";
 import { upDateUserInfo, getUser as getUserById, getUserId } from "../../../HTTP/registerAndLogin";
+import LoadingSpinner from "../../../Loading spinner/Spinner";
 
 const EditProfile = () => {
     const [userName, setUserName] = useState('');
@@ -19,6 +20,7 @@ const EditProfile = () => {
     const [preferences, setPreferences] = useState({ connectWith: '', getMore: '', peronalizedAds: '' });
     const navigate = useNavigate();
     const { formData, updateForm, resetFormData } = useContext(FormContext);
+    const [loading, setLoading] = useState(false);
     
 
     useEffect(() => {
@@ -26,8 +28,7 @@ const EditProfile = () => {
             const userInfo = JSON.parse(getUser());
             setUserName(userInfo.name);
     
-            // Тук изчакваме да получим userId
-            const id = await getUserId(userInfo.name);  // Това ще върне вече ID-то, а не промис
+            const id = await getUserId(userInfo.name); 
             setUserId(id);
             console.log(userId);
             
@@ -73,6 +74,7 @@ const EditProfile = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true)
         const content = {
             name,
             email,
@@ -85,11 +87,13 @@ const EditProfile = () => {
         const user = await getUserById(userId);
         updateUserLocalStorage(user);
         navigate('/react-regular-exam/welcome/profile');
+        setLoading(false)
     };
 
 
     return (
         <div className={styles.editProfileContainer}>
+            {loading && <LoadingSpinner />}
             <h2 className={styles.editProfileTitle}>Edit Profile</h2>
             <form onSubmit={handleSubmit} className={styles.editProfileForm}>
                 <div className={styles.imageUploadContainer}>
