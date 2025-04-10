@@ -103,12 +103,12 @@ function Main() {
                             <div onClick={(e) => handleClick(e)} key={post.id} className={styles.post}>
                                 <div className={styles.imgWrap}>
                                     <div className={styles.meta}>
-                                        <img src={post.meta.profileImg || "https://example.com/default-avatar.jpg"} alt="Profile" />
+                                        <img src={post.meta.profileImg? post.meta.profileImg : "https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-png-image_3918418.jpg"} alt="Profile" />
                                         <h4>{post.meta.author}</h4>
                                         <p>{post.meta.date}</p>
                                     </div>
                                     <p>{post.content}</p>
-                                    <img src={post.img || "https://example.com/default-avatar.jpg"} alt="Img or Video" />
+                                    {post.img && <img src={post.img} alt="" />}
                                 </div>
                             </div>
                             <div className={styles.feedback}>
