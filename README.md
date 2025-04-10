@@ -27,5 +27,6 @@ A function to prevent XSS attacks has been added.
 Media queries have been added for mobile screen compatibility.
 A spinner has been added in many places for a better user experience, along with new redirects.
 The profile page and the edit functionality are fully completed.
+Two new repositories have been added in Cloudinary. And the corresponding functionality has been added.
 I’m uploading the README at the last moment. Due to time constraints, it’s possible that I may have missed some important details.
 I hope you are satisfied with the result!
