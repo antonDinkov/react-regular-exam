@@ -44,9 +44,6 @@ function Details() {
     const handleDelete = async () => {
 
         const postId = postData.id;
-        /* const img = postData.imgId;
-        const imgId = img ? img : ''; */
-
         deletePost(postId);
 
         navigate('/react-regular-exam/welcome');
@@ -83,7 +80,7 @@ function Details() {
                             <p>{postData.meta.date}</p>
                         </div>
                         <p>{postData.content}</p>
-                        <img src={postData.img || "https://example.com/default-avatar.jpg"} alt="Img or Video" />
+                        {postData.img && <img src={postData.img} alt="" />}
                     </div>
 
                     <div className={styles.feedback}>
