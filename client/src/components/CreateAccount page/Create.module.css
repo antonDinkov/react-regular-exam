@@ -94,6 +94,15 @@
     border: none;
 }
 
+.passSpecialValid {
+    color: green;
+    
+}
+.passSpecialNoValid {
+    color: red;
+    
+}
+
 .login {
     display: flex;
     flex-direction: column;

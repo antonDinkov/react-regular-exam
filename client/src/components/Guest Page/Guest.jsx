@@ -39,23 +39,6 @@ function Guest() {
 
     useInfiniteScroll(mainRef, () => loadMorePosts(posts, filteredPosts, setFilteredPosts));
 
-    /* useEffect(() => {
-        if (isDone.current) return;
-        isDone.current = true;
-        const fetchPost = async () => {
-            try {
-                const postsCollection = collection(db, "posts");
-                const querySnapShot = await getDocs(postsCollection);
-                const postsArray = querySnapShot.docs.map((doc) => doc.data());
-                setPosts(postsArray)
-                setFilteredPosts(postsArray);
-            } catch (error) {
-                console.error("Грешка при взимане на постовете:", error);
-            }
-        }
-        fetchPost();
-    }, []); */
-
     return (
         <div className={styles.container}>
             <nav className={styles.nav}>

@@ -1,11 +1,14 @@
 import { useNavigate } from 'react-router';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { FormContext } from '../../../context/UserContext';
 import CreateJSX from './CreateJSX';
+import { gravityDependencies } from 'mathjs';
 
 function Create() {
     const { updateForm } = useContext(FormContext);
     const navigate = useNavigate();
+    const [password, setPassword] = useState('');
+    const [isValid, setIsValid] = useState(false);
 
     const emailRegEx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
     const passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,}$/;
@@ -70,8 +73,14 @@ function Create() {
         }
     };
 
+    const handleChange = (e) => {
+        const value = e.target.value;
+        setPassword(value);
+        setIsValid(passwordRegEx.test(value));
+    };
+
     return (
-        <CreateJSX submit={handleSubmit} clickPass={handlePasswordVisibility} clickRep={handleRepeatVisibility} />
+        <CreateJSX submit={handleSubmit} clickPass={handlePasswordVisibility} clickRep={handleRepeatVisibility} passChange={handleChange} pass={password} valid={isValid} />
     );
 }
 

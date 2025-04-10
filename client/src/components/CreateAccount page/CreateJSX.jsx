@@ -2,7 +2,7 @@ import { Link } from 'react-router';
 import styles from './Create.module.css';
 
 
-function CreateJSX({ submit, clickPass, clickRep }) {
+function CreateJSX({ submit, clickPass, clickRep, passChange, pass, valid }) {
     return (
         <>
             <form onSubmit={submit}>
@@ -42,7 +42,7 @@ function CreateJSX({ submit, clickPass, clickRep }) {
                                     </div>
 
                                     <div className={styles.inputWrapper}>
-                                        <input className={styles.pass} type="password" name="password" id="password" placeholder='At least 6 characters' />
+                                        <input value={pass}  onChange={passChange} className={`${styles.pass} ${valid? styles.passSpecialValid : styles.passSpecialNoValid}`} type="password" name="password" id="password" placeholder='At least 6 characters! Minimum: 1 uppercase, 1 lowercase, 1 number and 1 special character!' />
                                         <i onClick={clickPass} className="fa-regular fa-eye"></i>
                                     </div>
                                 </div>
