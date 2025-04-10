@@ -151,4 +151,8 @@
     .container {
         margin: 0;
     }
+
+    .main {
+        width: 85%;
+    }
 }
