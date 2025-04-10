@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { collection, db, getDocs } from "../../../../firebase";
 
 function useMainFunctionality (postsPerPage = 6) {
-    /* const [posts, setPosts] = useState([]);
-    const [filteredPosts, setFilteredPosts] = useState([]); */
+    
     const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(1);
     
