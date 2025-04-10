@@ -82,7 +82,7 @@ function Guest() {
                             return (
                                 <div id="post" className={styles.post} key={index}>
                                     <div id="meta" className={styles.meta}>
-                                        <img src={pos.meta.profileImg} alt="https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-png-image_3918418.jpg" />
+                                        <img src={pos.meta.profileImg?pos.meta.profileImg:"https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-png-image_3918418.jpg"} alt="https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-png-image_3918418.jpg" />
                                         <h4>{pos.meta.author}</h4>
                                         <p>{postDate}</p>
                                     </div>

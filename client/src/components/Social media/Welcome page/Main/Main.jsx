@@ -10,6 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { getAllPosts, postComment } from "../../../HTTP/registerAndLogin";
 import useLikeHandle from "./LikeHook";
 import useViewHandle from "./ViewHook";
+import LoadingSpinner from "../../../Loading spinner/Spinner";
 
 function Main() {
     const [posts, setPosts] = useState([]);
@@ -31,8 +32,10 @@ function Main() {
     
 
     useEffect(() => {
+        setLoadingg(true);
         const fetched = async () => {
             await fetchPosts(setPosts, setFilteredPosts);
+            setLoadingg(false);
         }
         fetched();
     }, [])
@@ -97,6 +100,7 @@ function Main() {
     return (
         <>
             <Search ref={searchValue} onSearch={handleSearchClick} />
+            {loadingg && <LoadingSpinner />}
             <section id="posts" className={styles.posts}>
                 {filteredPosts.length > 0 ? (
                     filteredPosts.map((post) => (
