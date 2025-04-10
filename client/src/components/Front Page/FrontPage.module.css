@@ -163,3 +163,14 @@
     align-items: center;
     gap: 3px;
 }
+
+@media (width < 825px) {
+    .main {
+        flex-direction: column;
+        gap: 1em;
+    }
+
+    .logo {
+        font-size: 100pt;
+    }
+}
