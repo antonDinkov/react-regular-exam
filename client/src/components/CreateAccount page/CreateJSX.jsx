@@ -42,7 +42,7 @@ function CreateJSX({ submit, clickPass, clickRep, passChange, pass, valid }) {
                                     </div>
 
                                     <div className={styles.inputWrapper}>
-                                        <input value={pass}  onChange={passChange} className={`${styles.pass} ${valid? styles.passSpecialValid : styles.passSpecialNoValid}`} type="password" name="password" id="password" placeholder='At least 6 characters! Minimum: 1 uppercase, 1 lowercase, 1 number and 1 special character!' />
+                                        <input value={pass}  onChange={passChange} className={`${styles.pass} ${valid? styles.passSpecialValid : styles.passSpecialNoValid}`} type="password" name="password" id="password" placeholder='At least 6 characters! Minimum: 1 uppercase, 1 lowercase, 1 number and 1 special character! Slowly 😊' />
                                         <i onClick={clickPass} className="fa-regular fa-eye"></i>
                                     </div>
                                 </div>
