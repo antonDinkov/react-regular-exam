@@ -22,7 +22,7 @@ function useMainFunctionality (postsPerPage = 6) {
         }
     };
 
-    /* useEffect(() => { */
+    
         const fetchPosts = async (setPosts, setFilteredPosts) => {
             try {
                 const postsCollection = collection(db, "posts");
@@ -35,7 +35,7 @@ function useMainFunctionality (postsPerPage = 6) {
                 console.error("Грешка при взимане на постовете:", error);
             }
         };
-    /* }, [postsPerPage]); */
+    
 
     const loadMorePosts = (posts, filteredPosts, setFilteredPosts) => {
         if (loading || filteredPosts.length >= posts.length) return;
@@ -44,7 +44,7 @@ function useMainFunctionality (postsPerPage = 6) {
         const newPosts = posts.slice(page * postsPerPage, nextPage * postsPerPage);
 
         if (newPosts.length > 0) {
-            setFilteredPosts(prevPosts => [...prevPosts, ...newPosts]);
+            setFilteredPosts([...filteredPosts, ...newPosts]/* prevPosts => [...prevPosts, ...newPosts] */);
             setPage(nextPage);
         }
 

@@ -22,6 +22,7 @@ function Main() {
     const {handleView} = useViewHandle();
     const {handleLike} = useLikeHandle();
     const [loadingg, setLoadingg] = useState(false);
+    const [counter, setCounter] = useState(0);
 
     const handleClick = async (e) => {
         const sourceElement = e.target.closest('#closestID');
@@ -38,7 +39,7 @@ function Main() {
             setLoadingg(false);
         }
         fetched();
-    }, [])
+    }, [counter])
     
 
     const handleSearchClick = () => {
@@ -81,8 +82,10 @@ function Main() {
         const theComment = document.getElementById(postId);
         theComment.style.display = "none";
         const allPosts = await getAllPosts();
+        
         if(allPosts){
             setFilteredPosts(allPosts);
+            setCounter((prev) => (prev + 1));
         }
     }
 
@@ -94,6 +97,7 @@ function Main() {
         const allPosts = await getAllPosts();
         if(allPosts){
             setFilteredPosts(allPosts);
+            setCounter((prev) => (prev + 1));
         }
     }
 
