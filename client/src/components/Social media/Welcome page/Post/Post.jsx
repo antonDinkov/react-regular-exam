@@ -80,7 +80,7 @@ function Post() {
                 author: formData.name,
                 date: new Date().toLocaleString(),
                 avatar: "https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-png-image_3918418.jpg",
-                profileImg: user.profileImg,
+                profileImg: user.profileImg ? user.profileImg : "https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-png-image_3918418.jpg",
             },
             comments: [],
         };
