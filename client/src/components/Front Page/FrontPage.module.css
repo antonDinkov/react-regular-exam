@@ -10,6 +10,7 @@
     justify-content: space-between;
     align-items: center;
     background-color: #ffffff;
+    padding: 1em;
 }
 
 .main {
@@ -172,5 +173,13 @@
 
     .logo {
         font-size: 100pt;
+    }
+
+    .happening {
+        font-size: 25pt;
+    }
+
+    .h2 {
+        font-size: 20pt;
     }
 }
