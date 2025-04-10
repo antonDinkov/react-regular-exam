@@ -132,6 +132,10 @@
 }
 
 @media (width < 825px) {
+    .nav {
+        flex: 0 0 15%;
+    }
+
     .nav > ul > li > a > span {
         display: none;
     }
