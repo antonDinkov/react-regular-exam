@@ -1,9 +1,10 @@
 import { FormContext } from '../../../../../context/UserContext';
+import { getUser } from '../../../HTTP/localeStorageApi';
 import { postCreate } from '../../../HTTP/registerAndLogin';
 import LoadingSpinner from '../../../Loading spinner/Spinner';
 import xssProtect from '../../../Utils/xssProtect';
 import styles from './Post.module.css';
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from 'react-router';
 
 
@@ -16,6 +17,12 @@ function Post() {
     const {formData} = useContext(FormContext);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const [user, setUser] = useState({});
+
+    useEffect(() => {
+        const userInfo = JSON.parse(getUser());
+        setUser(userInfo);
+    },[]);
 
     const handleMediaUpload = (e) => {
         const file = e.target.files[0];
@@ -92,7 +99,7 @@ function Post() {
             {loading && <LoadingSpinner />}
             <div className={styles.postForm}>
                 <img 
-                    src="https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-png-image_3918418.jpg" 
+                    src={user.profileImg || "https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-png-image_3918418.jpg"} 
                     alt="User avatar" 
                     className={styles.avatar} 
                 />
