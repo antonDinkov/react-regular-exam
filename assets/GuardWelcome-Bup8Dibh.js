@@ -1,0 +1,1 @@
+import{u as s,r as o,j as e}from"./index-DfvjauYB.js";import{a as n}from"./localeStorageApi-BzC0sAnb.js";function m({children:r}){const t=n(),a=s();return o.useEffect(()=>{if(!t)return a("/react-regular-exam")}),e.jsx(e.Fragment,{children:r})}export{m as default};
