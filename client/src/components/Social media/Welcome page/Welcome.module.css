@@ -15,3 +15,9 @@
     padding-left: 40px;
     overflow-y: auto;
 }
+
+@media (width < 825px) {
+    .container {
+        margin: 0;
+    }
+}
