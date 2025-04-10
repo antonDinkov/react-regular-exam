@@ -32,7 +32,7 @@ function useMainFunctionality (postsPerPage = 6) {
                 setPosts(postsArray);
                 setFilteredPosts(postsArray.slice(0, postsPerPage));
             } catch (error) {
-                console.error("Грешка при взимане на постовете:", error);
+                console.error("Error loading posts:", error);
             }
         };
     
@@ -44,7 +44,7 @@ function useMainFunctionality (postsPerPage = 6) {
         const newPosts = posts.slice(page * postsPerPage, nextPage * postsPerPage);
 
         if (newPosts.length > 0) {
-            setFilteredPosts([...filteredPosts, ...newPosts]/* prevPosts => [...prevPosts, ...newPosts] */);
+            setFilteredPosts([...filteredPosts, ...newPosts]);
             setPage(nextPage);
         }
 
