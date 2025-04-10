@@ -21,11 +21,12 @@ The application is deployed on GitHub Pages.
 The application also features a functional profile page, which is mostly completed.
 The non-functional pages redirect to an "Under construction" page.
 Context, multiple hooks, and custom hooks have been used. The application is highly labor-intensive and full of features. I have made sure to eliminate all bugs in the working parts, even in the smallest details.
-Validation has been added for the data during registration and post creation.
+Validation has been added for the data during registration and post creation. Added regex in the validation.
 Lazy loading has been added for each route.
 A function to prevent XSS attacks has been added.
 Media queries have been added for mobile screen compatibility.
 A spinner has been added in many places for a better user experience, along with new redirects.
 The profile page and the edit functionality are fully completed.
+Two new repositories have been added in Cloudinary. And the corresponding functionality has been added.
 I’m uploading the README at the last moment. Due to time constraints, it’s possible that I may have missed some important details.
 I hope you are satisfied with the result!
