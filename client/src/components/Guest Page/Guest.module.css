@@ -143,4 +143,8 @@
     .nav > p {
         overflow: hidden;
     }
+
+    .container {
+        margin: 0;
+    }
 }
