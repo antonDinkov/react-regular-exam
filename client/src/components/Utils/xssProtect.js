@@ -1,6 +1,6 @@
 function xssProtect(input) {
     const div = document.createElement("div");
-    div.textContent = str;
+    div.textContent = input;
     return div.innerHTML;
 }
 

@@ -1,8 +1,10 @@
 import { FormContext } from '../../../../../context/UserContext';
 import { postCreate } from '../../../HTTP/registerAndLogin';
+import LoadingSpinner from '../../../Loading spinner/Spinner';
 import xssProtect from '../../../Utils/xssProtect';
 import styles from './Post.module.css';
 import { useContext, useRef, useState } from "react";
+import { useNavigate } from 'react-router';
 
 
 
@@ -12,6 +14,8 @@ function Post() {
     const textRef = useRef(null);
     const fileInputRef = useRef(null);
     const {formData} = useContext(FormContext);
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     const handleMediaUpload = (e) => {
         const file = e.target.files[0];
@@ -42,7 +46,7 @@ function Post() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
         const rawContent = textRef.current.value.trim();
         const content = xssProtect(rawContent);
 
@@ -54,6 +58,8 @@ function Post() {
             alert("👉 The post cannot exceed 500 characters.");
             return;
         }
+
+        setLoading(true);
 
         const post = {
             content,
@@ -77,10 +83,13 @@ function Post() {
         if (fileInputRef.current) {
             fileInputRef.current.value = "";
         }
+        navigate('/react-regular-exam/welcome');
+        setLoading(false)
     };
 
     return (
         <div className={styles.postFormContainer}>
+            {loading && <LoadingSpinner />}
             <div className={styles.postForm}>
                 <img 
                     src="https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-png-image_3918418.jpg" 
