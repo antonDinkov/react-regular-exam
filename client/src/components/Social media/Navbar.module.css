@@ -81,21 +81,46 @@
 
 .pic>img {
     max-width: 150px;
-    height: 150px;
+    max-height: 150px;
     margin-top: auto;
     border-radius: 50%
 }
 
 @media (width < 825px) {
+    .nav {
+        width: 25%;
+    }
+
+    .nav > li:last-child {
+        padding: 0;
+    }
+
     .nav > ul > li:not(:last-child) > a > span {
         display: none;
     }
 
     .nav > ul > li:last-child > a > span {
         overflow: hidden;
+        text-align: left;
+
     }
 
     .nav > p {
         overflow: hidden;
     }
+}
+
+@media (width < 550px) {
+    
+    .nav li:last-child > a > span{
+        display: none;
+    }
+
+    .pic>img {
+        max-width: 75px;
+        max-height: 75px;
+        margin-top: auto;
+        border-radius: 50%
+    }
+
 }

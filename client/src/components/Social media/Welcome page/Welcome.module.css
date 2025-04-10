@@ -19,6 +19,8 @@
 @media (width < 825px) {
     .container {
         margin: 0;
-        gap: 0.1em;
+    }
+    .main {
+        width: 75%;
     }
 }
